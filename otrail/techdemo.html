@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oregon Trail QR Game</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #34e400; /* Background color set to Oregon Trail green */
+            color: #fff; /* Text color set to white */
+            text-align: center;
+        }
+        .container {
+            max-width: 90%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for content */
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 26px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        #qr-reader {
+            max-width: 100%;
+        }
+        .start-button {
+            background-color: #fff;
+            color: #34e400;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .start-button:hover {
+            background-color: #f0f0f0;
+        }
+        .input-field {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto 20px;
+        }
+        .submit-button {
+            background-color: #fff;
+            color: #34e400;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-button:hover {
+            background-color: #f0f0f0;
+        }
+
+    </style>
+</head>
+<body>
+
+<p><audio autoplay="autoplay">
+  <source src="otrail1.mp3" type="audio/mpeg" />
+Your browser does not support the audio element.</audio></p>
+
+<div class="container">
+    <p class="center"><img src="https://www.delcolibraries.org/sites/default/files/otrail.png"></p>
+	<h1>TECH DEMO</h1>
+    <p>Explore the library and find hidden QR codes to uncover clues that will lead you on an adventure!</p>
+    <p>Follow the clues to navigate through the library and solve the mystery.</p>
+    <p>Will you survive the journey?</p>
+	<p></p>
+	<p>This is a demonstration of a few of the features we can use in-game.  I'm demoing Oregon Trail here, but this could be themed like anything.  Other things would be Candy Land, Book Trivia, science stuff, you name it.</p>
+    <button class="start-button" onclick="startGame()">Hint!</button>
+    <p></p>
+	<p>We can use passwords to let people move through the puzzle.  It's not case sensitive, and the password is hidden so even if a techy person knows how to see the source code it's obscured.  I will fully mask the code if/when we do this for real.</p>
+	<p>Enter the clue word here to move on to the next step!</p>
+    <form id="wordForm" onsubmit="return checkWord()">
+        <input class="input-field" type="text" id="wordInput" placeholder="Enter the word...">
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+	<p>Start scanning QR codes to begin your journey!  You can use the QR Scanner below (there will be instructions for the real one). This QR reader works in the browser (couldn't get the app one working outside of the app) BUT it scans the AI generated ones fine.  It doesn't take people outide of the page, but it's perfect for reading words.</p>
+	<div id="qr-reader"></div>
+<p><a href="diceroll.html">DICE ROLLER DEMO</a></p>
+<p><a href="colorpicker.html">COLOR PICKER DEMO</a></p>
+<p><br /></p>
+	<h1>Game Workflow?</h1>
+	<ol align="left">
+	<li>Button on library page in app (doesn't have to be hidden)takes you to an initial page in the app for that library's game.  ALTERNATIVE - One main button links to each participating library game, like the Self Check button does.</li>
+	<li>Poster or sign in library to start game.  Uses app's built in QR reader</li>
+	<li>This starts the game which is hosted somewhere.  Test is using staff Wordpress</li>
+	<li>We can use the scanner on real or AI QRs, we can use AI generated hidden words, we can just use clues in the libraries (Radnor has all of those words on the wall for example).  Enter the word and move on.</li>
+	<li>We can hide small QRs or AI QRs that don't look like QRs.  We can put things on specific shelves or wherever.  Libraries already do scavenger hunts so we can follow that pattern</li>
+	<li>Can aslo present choices, so for Oregon Trail it could be a library flavored game event (cross past the Reference desk, get bitten by a librarian.  Take the long way around and you're safe.</li>
+	</ol>	
+</div>
+
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.11.0/sha256.min.js"></script>
+<script>
+    function startGame() {
+        // Add logic to start the game (e.g., navigate to the first clue location)
+        alert("We can use a button to provide hints");
+    }
+
+    function onScanSuccess(qrCodeMessage) {
+        // Handle the scanned QR code message here
+        alert("QR Code scanned: " + qrCodeMessage);
+        // You can add logic here to check the scanned QR code against clues and progress the game
+    }
+
+    // Create an instance of the QRCodeScanner
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+        "qr-reader", { fps: 10, qrbox: 250 });
+
+    // Start scanning
+    html5QrcodeScanner.render(onScanSuccess);
+
+    function checkWord() {
+        var userInput = document.getElementById("wordInput").value.trim().toLowerCase(); // Convert input to lowercase
+        // Hash the user input using SHA-256
+        var hashedInput = sha256(userInput).toUpperCase();
+        console.log("Hashed input:", hashedInput);
+        // Hash of the correct answer
+        var correctHash = "6F281157AB246F0E1F35DB82165D3448EE1E39077AB0D720FCA7DDDF014249D6";
+        console.log("Correct hash:", correctHash);
+        if (hashedInput === correctHash) {
+            // Redirect to the next page
+            window.location.href = "otrail2.html";
+            return false; // Prevent form submission
+        } else {
+            alert("Oops! That's not the right word. Please explore your surroundings and try again.");
+            return false; // Prevent form submission
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Clone</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.game-container {
+    text-align: center;
+}
+
+#game-board {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.guess-row {
+    display: flex;
+    gap: 5px;
+}
+
+.letter {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.correct {
+    background-color: green;
+    color: white;
+}
+
+.present {
+    background-color: yellow;
+    color: black;
+}
+
+.absent {
+    background-color: grey;
+    color: white;
+}
+</style>
+</head>
+<body>
+    <div class="game-container">
+        <div id="game-board"></div>
+        <input type="text" id="guess-input" maxlength="5">
+        <button id="submit-guess">Submit Guess</button>
+    </div>
+    <script>
+	const targetWord = "books"; // You can randomize this or choose from a list
+let attempts = 0;
+
+document.getElementById('submit-guess').addEventListener('click', () => {
+    const guessInput = document.getElementById('guess-input');
+    const guess = guessInput.value.toLowerCase();
+    guessInput.value = '';
+
+    if (guess.length !== 5) {
+        alert("Please enter a 5-letter word.");
+        return;
+    }
+
+    attempts++;
+    updateBoard(guess);
+
+    if (guess === targetWord) {
+        alert(`Congratulations! You guessed the word in ${attempts} attempts.`);
+    } else if (attempts === 6) {
+        alert(`Game over! The word was ${targetWord}.`);
+    }
+});
+
+function updateBoard(guess) {
+    const board = document.getElementById('game-board');
+    const row = document.createElement('div');
+    row.className = 'guess-row';
+
+    for (let i = 0; i < guess.length; i++) {
+        const letter = document.createElement('div');
+        letter.className = 'letter';
+        letter.textContent = guess[i];
+
+        if (guess[i] === targetWord[i]) {
+            letter.classList.add('correct');
+        } else if (targetWord.includes(guess[i])) {
+            letter.classList.add('present');
+        } else {
+            letter.classList.add('absent');
+        }
+
+        row.appendChild(letter);
+    }
+
+    board.appendChild(row);
+}
+
+	</script>
+</body>
+</html>
