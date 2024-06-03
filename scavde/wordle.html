@@ -157,7 +157,7 @@
     <div class="instructions-container">
         <h3>How to Play</h3>
         <ol>
-            <li>Type a 5-letter word in the input box and click "Submit Guess".</li>
+            <li>Type a <strong>5-letter word</strong> in the input box and click "Submit Guess".</li>
             <li>The game will provide feedback:
                 <ul>
                     <li><span class="correct">Green</span>: Correct letter in the correct position.</li>
@@ -166,8 +166,10 @@
                 </ul>
             </li>
             <li>If you guess the word within 6 attempts, you win! Otherwise, try again.</li>
-            <li>After solving the word, enter the clue word in the input field below to move on.</li>
+            <li>After solving the word, enter the clue word in the input field below the game.</li>
+			<li>If you need a hint, click the hint button below.</li>
         </ol>
+		<p><button class="hint-button" onclick="HintOne()">Hint!</button></p>
     </div>
     <div class="game-container">
         <div id="game-board"></div>
@@ -176,7 +178,6 @@
     </div>
 	<p></p>
     <div class="container">
-        <p><button class="hint-button" onclick="HintOne()">Hint!</button></p>
         <p>Enter the clue word here to finish the game!</p>
         <form id="wordForm" onsubmit="return checkWord()">
             <input class="input-field" type="text" id="wordInput" placeholder="Enter the word...">
@@ -190,51 +191,83 @@
     const targetWord = "shelf"; // You can randomize this or choose from a list
     let attempts = 0;
 
-    document.getElementById('submit-guess').addEventListener('click', () => {
-        const guessInput = document.getElementById('guess-input');
-        const guess = guessInput.value.toLowerCase();
-        guessInput.value = '';
+document.getElementById('submit-guess').addEventListener('click', () => {
+    const guessInput = document.getElementById('guess-input');
+    const guess = guessInput.value.toLowerCase();
+    guessInput.value = '';
 
-        if (guess.length !== 5) {
-            alert("Please enter a 5-letter word.");
-            return;
-        }
-
-        attempts++;
-        updateBoard(guess);
-
-        if (guess === targetWord) {
-            alert(`Congratulations! You guessed the word in ${attempts} attempts.`);
-            resetGame();
-        } else if (attempts === 6) {
-            alert(`Game over! Try again.`);
-            resetGame();
-        }
-    });
-
-    function updateBoard(guess) {
-        const board = document.getElementById('game-board');
-        const row = document.createElement('div');
-        row.className = 'guess-row';
-
-        for (let i = 0; i < guess.length; i++) {
-            const letter = document.createElement('div');
-            letter.className = 'letter';
-            letter.textContent = guess[i];
-
-            if (guess[i] === targetWord[i]) {
-                letter.classList.add('correct');
-            } else if (targetWord.includes(guess[i])) {
-                letter.classList.add('present');
-            } else {
-                letter.classList.add('absent');
-            }
-
-            row.appendChild(letter);
-        }
-
-        board.appendChild(row);
+    if (guess.length !== 5) {
+        alert("Please enter a 5-letter word.");
+        return;
     }
+
+    attempts++;
+    updateBoard(guess);
+
+    if (guess === targetWord) {
+        alert(`Congratulations! You guessed the word in ${attempts} attempts.`);
+        disableInput(); // Disable input after the correct guess
+    } else if (attempts === 6) {
+        alert(`Game over! The word was ${targetWord}. Try again.`);
+        location.reload(); // Reload the page to reset the game
+    }
+});
+
+function updateBoard(guess) {
+    const board = document.getElementById('game-board');
+    const row = document.createElement('div');
+    row.className = 'guess-row';
+
+    // Count the occurrences of each letter in the target word
+    const targetLetterCount = {};
+    for (let letter of targetWord) {
+        targetLetterCount[letter] = (targetLetterCount[letter] || 0) + 1;
+    }
+
+    // Arrays to keep track of correct and present letters
+    const correctLetters = Array(targetWord.length).fill(false);
+    const presentLetters = Array(targetWord.length).fill(false);
+
+    // First pass: mark correct letters and update the letter count
+    for (let i = 0; i < guess.length; i++) {
+        if (guess[i] === targetWord[i]) {
+            correctLetters[i] = true;
+            targetLetterCount[guess[i]]--;
+        }
+    }
+
+    // Second pass: mark present letters
+    for (let i = 0; i < guess.length; i++) {
+        if (!correctLetters[i] && targetLetterCount[guess[i]]) {
+            presentLetters[i] = true;
+            targetLetterCount[guess[i]]--;
+        }
+    }
+
+    // Display letters with the appropriate class
+    for (let i = 0; i < guess.length; i++) {
+        const letter = document.createElement('div');
+        letter.className = 'letter';
+        letter.textContent = guess[i];
+
+        if (correctLetters[i]) {
+            letter.classList.add('correct');
+        } else if (presentLetters[i]) {
+            letter.classList.add('present');
+        } else {
+            letter.classList.add('absent');
+        }
+
+        row.appendChild(letter);
+    }
+
+    board.appendChild(row);
+}
+
+function disableInput() {
+    document.getElementById('guess-input').disabled = true;
+    document.getElementById('submit-guess').disabled = true;
+}
 
     function resetGame() {
         attempts = 0;
