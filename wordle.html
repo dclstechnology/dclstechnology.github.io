@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #42bcf5; /* Background color set to office blue */
+            color: #fff; /* Text color set to white */
+            margin: 0; /* Remove default margin */
+            padding: 20px; /* Add padding to prevent content from being cut off */
+            box-sizing: border-box;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .container {
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for content */
+            border-radius: 10px;
+            margin-bottom: 20px; /* Add margin-bottom to separate containers */
+            box-sizing: border-box;
+            text-align: center;
+        }
+		.instructions-container {
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for content */
+            border-radius: 10px;
+            margin-bottom: 20px; /* Add margin-bottom to separate containers */
+            box-sizing: border-box;
+        }
+
+        .instructions-container h3 {
+            margin-top: 0;
+        }
+
+        .instructions-container ol {
+            padding-left: 20px;
+        }
+
+        .instructions-container ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .instructions-container li {
+            margin-bottom: 10px;
+        }
+
+        .game-container {
+            text-align: center;
+            width: 100%;
+            background-color: #fff; /* Set background color to white */
+            padding: 20px; /* Add padding to the game container */
+            border-radius: 10px; /* Add border radius for rounded corners */
+        }
+
+        #game-board {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+			align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .guess-row {
+            display: flex;
+            gap: 5px;
+        }
+
+        .letter {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ccc;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        .correct {
+            background-color: green;
+            color: white;
+        }
+
+        .present {
+            background-color: yellow;
+            color: black;
+        }
+
+        .absent {
+            background-color: grey;
+            color: white;
+        }
+
+        .hint-button {
+            background-color: #fff;
+            color: #4257f5;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .hint-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .input-field {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto 20px;
+        }
+
+        .submit-button {
+            background-color: #fff;
+            color: #4257f5;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <div class="container">
+        <h2>Almost done!</h2>
+        <p>Solve this puzzle to find the final word.</p>
+    </div>
+    <div class="instructions-container">
+        <h3>How to Play</h3>
+        <ol>
+            <li>Type a 5-letter word in the input box and click "Submit Guess".</li>
+            <li>The game will provide feedback:
+                <ul>
+                    <li><span class="correct">Green</span>: Correct letter in the correct position.</li>
+                    <li><span class="present">Yellow</span>: Correct letter in the wrong position.</li>
+                    <li><span class="absent">Grey</span>: Letter not in the word.</li>
+                </ul>
+            </li>
+            <li>If you guess the word within 6 attempts, you win! Otherwise, try again.</li>
+            <li>After solving the word, enter the clue word in the input field below to move on.</li>
+        </ol>
+    </div>
+    <div class="game-container">
+        <div id="game-board"></div>
+        <input type="text" id="guess-input" maxlength="5">
+        <button id="submit-guess">Submit Guess</button>
+    </div>
+    <div class="container">
+        <p><button class="hint-button" onclick="HintOne()">Hint!</button></p>
+        <p>Enter the clue word here to finish the game!</p>
+        <form id="wordForm" onsubmit="return checkWord()">
+            <input class="input-field" type="text" id="wordInput" placeholder="Enter the word...">
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.11.0/sha256.min.js"></script>
+<script>
+    const targetWord = "shelf"; // You can randomize this or choose from a list
+    let attempts = 0;
+
+    document.getElementById('submit-guess').addEventListener('click', () => {
+        const guessInput = document.getElementById('guess-input');
+        const guess = guessInput.value.toLowerCase();
+        guessInput.value = '';
+
+        if (guess.length !== 5) {
+            alert("Please enter a 5-letter word.");
+            return;
+        }
+
+        attempts++;
+        updateBoard(guess);
+
+        if (guess === targetWord) {
+            alert(`Congratulations! You guessed the word in ${attempts} attempts.`);
+            resetGame();
+        } else if (attempts === 6) {
+            alert(`Game over! Try again.`);
+            resetGame();
+        }
+    });
+
+    function updateBoard(guess) {
+        const board = document.getElementById('game-board');
+        const row = document.createElement('div');
+        row.className = 'guess-row';
+
+        for (let i = 0; i < guess.length; i++) {
+            const letter = document.createElement('div');
+            letter.className = 'letter';
+            letter.textContent = guess[i];
+
+            if (guess[i] === targetWord[i]) {
+                letter.classList.add('correct');
+            } else if (targetWord.includes(guess[i])) {
+                letter.classList.add('present');
+            } else {
+                letter.classList.add('absent');
+            }
+
+            row.appendChild(letter);
+        }
+
+        board.appendChild(row);
+    }
+
+    function resetGame() {
+        attempts = 0;
+        document.getElementById('game-board').innerHTML = '';
+    }
+
+    function HintOne() {
+        // Add logic to provide a hint
+        alert("Something that you see in libraries");
+    }
+
+    function checkWord() {
+        var userInput = document.getElementById("wordInput").value.trim().toLowerCase(); // Convert input to lowercase
+        // Hash the user input using SHA-256
+        var hashedInput = sha256(userInput).toUpperCase();
+        console.log("Hashed input:", hashedInput);
+        // Hash of the correct answer
+        var correctHash = "3EEFA42D52064C480030A45D5813C250A9D15AEB1E6296EAE68CA401E6BB1E6F";
+        console.log("Correct hash:", correctHash);
+        if (hashedInput === correctHash) {
+            // Redirect to the next page
+            window.location.href = "scavfinal.html";
+            return false; // Prevent form submission
+        } else {
+            alert("Oops! That's not the right word. Please explore your surroundings and try again.");
+            return false; // Prevent form submission
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Scavenger Hunt</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #42bcf5; /* Background color set to office blue */
+            color: #fff; /* Text color set to white */
+            text-align: center;
+        }
+        .container {
+            max-width: 90%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for content */
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 26px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        #qr-reader {
+            max-width: 100%;
+        }
+        .hint-button {
+            background-color: #fff;
+            color: #4257f5;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .hint-button:hover {
+            background-color: #f0f0f0;
+        }
+        .input-field {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto 20px;
+        }
+        .submit-button {
+            background-color: #fff;
+            color: #4257f5;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-button:hover {
+            background-color: #f0f0f0;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+	<h1>DCL SCAVENGER HUNT DEMO</h1>
+    <p>Explore the office and uncover clues that will lead you on an adventure!</p>
+	<p></p>
+	<p>Each clue will be a word.  Enter the word into the box to move on to the next step. Press the button for a hint if you get stuck!</p>
+	<h2 align=center>Three bears in a row, perched up high,<br />
+Under the middle one — give it a try.</h2>
+	<p><button class="hint-button" onclick="HintOne()">Hint!</button></p>
+	<p>Enter the clue word here to move on to the next step!</p>
+    <form id="wordForm" onsubmit="return checkWord()">
+        <input class="input-field" type="text" id="wordInput" placeholder="Enter the word...">
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+</div>
+
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.11.0/sha256.min.js"></script>
+<script>
+    function HintOne() {
+        // Add logic to start the game (e.g., navigate to the first clue location)
+        alert("This one is easy - NO HINT FOR YOU!");
+    }
+
+    function checkWord() {
+        var userInput = document.getElementById("wordInput").value.trim().toLowerCase(); // Convert input to lowercase
+        // Hash the user input using SHA-256
+        var hashedInput = sha256(userInput).toUpperCase();
+        console.log("Hashed input:", hashedInput);
+        // Hash of the correct answer
+        var correctHash = "84938191021C881180909908525DC2124CBC214081ADF074CF609DE9F9AB5AB6";
+        console.log("Correct hash:", correctHash);
+        if (hashedInput === correctHash) {
+            // Redirect to the next page
+            window.location.href = "071532.html";
+            return false; // Prevent form submission
+        } else {
+            alert("Oops! That's not the right word. Please explore your surroundings and try again.");
+            return false; // Prevent form submission
+        }
+    }
+</script>
+
+</body>
+</html>
