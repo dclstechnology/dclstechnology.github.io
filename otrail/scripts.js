@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if (!window.location.href.includes("endgame.html")) {
         checkGameCompletion();
         updateColorPicker();
+        logVisitedColor();
     }
 });
 
@@ -72,18 +73,9 @@ function displayColor(color, isLastColor) {
 
     setTimeout(function() {
         alert("You landed on " + color + "!");
-        var usedColors = JSON.parse(localStorage.getItem('usedColors')) || [];
-        usedColors.push(color);
-        localStorage.setItem('usedColors', JSON.stringify(usedColors));
-
-        if (isLastColor) {
-            console.log("Last color used. Displaying complete puzzle button.");
-            displayCompletePuzzleButton();
-        } else {
-            var nextPage = color + ".html";
-            console.log("Redirecting to color page: " + nextPage);
-            window.location.href = nextPage;
-        }
+        var nextPage = color + ".html";
+        console.log("Redirecting to color page: " + nextPage);
+        window.location.href = nextPage;
     }, 500);
 }
 
@@ -92,22 +84,35 @@ function checkGameCompletion() {
     var allColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
 
     if (usedColors.length === allColors.length) {
-        console.log("All colors used. Displaying endgame button.");
-        displayCompletePuzzleButton();
+        console.log("All colors used. Redirecting to endgame.html.");
+        window.location.href = 'endgame.html';
     }
 }
 
-function displayCompletePuzzleButton() {
-    var buttonContainer = document.createElement('div');
-    buttonContainer.style.marginTop = '20px';
-    var completePuzzleButton = document.createElement('button');
-    completePuzzleButton.innerText = 'Complete Puzzle';
-    completePuzzleButton.className = 'submit-button';
-    completePuzzleButton.addEventListener('click', function() {
-        window.location.href = 'endgame.html';
-    });
-    buttonContainer.appendChild(completePuzzleButton);
-    document.body.appendChild(buttonContainer);
+function logVisitedColor() {
+    var color = getColorFromUrl();
+    if (color) {
+        var usedColors = JSON.parse(localStorage.getItem('usedColors')) || [];
+        if (!usedColors.includes(color)) {
+            usedColors.push(color);
+            localStorage.setItem('usedColors', JSON.stringify(usedColors));
+            console.log("Visited color logged: " + color);
+        }
+    }
+}
+
+function getColorFromUrl() {
+    var url = window.location.href;
+    var colorPages = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+    for (var i = 0; i < colorPages.length; i++) {
+        if (url.includes(colorPages[i] + ".html")) {
+            return colorPages[i];
+        }
+    }
+    if (url.includes("endgame.html")) {
+        return 'endgame';
+    }
+    return null;
 }
 
 function resetGame() {
