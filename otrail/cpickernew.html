@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Game</title>
+    <title>Oregon Trail QR Game</title>
     <style>
         @keyframes backgroundColorCycle {
             0% { background-color: red; }
@@ -13,21 +13,23 @@
             80% { background-color: blue; }
             100% { background-color: purple; }
         }
+
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
             animation: backgroundColorCycle 10s infinite;
             transition: background-color 1s ease;
-            color: #fff; /* Text color set to white */
-            text-align: center;
         }
+
         .container {
             max-width: 90%;
             margin: 50px auto;
             padding: 20px;
             background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for content */
             border-radius: 10px;
+            color: #fff; /* Text color set to white */
+            text-align: center;
         }
         .colorbox {
             margin-top: 50px;
@@ -97,22 +99,21 @@
         .reset-button:hover {
             background-color: #cc0000;
         }
-.box {
-    width: 200px;
-    height: 100px;
-    border: 2px solid #333;
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    overflow: hidden;
-}
-
-.card {
-    flex: 1;
-    height: 100%;
-    transition: background-color 0.25s ease-in-out; /* Smooth transition of color */
-}
+        .box {
+            width: 200px;
+            height: 100px;
+            border: 2px solid #333;
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            overflow: hidden;
+        }
+        .card {
+            flex: 1;
+            height: 100%;
+            transition: background-color 0.25s ease-in-out; /* Smooth transition of color */
+        }
         .red { background-color: red; }
         .blue { background-color: blue; }
         .green { background-color: green; }
@@ -146,89 +147,7 @@ Your browser does not support the audio element.</audio></p>
 
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.11.0/sha256.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        updateColorPicker();
-    });
-
-function updateColorPicker() {
-    var usedColors = JSON.parse(localStorage.getItem('usedColors')) || [];
-    var allColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
-    var availableColors = allColors.filter(color => !usedColors.includes(color));
-
-    var box = document.querySelector('.box');
-    box.innerHTML = ''; // Clear existing cards
-
-    availableColors.forEach(color => {
-        var card = document.createElement('div');
-        card.className = 'card ' + color;
-        box.appendChild(card);
-    });
-
-    // Adjust the flex property of each card to fill the available space
-    var cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        card.style.flex = '1';
-    });
-}
-
-    function startAnimation() {
-        var usedColors = JSON.parse(localStorage.getItem('usedColors')) || [];
-        var allColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
-        var availableColors = allColors.filter(color => !usedColors.includes(color));
-
-        if (availableColors.length === 0) {
-            alert("No more colors available!");
-            return;
-        }
-
-        var box = document.querySelector('.box');
-        var cards = box.querySelectorAll('.card');
-        var duration = 3000; // Duration in milliseconds
-        var interval = 250; // Interval in milliseconds for color change
-        var steps = duration / interval; // Number of steps
-        var currentStep = 0;
-        var intervalId = setInterval(function() {
-            var color = availableColors[currentStep % availableColors.length]; // Get the next color in the cycle
-            cards.forEach(function(card) {
-                card.style.backgroundColor = color; // Set background color of all cards
-            });
-            currentStep++;
-            if (currentStep >= steps) {
-                clearInterval(intervalId); // Stop interval when all steps are completed
-                var randomColor = availableColors[Math.floor(Math.random() * availableColors.length)]; // Randomly select a color
-                displayColor(randomColor); // Display the randomly selected color
-            }
-        }, interval);
-    }
-
-    function displayColor(color) {
-        var box = document.querySelector('.box');
-        var cards = box.querySelectorAll('.card');
-        cards.forEach(function(card) {
-            card.style.backgroundColor = color; // Set background color of all cards to the selected color
-        });
-        setTimeout(function() {
-            alert("You landed on " + color + "!");
-            var usedColors = JSON.parse(localStorage.getItem('usedColors')) || [];
-            usedColors.push(color);
-            localStorage.setItem('usedColors', JSON.stringify(usedColors));
-
-            var allColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
-            if (usedColors.length >= allColors.length) {
-                window.location.href = "endgame.html"; // Redirect to endgame page
-            } else {
-                window.location.href = color + ".html"; // Redirect to the color-specific puzzle page
-            }
-        }, 500); // Delay the pop-up message until after the color is displayed
-    }
-
-    function resetGame() {
-        localStorage.removeItem('usedColors');
-        updateColorPicker();
-        alert("Game has been reset!");
-    }
-</script>
+<script src="scripts.js"></script>
 
 </body>
 </html>
