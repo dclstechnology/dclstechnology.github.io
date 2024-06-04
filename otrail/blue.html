@@ -122,35 +122,16 @@ Your browser does not support the audio element.</audio></p>
     <h1>Color Game</h1>
     <p><h1>BLUE PUZZLE</a></p>
 	<p>This is where the BLUE puzzle will be.  Once they solve the puzzle they will be able to click the box below and get to one of the other colors.<br />  They need to solve each color to move on.  Once all six colors are solved they are taken to the end of the game.
-    <div class="colorbox">
-        <h1>Click the box to pick a color!</h1>
-        <div class="box" onclick="startAnimation()">
-            <div class="card red"></div>
-            <div class="card blue"></div>
-            <div class="card green"></div>
-            <div class="card yellow"></div>
-            <div class="card purple"></div>
-            <div class="card orange"></div>
+        <div class="colorbox">
+            <h1>Click the box to pick a color!</h1>
+            <div class="box"></div>
         </div>
-        <button class="reset-button" onclick="resetGame()">Reset Game</button>
+		<button class="reset-button" onclick="resetGame()">Reset Game</button>
     </div>
 </div>
 
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.11.0/sha256.min.js"></script>
 <script src="scripts.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        var completeButton = document.getElementById('completePuzzleButton');
-        if (completeButton) {
-            completeButton.addEventListener('click', () => {
-                checkGameCompletion();
-            });
-        } else {
-            console.error("Complete Puzzle button not found!");
-        }
-    });
-</script>
-
 </body>
 </html>

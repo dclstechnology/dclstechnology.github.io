@@ -131,28 +131,13 @@ Your browser does not support the audio element.</audio></p>
 <div class="container">
     <h1>Color Game</h1>
     <p><h1>Color Picker Demo</a></p>
-    <div class="colorbox">
-        <h1>Click the box to pick a color!</h1>
-        <div class="box" onclick="startAnimation()">
-            <div class="card red"></div>
-            <div class="card blue"></div>
-            <div class="card green"></div>
-            <div class="card yellow"></div>
-            <div class="card purple"></div>
-            <div class="card orange"></div>
+        <div class="colorbox">
+            <h1>Click the box to pick a color!</h1>
+            <div class="box"></div>
         </div>
-        <button class="reset-button" onclick="resetGame()">Reset Game</button>
+		<button class="reset-button" onclick="resetGame()">Reset Game</button>
     </div>
-</div>
 
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.11.0/sha256.min.js"></script>
-<script src="scripts.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        checkGameCompletion();
-    });
-</script>
-
+    <script src="scripts.js"></script>
 </body>
 </html>

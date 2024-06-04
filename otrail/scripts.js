@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     if (!window.location.href.includes("endgame.html")) {
+        checkGameCompletion();
         updateColorPicker();
     }
 });
@@ -9,8 +10,8 @@ function updateColorPicker() {
     var allColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
     var availableColors = allColors.filter(color => !usedColors.includes(color));
 
-    console.log("Used Colors:", usedColors);  // Debugging output
-    console.log("Available Colors:", availableColors);  // Debugging output
+    console.log("Used Colors:", usedColors);
+    console.log("Available Colors:", availableColors);
 
     var box = document.querySelector('.box');
     if (box) {
@@ -19,14 +20,13 @@ function updateColorPicker() {
         availableColors.forEach(color => {
             var card = document.createElement('div');
             card.className = 'card ' + color;
+            card.style.flex = '1';
             box.appendChild(card);
         });
 
-        // Adjust the flex property of each card to fill the available space
-        var cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.style.flex = '1';
-        });
+        if (availableColors.length > 0) {
+            box.addEventListener('click', startAnimation);
+        }
     }
 }
 
@@ -39,28 +39,25 @@ function startAnimation() {
         alert("No more colors available!");
         return;
     } else if (availableColors.length === 1) {
-        // Directly handle the last remaining color
         var lastColor = availableColors[0];
-        console.log("Last color: " + lastColor); // Debugging output
-        displayColor(lastColor, true); // Pass true to indicate it's the last color
+        displayColor(lastColor, true);
     } else {
         var box = document.querySelector('.box');
         var cards = box.querySelectorAll('.card');
-        var duration = 3000; // Duration in milliseconds
-        var interval = 250; // Interval in milliseconds for color change
-        var steps = duration / interval; // Number of steps
+        var duration = 3000;
+        var interval = 250;
+        var steps = duration / interval;
         var currentStep = 0;
         var intervalId = setInterval(function() {
-            var color = availableColors[currentStep % availableColors.length]; // Get the next color in the cycle
+            var color = availableColors[currentStep % availableColors.length];
             cards.forEach(function(card) {
-                card.style.backgroundColor = color; // Set background color of all cards
+                card.style.backgroundColor = color;
             });
             currentStep++;
             if (currentStep >= steps) {
-                clearInterval(intervalId); // Stop interval when all steps are completed
-                var randomColor = availableColors[Math.floor(Math.random() * availableColors.length)]; // Randomly select a color
-                console.log("Random color: " + randomColor); // Debugging output
-                displayColor(randomColor, false); // Display the randomly selected color
+                clearInterval(intervalId);
+                var randomColor = availableColors[Math.floor(Math.random() * availableColors.length)];
+                displayColor(randomColor, false);
             }
         }, interval);
     }
@@ -70,7 +67,7 @@ function displayColor(color, isLastColor) {
     var box = document.querySelector('.box');
     var cards = box.querySelectorAll('.card');
     cards.forEach(function(card) {
-        card.style.backgroundColor = color; // Set background color of all cards to the selected color
+        card.style.backgroundColor = color;
     });
 
     setTimeout(function() {
@@ -79,13 +76,15 @@ function displayColor(color, isLastColor) {
         usedColors.push(color);
         localStorage.setItem('usedColors', JSON.stringify(usedColors));
 
-        console.log("Updated Used Colors:", usedColors);  // Debugging output
-
-        if (!isLastColor) {
-            // Ensure redirection happens after the color is added to usedColors
-            window.location.href = color + ".html"; // Redirect to the color-specific puzzle page
+        if (isLastColor) {
+            console.log("Last color used. Displaying complete puzzle button.");
+            displayCompletePuzzleButton();
+        } else {
+            var nextPage = color + ".html";
+            console.log("Redirecting to color page: " + nextPage);
+            window.location.href = nextPage;
         }
-    }, 500); // Delay the pop-up message until after the color is displayed
+    }, 500);
 }
 
 function checkGameCompletion() {
@@ -93,11 +92,22 @@ function checkGameCompletion() {
     var allColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
 
     if (usedColors.length === allColors.length) {
-        console.log("All colors used. Redirecting to endgame.html"); // Debugging output
-        window.location.href = "endgame.html"; // Redirect to endgame page
-    } else {
-        console.log("Game not yet complete. Used colors:", usedColors.length); // Debugging output
+        console.log("All colors used. Displaying endgame button.");
+        displayCompletePuzzleButton();
     }
+}
+
+function displayCompletePuzzleButton() {
+    var buttonContainer = document.createElement('div');
+    buttonContainer.style.marginTop = '20px';
+    var completePuzzleButton = document.createElement('button');
+    completePuzzleButton.innerText = 'Complete Puzzle';
+    completePuzzleButton.className = 'submit-button';
+    completePuzzleButton.addEventListener('click', function() {
+        window.location.href = 'endgame.html';
+    });
+    buttonContainer.appendChild(completePuzzleButton);
+    document.body.appendChild(buttonContainer);
 }
 
 function resetGame() {
