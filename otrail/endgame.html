@@ -148,6 +148,13 @@ Your browser does not support the audio element.</audio></p>
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.11.0/sha256.min.js"></script>
 <script src="scripts.js"></script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Only call checkGameCompletion if this is not endgame.html
+            if (!window.location.href.includes("endgame.html")) {
+                checkGameCompletion();
+            }
+        });
+    </script>
 </body>
 </html>

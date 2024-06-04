@@ -139,6 +139,18 @@ Your browser does not support the audio element.</audio></p>
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.11.0/sha256.min.js"></script>
 <script src="scripts.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        var completeButton = document.getElementById('completePuzzleButton');
+        if (completeButton) {
+            completeButton.addEventListener('click', () => {
+                checkGameCompletion();
+            });
+        } else {
+            console.error("Complete Puzzle button not found!");
+        }
+    });
+</script>
 
 </body>
 </html>

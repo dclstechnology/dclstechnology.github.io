@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oregon Trail QR Game</title>
+    <title>Color Game</title>
     <style>
         @keyframes backgroundColorCycle {
             0% { background-color: red; }
@@ -148,6 +148,11 @@ Your browser does not support the audio element.</audio></p>
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.11.0/sha256.min.js"></script>
 <script src="scripts.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        checkGameCompletion();
+    });
+</script>
 
 </body>
 </html>
