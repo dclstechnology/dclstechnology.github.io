@@ -129,15 +129,29 @@
 Your browser does not support the audio element.</audio></p>
 
 <div class="container">
-    <h1>Color Game</h1>
-    <p><h1>Color Picker Demo</a></p>
+    <h1>The Color Game</h1>
+    <p><h3>DEMO VERSION / NOT COMPLETE YET</h3></p>
+	<p align="left">The Color Game is designed for young children and their parents.  There are six colors, BLUE, GREEN, ORANGE, RED, PURPLE, and YELLOW.  Clicking the box randomly selects a color and takes you to that color's page.  When that page loads, it will show a puzzle that directs players to one of six locations in the library.  In each location will be something representing FOOD, ANIMALS, SHAPES, VEHICLES, PLANTS, and... something?  Not sure yet, and this is just the planning stage.  Loading the page randomly selects the puzzle, for replayability.  The players have to identify the proper item that matches the color to move onto the next one.</p>
+	<p><h3>EXAMPLE</h3></p>
+	<ul align="left">
+	<li>Player one gets RED and VEHICLES on their first turn.  They need to find the poster or toys or whatever showing the vehicles, and then put the name of the red one in the box (FIRETRUCK). Moving on, they get PURPLE and FOOD and find the grape. </li>
+	<li>Player two gets YELLOW and FOOD and finds BANANA.  They get GREEN and SHAPES and find the CIRCLE.</li>
+	</ul>
+	<p align="left">Due to the random nature of the game you can play it several times and end up with different answers, though you would know where the items are displayed.  This is probably Ok for little kids, but older kids would find it less entertaining</p>
+	<p><h3>STATE OF THE DEMO</h3></p>
+	<p align="left">The color randomizer picker works and takes you through the colors.  Still working on getting it to take you through to the "YOU WIN" page.  Other game elements aren't in place yet.</p>
         <div class="colorbox">
             <h1>Click the box to pick a color!</h1>
             <div class="box"></div>
         </div>
-		<button class="reset-button" onclick="resetGame()">Reset Game</button>
     </div>
 
-    <script src="scripts.js"></script>
+<script src="scripts.js"></script>
+<script>
+    // Automatically reset the game when the main page loads
+    document.addEventListener('DOMContentLoaded', (event) => {
+        resetGame();
+    });
+</script>
 </body>
 </html>
