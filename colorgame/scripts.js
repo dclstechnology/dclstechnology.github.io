@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     if (!window.location.href.includes("endgame.html")) {
-        checkGameCompletion();
-        updateColorPicker();
         logVisitedColor();
+        updateColorPicker();
+        checkGameCompletion(); // Check game completion only on non-endgame pages
     }
 });
 
@@ -25,19 +25,27 @@ function updateColorPicker() {
             box.appendChild(card);
         });
 
+        // Remove existing event listener to prevent duplication
+        box.removeEventListener('click', startAnimation);
         if (availableColors.length > 0) {
             box.addEventListener('click', startAnimation);
         }
     }
 }
 
+let isAnimating = false;
+
 function startAnimation() {
+    if (isAnimating) return;
+    isAnimating = true;
+
     var usedColors = JSON.parse(localStorage.getItem('usedColors')) || [];
     var allColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
     var availableColors = allColors.filter(color => !usedColors.includes(color));
 
     if (availableColors.length === 0) {
         alert("No more colors available!");
+        isAnimating = false;
         return;
     } else if (availableColors.length === 1) {
         var lastColor = availableColors[0];
@@ -59,6 +67,7 @@ function startAnimation() {
                 clearInterval(intervalId);
                 var randomColor = availableColors[Math.floor(Math.random() * availableColors.length)];
                 displayColor(randomColor, false);
+                isAnimating = false;
             }
         }, interval);
     }
@@ -73,9 +82,17 @@ function displayColor(color, isLastColor) {
 
     setTimeout(function() {
         alert("You landed on " + color + "!");
-        var nextPage = color + ".html";
-        console.log("Redirecting to color page: " + nextPage);
-        window.location.href = nextPage;
+        if (!isLastColor) {
+            logVisitedColor(color);
+            var nextPage = color + ".html";
+            console.log("Redirecting to color page: " + nextPage);
+            window.location.href = nextPage;
+        } else {
+            logVisitedColor(color); // Log the final color before redirecting
+            setTimeout(function() {
+                window.location.href = 'endgame.html';
+            }, 500); // Allow some time to log the final color
+        }
     }, 500);
 }
 
@@ -89,8 +106,7 @@ function checkGameCompletion() {
     }
 }
 
-function logVisitedColor() {
-    var color = getColorFromUrl();
+function logVisitedColor(color) {
     if (color) {
         var usedColors = JSON.parse(localStorage.getItem('usedColors')) || [];
         if (!usedColors.includes(color)) {
@@ -118,4 +134,5 @@ function getColorFromUrl() {
 function resetGame() {
     localStorage.removeItem('usedColors');
     updateColorPicker();
+    isAnimating = false;  // Reset the animation flag when the game is reset
 }
