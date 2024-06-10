@@ -175,15 +175,13 @@ function checkGameCompletion() {
     var usedColors = JSON.parse(localStorage.getItem('usedColors')) || [];
     var completedPages = JSON.parse(localStorage.getItem('completedPages')) || [];
     var allColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
-    var allCategories = Object.keys(riddles);
-    var totalCategories = allCategories.length;
 
     console.log("Checking game completion.");
     console.log("Used Colors Length:", usedColors.length);
     console.log("Completed Pages Length:", completedPages.length);
 
-    if (usedColors.length === allColors.length && completedPages.length === allColors.length * totalCategories) {
-        console.log("All colors and categories completed. Redirecting to endgame.html.");
+    if (usedColors.length === allColors.length && completedPages.length === allColors.length) {
+        console.log("All colors used and pages completed. Redirecting to endgame.html.");
         window.location.href = 'endgame.html';
     }
 }
@@ -244,6 +242,7 @@ function setupPuzzle() {
 
     var availableCategories = Object.keys(riddles).filter(cat => !usedCategories[color].includes(cat));
     if (availableCategories.length === 0) {
+        // All categories have been used for this color
         alert("All categories have been used for this color!");
         return;
     }
