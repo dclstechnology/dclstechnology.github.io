@@ -152,11 +152,9 @@ function getColorFromUrl() {
     return null;
 }
 
-function resetGame(event) {
+function resetGame() {
     localStorage.removeItem('usedColors');
     localStorage.removeItem('completedPages');
     updateColorPicker();
-    if (event) {
-        window.location.href = 'colorgame.html';  // Redirect to index.html only if the function is called by an event (i.e., button click)
-    }
+    isAnimating = false;  // Reset the animation flag when the game is reset
 }
