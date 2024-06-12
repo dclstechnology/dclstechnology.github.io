@@ -32,16 +32,19 @@ tw-story[tags~="red-background"] {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="" position="100,200" size="100,100">&#39;&#39;NOTE&#39;&#39;  We will be using (link: &quot;Twine&quot;)[(goto-url: &#39;https://twinery.org/&#39;)] to develop a story geared for young adults and older that is a sort of spooky story set in a library.  Choices in the story lead the players to actual locations within the library to search for clues that will take them to the good story ending.
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="donotshowclues donotshowinventory" position="100,200" size="100,100">(set: $inv to (a:))
+(set: $clues to (a:))
+
+&#39;&#39;NOTE&#39;&#39;  We will be using (link: &quot;Twine&quot;)[(goto-url: &#39;https://twinery.org/&#39;)] to develop a story geared for young adults and older that is a sort of spooky story set in a library.  Choices in the story lead the players to actual locations within the library to search for clues that will take them to the good story ending.
 
 &#39;&#39;THIS IS ALL AI GENERATED FILLER FOR NOW&#39;&#39;
 
 You step through the grand entrance of the library, feeling a chill run down your spine as you cross the threshold. The air is heavy with the scent of old books, and the sound of your footsteps echoes in the cavernous foyer.
 
-(live: 5s)[(t8n:&quot;dissolve&quot;)[Before we go on....](stop:)]
-(live: 8s)[(t8n:&quot;dissolve&quot;)[&lt;font size=-2&gt;tap to continue&lt;/font&gt;](stop:)]
+(live: 3s)[(t8n:&quot;dissolve&quot;)[Before we go on....](stop:)]
 (click: ?page)[==
-(set: $name to (prompt: &quot;What is your name?&quot;, &quot;&quot;))
+(set: $name to (prompt: &quot;What is your name?&quot;, &quot;Patron&quot;))
+
 (live: 1s)[(t8n:&quot;dissolve&quot;)[Hello, $name!  It&#39;s nice to meet you.](stop:)]
 
 (live: 4s)[(t8n:&quot;dissolve&quot;)[You&#39;ll have several choices to make in our little story. To start, you can:](stop:)]
@@ -71,7 +74,32 @@ This text won&#39;t appear until the page is clicked twice.
 (click: ?page)[==
 This text won&#39;t appear until the page is clicked three times.
 
-</tw-passagedata></tw-storydata>
+</tw-passagedata><tw-passagedata pid="9" name="footer" tags="footer" position="1250,175" size="100,100">
+
+{
+&lt;div style=&quot;float: left&quot;&gt;
+(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;]
+(else-if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;]
+(else:)[Check [[inventory-&gt;Inventory]].]&lt;/div&gt;
+&lt;div style=&quot;float: right&quot;&gt;
+(if: (passage:)&#39;s name is &quot;Codes and Clues&quot;)[&lt;!--Do nothing--&gt;]
+(else-if: (passage:)&#39;s tags contains &quot;donotshowclues&quot;)[&lt;!--Do nothing--&gt;]
+(else:)[[Codes and Clues]]&lt;/div&gt;
+}
+
+
+
+</tw-passagedata><tw-passagedata pid="10" name="Codes and Clues" tags="donotshowinventory" position="1250,300" size="100,100">(if: $clues&#39;s length &gt; 0)[You have found the following clues: (print: $clues + &quot;, &quot;)).]
+(else:)[You haven&#39;t found any clues yet.  Keep investigating!]
+
+
+
+(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="11" name="Inventory" tags="donotshowclues" position="1250,50" size="100,100">(if: $inv&#39;s length &gt; 0)[Your inventory contains a (print: $inv + &quot;, &quot;)).]
+(else:)[Your inventory is empty.]
+
+
+
+(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
