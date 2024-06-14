@@ -38,7 +38,6 @@ tw-story[tags~="red-background"] {
     max-width: 100%;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="donotshowclues donotshowinventory nobacksies" position="100,400" size="100,100">(set: $inv to (a:))
 (set: $turns to (a:))
-(set: $history to &quot;FrontArea&quot;)
 Welcome to the Norwood Public Library! FUN INFO ABOUT NORWOOD GOES HERE
 
 You have been brought in to investigate the strange things that have been happening in the library:
@@ -65,7 +64,7 @@ You have been brought in to investigate the strange things that have been happen
 
 
 
-</tw-passagedata><tw-passagedata pid="4" name="Inventory" tags="donotshowclues" position="1250,50" size="100,100">(if: $inv&#39;s length &gt; 0)[Your inventory contains a (print: $inv + &quot;, &quot;)).]
+</tw-passagedata><tw-passagedata pid="4" name="Inventory" tags="donotshowclues" position="1250,50" size="100,100">(if: $inv&#39;s length &gt; 0)[Your inventory contains a (print: $inv + &quot;, &quot;).]
 (else:)[Your inventory is empty.]
 
 
@@ -82,16 +81,27 @@ You can also go back to the [[vestibule-&gt;Vestibule]].</tw-passagedata><tw-pas
 You can [[enter the library-&gt;Vestibule]]. </tw-passagedata><tw-passagedata pid="7" name="Vestibule" tags="" position="100,275" size="100,100">(set: $showfooter to true)
 You are in the vestibule.  You can either [[enter the library-&gt;FrontArea]] or [[go outside-&gt;Outside]].</tw-passagedata><tw-passagedata pid="8" name="TV" tags="" position="475,150" size="100,100">The TV is currently playing the local news.
 
-From here you can investigate the [[public computers-&gt;PUBS]], or [[browse the catalog-&gt;PAC1]] </tw-passagedata><tw-passagedata pid="9" name="PAC1" tags="" position="475,375" size="100,100">This catalog shows all 2+ million items available at Delaware County Libraries.  You can search by author, title, or key words.
+From here you can investigate the [[public computers-&gt;PUBS]], or [[browse the catalog-&gt;PAC1]] 
 
-You can [[go back-&gt;FrontArea]].</tw-passagedata><tw-passagedata pid="10" name="PUBS" tags="" position="300,325" size="100,100">Four public computers and two printers are available for use.  You can sign in using your library card or visit the [[circulation desk-&gt;Circ Desk]] if you need a guest pass.</tw-passagedata><tw-passagedata pid="11" name="Circ Desk" tags="" position="650,300" size="100,100">There is a librarian behind the desk.  They are currently helping a patron check out some books.
+You can also [[go back-&gt;FrontArea]]. </tw-passagedata><tw-passagedata pid="9" name="PAC1" tags="" position="475,375" size="100,100">This catalog shows all 2+ million items available at Delaware County Libraries.  You can search by author, title, or key words.
 
-You can go to the [[front of the library-&gt;FrontArea]], go to the [[bathroom-&gt;Bathroom]], or back to the [[children and teen&#39;s area-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="12" name="Bookshelf Wall" tags="" position="475,0" size="100,100">This is a large wall of books.  Behind this wall is the [[meeting area-&gt;Meeting Area]].</tw-passagedata><tw-passagedata pid="13" name="Meeting Area" tags="" position="625,25" size="100,100">There is a long meeting table here, and bookshelves around each wall.  You can exit to the [[front of the library-&gt;FrontArea]] or toward the [[public computers-&gt;PUBS]]. </tw-passagedata><tw-passagedata pid="14" name="Bathroom" tags="" position="650,175" size="100,100">This is the bathroom.</tw-passagedata><tw-passagedata pid="15" name="ChildrenRoom" tags="" position="850,325" size="100,100">Entering the children and teen area, you see another [[catalog computer-&gt;PAC2]] to your right.  To your left is the children&#39;s area, but that is off limits.  To your right is the teen area, featuring a [[public computer-&gt;TEENPUB]] and another [[television-&gt;TEENTV]].
+You can [[go back-&gt;FrontArea]].</tw-passagedata><tw-passagedata pid="10" name="PUBS" tags="" position="300,325" size="100,100">Four public computers and two printers are available for use.  You can sign in using your library card or visit the [[circulation desk-&gt;Circ Desk]] if you need a guest pass.  You can also go to the [[main entrance area-&gt;FrontArea]]. </tw-passagedata><tw-passagedata pid="11" name="Circ Desk" tags="" position="650,300" size="100,100">There is a librarian behind the desk.  They are currently helping a patron check out some books.
+
+You can go to the [[front of the library-&gt;FrontArea]], go to the [[bathroom-&gt;Bathroom]], or back to the [[children and teen&#39;s area-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="12" name="Bookshelf Wall" tags="" position="475,0" size="100,100">This is a large wall of books.  Behind this wall is the [[meeting area-&gt;Meeting Area]].</tw-passagedata><tw-passagedata pid="13" name="Meeting Area" tags="" position="625,25" size="100,100">There is a long meeting table here, and bookshelves around each wall.  You can exit to the [[front of the library-&gt;FrontArea]] or toward the [[public computers-&gt;PUBS]]. 
+
+There is a [[remote control-&gt;TVRemote]] here.</tw-passagedata><tw-passagedata pid="14" name="Bathroom" tags="" position="650,175" size="100,100">This is the bathroom.</tw-passagedata><tw-passagedata pid="15" name="ChildrenRoom" tags="" position="850,325" size="100,100">Entering the children and teen area, you see another [[catalog computer-&gt;PAC2]] to your right.  To your left is the children&#39;s area, but that is off limits.  To your right is the teen area, featuring a [[public computer-&gt;TEENPUB]] and another [[television-&gt;TEENTV]].
 </tw-passagedata><tw-passagedata pid="16" name="PAC2" tags="" position="850,200" size="100,100">This catalog shows all 2+ million items available at Delaware County Libraries.  You can search by author, title, or key words.
 
 You can [[go back-&gt;ChildrenRoom]]. </tw-passagedata><tw-passagedata pid="17" name="TEENPUB" tags="" position="1000,200" size="100,100">One public computer is available for use.  You can sign in using your library card or visit the [[circulation desk-&gt;Circ Desk]] if you need a guest pass.  You can also [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="18" name="TEENTV" tags="" position="1000,325" size="100,100">This TV is currently off.
 
-You can [[go back-&gt;ChildrenRoom]].</tw-passagedata></tw-storydata>
+You can [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="19" name="TVRemote" tags="" position="625,525" size="100,100">(set: $inv to it + (a: &#39;remote control&#39;)) 
+
+This is a remote control.  You put it in your inventory.
+
+You can [[go back-&gt;Meeting Area]]. </tw-passagedata><tw-passagedata pid="20" name="Remote1" tags="" position="1025,450" size="100,100">
+
+
+</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
