@@ -36,28 +36,7 @@ tw-story[tags~="red-background"] {
 
 #qr-reader {
     max-width: 100%;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">$(function () {
-    $.getScript("https://unpkg.com/html5-qrcode", function (data, textStatus, jqxhr) {
-        console.log("Script loaded successfully.");
-        
-        function onScanSuccess(qrCodeMessage) {
-            alert("QR Code scanned: " + qrCodeMessage);
-        }
-        
-        function initializeQrCodeScanner() {
-            var html5QrcodeScanner = new Html5QrcodeScanner(
-                "qr-reader", { fps: 10, qrbox: 250 });
-            html5QrcodeScanner.render(onScanSuccess);
-        }
-
-        // Event listener for passage change
-        $(document).on('tw-story:shown', function (event) {
-            if (event.passage == 'scanner') {
-                initializeQrCodeScanner();
-            }
-        });
-    });
-});</script><tw-passagedata pid="1" name="Intro" tags="donotshowclues donotshowinventory nobacksies" position="400,775" size="100,100">(set: $inv to (a:))
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="donotshowclues donotshowinventory nobacksies" position="100,200" size="100,100">(set: $inv to (a:))
 Welcome to the Norwood Public Library!
 
 FUN INFO ABOUT NORWOOD GOES HERE
@@ -78,7 +57,7 @@ Events happen throughout the game, so revisiting a location later, or with an it
 
 (live: 2s)[(t8n:&quot;dissolve&quot;)[You are in the vestibule. You&#39;ll have several choices to make in our little story, just tap the highligted words to select them. To start, you can:](stop:)]
 
-(live: 3s)[[[Enter the library-&gt;FrontArea]] or(stop:)] (live: 3.5s)[[[go outside-&gt;Outside]](stop:)]</tw-passagedata><tw-passagedata pid="2" name="footer" tags="footer" position="1550,550" size="100,100">(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;]
+(live: 3s)[[[Enter the library-&gt;FrontArea]] or(stop:)] (live: 3.5s)[[[go outside-&gt;Outside]](stop:)]</tw-passagedata><tw-passagedata pid="2" name="footer" tags="footer" position="1225,325" size="100,100">(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;]
 (else-if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;]
 (else-if: $inv&#39;s length is 0)[&lt;!--Do nothing--&gt;]
 (else:)[Check [[inventory-&gt;Inventory]]]&lt;br /&gt;
@@ -86,9 +65,12 @@ Events happen throughout the game, so revisiting a location later, or with an it
 (else-if: (passage:)&#39;s name is &quot;scanner&quot;)[&lt;!--Do nothing--&gt;]
 (else-if: (passage:)&#39;s tags contains &quot;noscanner&quot;)[&lt;!--Do nothing--&gt;]
 (else:)[&lt;!--Do nothing--&gt;]
-</tw-passagedata><tw-passagedata pid="3" name="scanner" tags="" position="1550,675" size="100,100">[(enchant:?page,(text-colour:red))Your Text Here]
+</tw-passagedata><tw-passagedata pid="3" name="scanner" tags="" position="1225,450" size="100,100">(text-colour:lime)[Hint Scanner]
 &lt;div id=&quot;qr-reader&quot;&gt;&lt;/div&gt;
 
+Use the scanner to search for clues. Each clue will show you a word.  You&#39;ll be able to enter that word to unlock more information, an item, or further clues.
+
+(link-goto: &quot;Return&quot;, (history:)&#39;s last) 
 
 &lt;script&gt;
 $(function () {
@@ -109,51 +91,55 @@ $(function () {
         html5QrcodeScanner.render(onScanSuccess);
     });
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="4" name="Inventory" tags="" position="1550,425" size="100,100">&lt;!-- Your inventory contains:
-
-(if: $inv&#39;s length &gt; 0)[\
-(for: each _item, ...$inv)[   _item&lt;br /&gt;]
-]--&gt;
-(if: $inv&#39;s length &gt; 0)[Your inventory contains a (joined: &quot;, &quot;, ...$inv).]
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="4" name="Inventory" tags="" position="1225,200" size="100,100">(if: $inv&#39;s length &gt; 0)[Your inventory contains a (joined: &quot;, &quot;, ...$inv).]
 (else:)[Your inventory is empty.]
-(click: &quot;remote control&quot;)[(display: &quot;RemoteControl1Desc&quot;)]
-
-(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="5" name="FrontArea" tags="nobacksies" position="600,500" size="100,100">(set: $showfooter to true)
+(click: &quot;remote control&quot;)[(display: &quot;TVRemote&quot;)]
+(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="5" name="FrontArea" tags="nobacksies" position="300,200" size="100,100">(set: $showfooter to true)
 This is the main entrance area of the Norwood Public Library.
 
 In front of you is a [[television-&gt;TV]]. There is a [[catalog computer-&gt;PAC1]] on a stand to the left of the television.  There are several [[public computers and printers-&gt;PUBS]] behind the television.
 
 To your right is the [[circulation desk-&gt;Circ Desk]].  To your left, behind some [[books-&gt;Bookshelf Wall]] is a [[meeting area-&gt;Meeting Area]].
 
-You can also go back to the [[vestibule-&gt;Vestibule]].</tw-passagedata><tw-passagedata pid="6" name="Outside" tags="" position="525,900" size="100,100">You are outside of the library building.
+You can also go back to the [[vestibule-&gt;Vestibule]].</tw-passagedata><tw-passagedata pid="6" name="Outside" tags="" position="200,600" size="100,100">You are outside of the library building.
 
 Test the [[scanner]] 
 
-You can [[enter the library-&gt;Vestibule]]. </tw-passagedata><tw-passagedata pid="7" name="Vestibule" tags="" position="400,650" size="100,100">(set: $showfooter to true)
-You are in the vestibule.  You can either [[enter the library-&gt;FrontArea]] or [[go outside-&gt;Outside]].</tw-passagedata><tw-passagedata pid="8" name="TV" tags="" position="775,525" size="100,100">The TV is currently playing the local news. \
+You can [[enter the library-&gt;Vestibule]]. </tw-passagedata><tw-passagedata pid="7" name="Vestibule" tags="" position="100,400" size="100,100">(set: $showfooter to true)
+You are in the vestibule.  You can either [[enter the library-&gt;FrontArea]] or [[go outside-&gt;Outside]].</tw-passagedata><tw-passagedata pid="8" name="TV" tags="" position="500,250" size="100,100">The TV is currently playing the local news. \
 
 (if: $inv contains &quot;different remote control&quot;)[You pull the new remote control out of your inventory and point it at the TV.  This time you can [[change the channels-&gt;TV Channels]]!](else-if: $inv contains &quot;remote control&quot;)[You pull the remote control out of your inventory and point it at the TV, but nothing happens.  It must be for another televison somewhere.] \
 
 From here you can investigate the [[public computers-&gt;PUBS]], or [[browse the catalog-&gt;PAC1]]
 
-You can also [[go back-&gt;FrontArea]]. </tw-passagedata><tw-passagedata pid="9" name="PAC1" tags="" position="775,700" size="100,100">This catalog shows all 2+ million items available at Delaware County Libraries.  You can search by author, title, or key words.
+You can also [[go back-&gt;FrontArea]]. </tw-passagedata><tw-passagedata pid="9" name="PAC1" tags="" position="500,400" size="100,100">This catalog shows all 2+ million items available at Delaware County Libraries.  You can search by author, title, or key words.
 
-You can [[go back-&gt;FrontArea]].</tw-passagedata><tw-passagedata pid="10" name="PUBS" tags="" position="600,700" size="100,100">Four public computers and two printers are available for use.  You can sign in using your library card or visit the [[circulation desk-&gt;Circ Desk]] if you need a guest pass.  You can also go to the [[main entrance area-&gt;FrontArea]]. </tw-passagedata><tw-passagedata pid="11" name="Circ Desk" tags="" position="950,675" size="100,100">There is a librarian behind the desk.  They are currently helping a patron check out some books.
+You can [[go back-&gt;FrontArea]].</tw-passagedata><tw-passagedata pid="10" name="PUBS" tags="" position="300,400" size="100,100">Four public computers and two printers are available for use.  You can sign in using your library card or visit the [[circulation desk-&gt;Circ Desk]] if you need a guest pass.  You can also go to the [[main entrance area-&gt;FrontArea]]. </tw-passagedata><tw-passagedata pid="11" name="Circ Desk" tags="" position="500,600" size="100,100">There is a librarian behind the desk.  They are currently helping a patron check out some books.
 
-You can go to the [[front of the library-&gt;FrontArea]], go to the [[bathroom-&gt;Bathroom]], or back to the [[children and teen&#39;s area-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="12" name="Bookshelf Wall" tags="" position="775,375" size="100,100">This is a large wall of books.  Behind this wall is the [[meeting area-&gt;Meeting Area]].</tw-passagedata><tw-passagedata pid="13" name="Meeting Area" tags="" position="925,400" size="100,100">{There is a long meeting table here, and bookshelves around each wall.  You can exit to the [[front of the library-&gt;FrontArea]] or toward the [[public computers-&gt;PUBS]].&lt;br /&gt; &lt;br /&gt;
+You can go to the [[front of the library-&gt;FrontArea]], go to the [[bathroom-&gt;Bathroom]], or back to the [[children and teen&#39;s area-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="12" name="Bookshelf Wall" tags="" position="500,100" size="100,100">This is a large wall of books.  Behind this wall is the [[meeting area-&gt;Meeting Area]].</tw-passagedata><tw-passagedata pid="13" name="Meeting Area" tags="" position="700,100" size="100,100">{There is a long meeting table here, and bookshelves around each wall.  You can exit to the [[front of the library-&gt;FrontArea]] or toward the [[public computers-&gt;PUBS]].&lt;br /&gt; &lt;br /&gt;
 (if: $inv contains &quot;remote control&quot;)[&lt;!--DO NOTHING--&gt;](else:)[There is a [[remote control-&gt;TVRemote]] here.]}
-</tw-passagedata><tw-passagedata pid="14" name="Bathroom" tags="" position="950,550" size="100,100">This is the bathroom.</tw-passagedata><tw-passagedata pid="15" name="ChildrenRoom" tags="" position="1150,700" size="100,100">Entering the children and teen area, you see another [[catalog computer-&gt;PAC2]] to your right.  To your left is the children&#39;s area, but that is off limits.  To your right is the teen area, featuring a [[public computer-&gt;TEENPUB]] and another [[television-&gt;TEENTV]].
-</tw-passagedata><tw-passagedata pid="16" name="PAC2" tags="" position="1150,575" size="100,100">This catalog shows all 2+ million items available at Delaware County Libraries.  You can search by author, title, or key words.
+</tw-passagedata><tw-passagedata pid="14" name="Bathroom" tags="" position="500,800" size="100,100">This is the bathroom.</tw-passagedata><tw-passagedata pid="15" name="ChildrenRoom" tags="" position="700,600" size="100,100">Entering the children and teen area, you see another [[catalog computer-&gt;PAC2]] to your right.  To your left is the children&#39;s area, but that is off limits.  To your right is the teen area, featuring a [[public computer-&gt;TEENPUB]] and another [[television-&gt;TEENTV]].
+</tw-passagedata><tw-passagedata pid="16" name="PAC2" tags="" position="800,800" size="100,100">This catalog shows all 2+ million items available at Delaware County Libraries.  You can search by author, title, or key words.
 
-You can [[go back-&gt;ChildrenRoom]]. </tw-passagedata><tw-passagedata pid="17" name="TEENPUB" tags="" position="1300,575" size="100,100">One public computer is available for use.  You can sign in using your library card or visit the [[circulation desk-&gt;Circ Desk]] if you need a guest pass.  You can also [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="18" name="TEENTV" tags="" position="1300,700" size="100,100">This TV is currently off.
+You can [[go back-&gt;ChildrenRoom]]. </tw-passagedata><tw-passagedata pid="17" name="TEENPUB" tags="" position="1000,800" size="100,100">One public computer is available for use.  You can sign in using your library card or visit the [[circulation desk-&gt;Circ Desk]] if you need a guest pass.  You can also [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="18" name="TEENTV" tags="" position="1200,800" size="100,100">This TV is currently off.
 
-You can [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="19" name="TVRemote" tags="" position="925,900" size="100,100">{This is a standard TV remote control, somewhat old and worn.  The brand of the remote is not labeled.&lt;br /&gt; &lt;br /&gt;
+You can [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="19" name="TVRemote" tags="" position="900,100" size="100,100">{This is a standard TV remote control, somewhat old and worn.  The brand of the remote is not labeled.&lt;br /&gt; &lt;br /&gt;
 (if: $inv contains &quot;remote control&quot;)[&lt;!--DO NOTHING](else:)[You add the remote to your inventory (set: $inv to it + (a: &quot;remote control&quot;))]&lt;br /&gt; &lt;br /&gt;
-You can [[go back-&gt;Meeting Area]].}</tw-passagedata><tw-passagedata pid="20" name="Remote1" tags="" position="1325,825" size="100,100">
+(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else:)[You can [[go back-&gt;Meeting Area]].]}</tw-passagedata><tw-passagedata pid="20" name="TV Channels" tags="" position="700,250" size="100,100">
+You can [[go back-&gt;TV]]. </tw-passagedata><tw-passagedata pid="21" name="Prompt validation" tags="" position="1350,450" size="100,100">https://twinery.org/forum/discussion/8947/i-want-to-create-a-prompt-box-in-which-the-answer-becomes-a-correct-or-incorrect-variable
 
+(set: $total to &quot;0&quot;)
 
-</tw-passagedata><tw-passagedata pid="21" name="RemoteControl1Desc" tags="" position="1025,900" size="100,100">This is a standard TV remote control, somewhat old and worn.  The brand of the remote is not labeled.</tw-passagedata><tw-passagedata pid="22" name="TV Channels" tags="" position="775,900" size="100,100">
-You can [[go back-&gt;TV]]. </tw-passagedata></tw-storydata>
+(link-repeat: &quot;Send results&quot;)[{
+	(set: $total to (prompt: &quot;Please enter the total below (see task for instruction)&quot;, &quot;Enter total here&quot;))
+
+	(if: $total is &quot;71&quot;)[
+		(replace: ?results)[Task submitted. Please return to your.]
+	]
+	(else:)[
+		(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]
+	]
+}]</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
