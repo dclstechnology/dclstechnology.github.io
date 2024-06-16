@@ -122,7 +122,7 @@ To your right is the [[circulation desk-&gt;Circ Desk]].  To your left, behind s
 You can also go back to the [[vestibule-&gt;Vestibule]].</tw-passagedata><tw-passagedata pid="6" name="Outside" tags="" position="200,600" size="100,100">You are outside of the library building.
 
 Test the [[scanner]] 
-Test [[GPS]] 
+Test [[gps-passage]] 
 
 You can [[enter the library-&gt;Vestibule]]. </tw-passagedata><tw-passagedata pid="7" name="Vestibule" tags="" position="100,400" size="100,100">(set: $showfooter to true)
 You are in the vestibule.  You can either [[enter the library-&gt;FrontArea]] or [[go outside-&gt;Outside]].</tw-passagedata><tw-passagedata pid="8" name="TV" tags="" position="500,250" size="100,100">The TV is currently playing the local news. \
@@ -184,9 +184,9 @@ $(function () {
         checkWord();
     });
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="23" name="GPS" tags="" position="1225,575" size="100,100">GPS
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="23" name="gps-passage" tags="" position="1225,575" size="100,100">GPS
 
-&lt;div id=&quot;output&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;output&quot;&gt;Fetching location...&lt;/div&gt;
 
 &lt;script&gt;
 $(function () {
