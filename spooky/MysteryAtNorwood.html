@@ -118,10 +118,10 @@ You can [[go back-&gt;FrontArea]].</tw-passagedata><tw-passagedata pid="10" name
 
 You can go to the [[front of the library-&gt;FrontArea]], go to the [[bathroom-&gt;Bathroom]], or back to the [[children and teen&#39;s area-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="12" name="Bookshelf Wall" tags="" position="500,100" size="100,100">This is a large wall of books.  Behind this wall is the [[meeting area-&gt;Meeting Area]].</tw-passagedata><tw-passagedata pid="13" name="Meeting Area" tags="" position="700,100" size="100,100">{There is a long meeting table here, and bookshelves around each wall.  You can exit to the [[front of the library-&gt;FrontArea]] or toward the [[public computers-&gt;PUBS]].&lt;br /&gt; &lt;br /&gt;
 (if: $inv contains &quot;remote control&quot;)[&lt;!--DO NOTHING--&gt;](else:)[There is a [[remote control-&gt;TVRemote]] here.]}
-</tw-passagedata><tw-passagedata pid="14" name="Bathroom" tags="" position="500,800" size="100,100">This is the bathroom.</tw-passagedata><tw-passagedata pid="15" name="ChildrenRoom" tags="" position="700,600" size="100,100">Entering the children and teen area, you see another [[catalog computer-&gt;PAC2]] to your right.  To your left is the children&#39;s area, but that is off limits.  To your right is the teen area, featuring a [[public computer-&gt;TEENPUB]] and another [[television-&gt;TEENTV]].
-</tw-passagedata><tw-passagedata pid="16" name="PAC2" tags="" position="800,800" size="100,100">This catalog shows all 2+ million items available at Delaware County Libraries.  You can search by author, title, or key words.
+</tw-passagedata><tw-passagedata pid="14" name="Bathroom" tags="" position="400,800" size="100,100">This is the bathroom.</tw-passagedata><tw-passagedata pid="15" name="ChildrenRoom" tags="" position="700,600" size="100,100">Entering the children and teen area, you see another [[catalog computer-&gt;PAC2]] to your right.  To your left is the children&#39;s area, but that is off limits.  To your right is the teen area, featuring a [[public computer-&gt;TEENPUB]] and another [[television-&gt;TEENTV]].
+</tw-passagedata><tw-passagedata pid="16" name="PAC2" tags="" position="700,800" size="100,100">This catalog shows all 2+ million items available at Delaware County Libraries.  You can search by author, title, or key words.
 
-You can [[go back-&gt;ChildrenRoom]]. </tw-passagedata><tw-passagedata pid="17" name="TEENPUB" tags="" position="1000,800" size="100,100">One public computer is available for use.  You can sign in using your library card or visit the [[circulation desk-&gt;Circ Desk]] if you need a guest pass.  You can also [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="18" name="TEENTV" tags="" position="1200,800" size="100,100">This TV is currently off.
+You can [[go back-&gt;ChildrenRoom]]. </tw-passagedata><tw-passagedata pid="17" name="TEENPUB" tags="" position="900,800" size="100,100">One public computer is available for use.  You can sign in using your library card or visit the [[circulation desk-&gt;Circ Desk]] if you need a guest pass.  You can also [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="18" name="TEENTV" tags="" position="1100,800" size="100,100">This TV is currently off.
 
 You can [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="19" name="TVRemote" tags="" position="900,100" size="100,100">{This is a standard TV remote control, somewhat old and worn.  The brand of the remote is not labeled.&lt;br /&gt; &lt;br /&gt;
 (if: $inv contains &quot;remote control&quot;)[&lt;!--DO NOTHING](else:)[You add the remote to your inventory (set: $inv to it + (a: &quot;remote control&quot;))]&lt;br /&gt; &lt;br /&gt;
@@ -139,7 +139,33 @@ You can [[go back-&gt;TV]]. </tw-passagedata><tw-passagedata pid="21" name="Prom
 	(else:)[
 		(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]
 	]
-}]</tw-passagedata></tw-storydata>
+}]</tw-passagedata><tw-passagedata pid="22" name="PromptNoWorky" tags="" position="1450,450" size="100,100">&lt;form id=&quot;wordForm&quot;&gt;
+    &lt;label for=&quot;wordInput&quot;&gt;Enter the word:&lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;wordInput&quot; name=&quot;wordInput&quot;&gt;
+    &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+$(function () {
+    function checkWord() {
+        var userInput = document.getElementById(&quot;wordInput&quot;).value.toUpperCase();
+        if (userInput === &quot;EXPLORE&quot;) {
+            // Use Harlowe&#39;s engine to navigate to a new passage
+            window.story.go(&quot;PAC2&quot;);
+            return false; // Prevent form submission
+        } else {
+            alert(&quot;Please enter the word &#39;EXPLORE&#39;.&quot;);
+            return false; // Prevent form submission
+        }
+    }
+
+    // Attach the function to the form submission
+    $(document).on(&#39;submit&#39;, &#39;#wordForm&#39;, function(event) {
+        event.preventDefault();
+        checkWord();
+    });
+});
+&lt;/script&gt;</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
