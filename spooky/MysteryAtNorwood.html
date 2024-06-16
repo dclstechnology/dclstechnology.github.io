@@ -36,7 +36,28 @@ tw-story[tags~="red-background"] {
 
 #qr-reader {
     max-width: 100%;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="donotshowclues donotshowinventory nobacksies" position="400,775" size="100,100">(set: $inv to (a:))
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">$(function () {
+    $.getScript("https://unpkg.com/html5-qrcode", function (data, textStatus, jqxhr) {
+        console.log("Script loaded successfully.");
+        
+        function onScanSuccess(qrCodeMessage) {
+            alert("QR Code scanned: " + qrCodeMessage);
+        }
+        
+        function initializeQrCodeScanner() {
+            var html5QrcodeScanner = new Html5QrcodeScanner(
+                "qr-reader", { fps: 10, qrbox: 250 });
+            html5QrcodeScanner.render(onScanSuccess);
+        }
+
+        // Event listener for passage change
+        $(document).on('tw-story:shown', function (event) {
+            if (event.passage == 'scanner') {
+                initializeQrCodeScanner();
+            }
+        });
+    });
+});</script><tw-passagedata pid="1" name="Intro" tags="donotshowclues donotshowinventory nobacksies" position="400,775" size="100,100">(set: $inv to (a:))
 Welcome to the Norwood Public Library!
 
 FUN INFO ABOUT NORWOOD GOES HERE
@@ -65,11 +86,30 @@ Events happen throughout the game, so revisiting a location later, or with an it
 (else-if: (passage:)&#39;s name is &quot;scanner&quot;)[&lt;!--Do nothing--&gt;]
 (else-if: (passage:)&#39;s tags contains &quot;noscanner&quot;)[&lt;!--Do nothing--&gt;]
 (else:)[&lt;!--Do nothing--&gt;]
-</tw-passagedata><tw-passagedata pid="3" name="scanner" tags="" position="1550,675" size="100,100">&lt;a href=&quot;http://www.google.com&quot;; target=&quot;_blank&quot;&gt;Click here&lt;/a&gt;
+</tw-passagedata><tw-passagedata pid="3" name="scanner" tags="" position="1550,675" size="100,100">[(enchant:?page,(text-colour:red))Your Text Here]
+&lt;div id=&quot;qr-reader&quot;&gt;&lt;/div&gt;
 
 
-
-</tw-passagedata><tw-passagedata pid="4" name="Inventory" tags="" position="1550,425" size="100,100">&lt;!-- Your inventory contains:
+&lt;script&gt;
+$(function () {
+    $.getScript(&quot;https://unpkg.com/html5-qrcode&quot;, function (data, textStatus, jqxhr) {
+        console.log(&quot;Script loaded successfully.&quot;);
+        // Define the onScanSuccess function
+        function onScanSuccess(qrCodeMessage) {
+            // Handle the scanned QR code message here
+            alert(&quot;QR Code scanned: &quot; + qrCodeMessage);
+            // You can add logic here to check the scanned QR code against clues and progress the game
+        }
+        
+        // Create an instance of the QRCodeScanner
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            &quot;qr-reader&quot;, { fps: 10, qrbox: 250 });
+        
+        // Start scanning
+        html5QrcodeScanner.render(onScanSuccess);
+    });
+});
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="4" name="Inventory" tags="" position="1550,425" size="100,100">&lt;!-- Your inventory contains:
 
 (if: $inv&#39;s length &gt; 0)[\
 (for: each _item, ...$inv)[   _item&lt;br /&gt;]
@@ -86,6 +126,8 @@ In front of you is a [[television-&gt;TV]]. There is a [[catalog computer-&gt;PA
 To your right is the [[circulation desk-&gt;Circ Desk]].  To your left, behind some [[books-&gt;Bookshelf Wall]] is a [[meeting area-&gt;Meeting Area]].
 
 You can also go back to the [[vestibule-&gt;Vestibule]].</tw-passagedata><tw-passagedata pid="6" name="Outside" tags="" position="525,900" size="100,100">You are outside of the library building.
+
+Test the [[scanner]] 
 
 You can [[enter the library-&gt;Vestibule]]. </tw-passagedata><tw-passagedata pid="7" name="Vestibule" tags="" position="400,650" size="100,100">(set: $showfooter to true)
 You are in the vestibule.  You can either [[enter the library-&gt;FrontArea]] or [[go outside-&gt;Outside]].</tw-passagedata><tw-passagedata pid="8" name="TV" tags="" position="775,525" size="100,100">The TV is currently playing the local news. \
