@@ -16,6 +16,10 @@ tw-story[tags~="red-background"] {
     color: white;
 }
 
+tw-passage {
+color:gray;
+}
+
 #delayedLink1 {
     animation: fadeIn 2s forwards;
 }
@@ -36,8 +40,18 @@ tw-story[tags~="red-background"] {
 
 #qr-reader {
     max-width: 100%;
+}
+
+.passage img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="donotshowclues donotshowinventory nobacksies" position="100,200" size="100,100">(set: $inv to (a:))
-Welcome to the Norwood Public Library!
+
+&lt;img src=https://dclstechnology.github.io/spooky/img/title.png&gt;
+
+&lt;h3&gt;(text-colour:blue)[INTERACTIVE SCAVENGER HUNT]&lt;/h3&gt;
 
 FUN INFO ABOUT NORWOOD GOES HERE
 
@@ -47,11 +61,15 @@ You have been brought in to investigate the strange things that have been happen
 - Strange handwritten notes have been found in all sorts of unlikely places.
 - Unusual noises are heard at all hours of the day and night.
 
-As you explore the library and interact with people, places, and things, you will automatically add items and information to your inventory. 
+Scroll down each page and make sure to read &lt;em&gt;everything&lt;/em&gt;!
+
+You will need to be in person in Norwood Public Library in to solve some puzzles.  They are hidden in unexpected places.
+
+As you explore the game and interact with people, places, and things, you will automatically add items and information to your inventory. 
 
 Events happen throughout the game, so revisiting a location later, or with an item in hand, may open new avenues to explore!
 
-(live: 1s)[(t8n:&quot;dissolve&quot;)[Please tap the screen to continue.](stop:)]
+(live: 4s)[(t8n:&quot;dissolve&quot;)[Please tap the screen to continue.](stop:)]
 (click: ?page)[== (set: $name to (prompt: &quot;What is your name?&quot;, &quot;Patron&quot;))
 (live: 1s)[(t8n:&quot;dissolve&quot;)[Hello, $name!  It&#39;s nice to meet you.](stop:)]
 
@@ -104,6 +122,7 @@ To your right is the [[circulation desk-&gt;Circ Desk]].  To your left, behind s
 You can also go back to the [[vestibule-&gt;Vestibule]].</tw-passagedata><tw-passagedata pid="6" name="Outside" tags="" position="200,600" size="100,100">You are outside of the library building.
 
 Test the [[scanner]] 
+Test [[GPS]] 
 
 You can [[enter the library-&gt;Vestibule]]. </tw-passagedata><tw-passagedata pid="7" name="Vestibule" tags="" position="100,400" size="100,100">(set: $showfooter to true)
 You are in the vestibule.  You can either [[enter the library-&gt;FrontArea]] or [[go outside-&gt;Outside]].</tw-passagedata><tw-passagedata pid="8" name="TV" tags="" position="500,250" size="100,100">The TV is currently playing the local news. \
@@ -163,6 +182,69 @@ $(function () {
     $(document).on(&#39;submit&#39;, &#39;#wordForm&#39;, function(event) {
         event.preventDefault();
         checkWord();
+    });
+});
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="23" name="GPS" tags="" position="1225,575" size="100,100">GPS
+
+&lt;div id=&quot;output&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+$(function () {
+    function toRadians(degrees) {
+        return degrees * (Math.PI / 180);
+    }
+
+    function toDegrees(radians) {
+        return radians * (180 / Math.PI);
+    }
+
+    function getDistanceAndBearing(lat1, lon1, lat2, lon2) {
+        const R = 6371e3; // Earth radius in meters
+        const φ1 = toRadians(lat1);
+        const φ2 = toRadians(lat2);
+        const Δφ = toRadians(lat2 - lat1);
+        const Δλ = toRadians(lon2 - lon1);
+
+        const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                  Math.cos(φ1) * Math.cos(φ2) *
+                  Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const distance = R * c;
+
+        const y = Math.sin(Δλ) * Math.cos(φ2);
+        const x = Math.cos(φ1) * Math.sin(φ2) -
+                  Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
+        const bearing = (toDegrees(Math.atan2(y, x)) + 360) % 360;
+
+        return { distance, bearing };
+    }
+
+    function showPosition(position) {
+        const lat1 = position.coords.latitude;
+        const lon1 = position.coords.longitude;
+        const lat2 = 37.7749; // Example target latitude
+        const lon2 = -122.4194; // Example target longitude
+
+        const result = getDistanceAndBearing(lat1, lon1, lat2, lon2);
+
+        document.getElementById(&quot;output&quot;).innerHTML = 
+            `Distance: ${result.distance.toFixed(2)} meters&lt;br&gt;` +
+            `Bearing: ${result.bearing.toFixed(2)} degrees`;
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            document.getElementById(&quot;output&quot;).innerHTML = 
+                &quot;Geolocation is not supported by this browser.&quot;;
+        }
+    }
+
+    $(document).on(&#39;tw-story:shown&#39;, function (event) {
+        if (event.passage == &#39;gps-passage&#39;) {
+            getLocation();
+        }
     });
 });
 &lt;/script&gt;</tw-passagedata></tw-storydata>
