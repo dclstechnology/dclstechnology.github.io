@@ -17,7 +17,7 @@ tw-story[tags~="red-background"] {
 }
 
 tw-passage {
-color:gray;
+color:#c2c2c2;
 }
 
 #delayedLink1 {
@@ -50,10 +50,11 @@ color:gray;
     max-width: 100%;
     height: auto;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="donotshowclues donotshowinventory nobacksies" position="100,200" size="100,100">(set: $inv to (a:))
-
+&lt;center&gt;
 &lt;img src=https://dclstechnology.github.io/spooky/img/title.png&gt;
 
 &lt;h3&gt;(text-colour:blue)[INTERACTIVE SCAVENGER HUNT]&lt;/h3&gt;
+&lt;/center&gt;
 
 FUN INFO ABOUT NORWOOD GOES HERE
 
@@ -71,7 +72,7 @@ As you explore the game and interact with people, places, and things, you will a
 
 Events happen throughout the game, so revisiting a location later, or with an item in hand, may open new avenues to explore!
 
-(live: 4s)[(t8n:&quot;dissolve&quot;)[Please tap the screen to continue.](stop:)]
+(live: 1.5s)[(t8n:&quot;dissolve&quot;)[Please tap the screen to continue.](stop:)]
 (click: ?page)[== (set: $name to (prompt: &quot;What is your name?&quot;, &quot;Patron&quot;))
 (live: 1s)[(t8n:&quot;dissolve&quot;)[Hello, $name!  It&#39;s nice to meet you.](stop:)]
 
