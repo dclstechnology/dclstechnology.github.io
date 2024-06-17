@@ -84,7 +84,7 @@ As you play, make sure to &lt;span class=&quot;emphasis&quot;&gt;scroll down eac
 Events happen at different times throughout the game, so &lt;span class=&quot;emphasis&quot;&gt;revisiting a location later or with an item in hand may open new avenues to explore!&lt;/span&gt;
 &lt;br&gt;&lt;br&gt;
 [[Continue-&gt;Intro2]]
-</tw-passagedata><tw-passagedata pid="2" name="footer" tags="" position="1275,325" size="100,100">(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;](else:)[&lt;div style=&quot;float: left;&quot;&gt;&lt;font size=&quot;4&quot;&gt;[[Inventory]]&lt;/font&gt;&lt;/div&gt;](if: (passage:)&#39;s name is &quot;scanner&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s name is &quot;Intro&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s tags contains &quot;noscanner&quot;)[&lt;!--Do nothing--&gt;](else-if: $HasScanner is 1)[&lt;div style=&quot;float: right;&quot;&gt;&lt;font size=&quot;4&quot;&gt;[[Scanner]]&lt;/font&gt;&lt;/div&gt;](else:)[&lt;!--Do nothing--&gt;]
+</tw-passagedata><tw-passagedata pid="2" name="footer" tags="" position="1275,325" size="100,100">(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;](else:)[&lt;div style=&quot;float: left;&quot;&gt;&lt;font size=&quot;4&quot;&gt;(link: &quot;Inventory&quot;)[(redirect: &quot;Inventory&quot;)]&lt;/font&gt;&lt;/div&gt;](if: (passage:)&#39;s name is &quot;scanner&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s name is &quot;Intro&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s tags contains &quot;noscanner&quot;)[&lt;!--Do nothing--&gt;](else-if: $HasScanner is 1)[&lt;div style=&quot;float: right;&quot;&gt;&lt;font size=&quot;4&quot;&gt;[[Scanner]]&lt;/font&gt;&lt;/div&gt;](else:)[&lt;!--Do nothing--&gt;]
 
 &lt;!--&lt;div style=&quot;float: left;&quot;&gt;&lt;font size=&quot;4&quot;&gt;[[Inventory-&gt;Inventory]]&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;float: right;&quot;&gt;&lt;font size=&quot;4&quot;&gt;[[Scanner-&gt;Scanner]]&lt;/font&gt;&lt;/div&gt;--&gt;</tw-passagedata><tw-passagedata pid="3" name="Scanner" tags="" position="1225,450" size="100,100">(text-colour:lime)[Hint Scanner]
 &lt;div id=&quot;qr-reader&quot;&gt;&lt;/div&gt;
@@ -112,10 +112,10 @@ $(function () {
         html5QrcodeScanner.render(onScanSuccess);
     });
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="4" name="Inventory" tags="" position="1225,200" size="100,100">(if: $inv&#39;s length &gt; 0)[Your inventory contains a (joined: &quot;, &quot;, ...$inv).](else:)[Your inventory is empty.]
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="4" name="Inventory" tags="" position="1225,200" size="100,100">{(if: $inv&#39;s length &gt; 0)[Your inventory contains a (joined: &quot;, &quot;, ...$inv).](else:)[Your inventory is empty.]
 (click: &quot;remote control&quot;)[(display: &quot;TVRemote&quot;)]
 (click: &quot;bathroom key&quot;)[(display: &quot;BathroomKey&quot;)]
-(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="5" name="FrontArea" tags="" position="300,200" size="100,100">You are in the &lt;span class=&quot;emphasis&quot;&gt;main entrance area&lt;/span&gt; of the Norwood Public Library. 
+(link: &quot;Go back&quot;)[(redirect: (history:)&#39;s last)]}</tw-passagedata><tw-passagedata pid="5" name="FrontArea" tags="" position="300,200" size="100,100">You are in the &lt;span class=&quot;emphasis&quot;&gt;main entrance area&lt;/span&gt; of the Norwood Public Library. 
 
 In front of you is a television. There is a catalog computer on a stand to the left of the television.  There are several public computers and printers behind the television.
 
@@ -228,7 +228,7 @@ https://twine2.neocities.org/#macro_click
 (click: ?page)[==
 (redirect: &quot;Intro2&quot;)
 
-(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="24" name="Intro2" tags="" position="100,200" size="100,100">{
+(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="24" name="Intro2" tags="donotshowinventory" position="100,200" size="100,100">{
 &lt;!--(dialog: [Enter your name when prompted.], &quot;You got it!&quot;)\--&gt;
 (set: $name to (prompt: [Your name, please:], &quot;Patron&quot;))\
 (click: ?page)[==
