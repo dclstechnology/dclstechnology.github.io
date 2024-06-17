@@ -71,9 +71,8 @@ color:#c2c2c2;
 	color: #68a1fc;
 	font-weight: bold;
 }
-</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="donotshowinventory nobacksies" position="100,50" size="100,100">(set: $inv to (a:))
-&lt;img src=https://dclstechnology.github.io/spooky/img/title.png&gt;
-&lt;h3&gt;(text-colour:blue)[INTERACTIVE SCAVENGER HUNT]&lt;/h3&gt;
+</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="noscanner donotshowinventory" position="100,50" size="100,100">(set: $inv to (a:))(align: &quot;=&gt;&lt;=&quot;)[&lt;img src=https://dclstechnology.github.io/spooky/img/title.png&gt;&lt;br&gt;
+&lt;h3&gt;(text-colour:blue)[INTERACTIVE SCAVENGER HUNT]&lt;/h3&gt;]
 FUN INFO ABOUT NORWOOD GOES HERE
 
 This game is both &lt;span class=&quot;emphasis&quot;&gt;on your phone&lt;/span&gt; and &lt;span class=&quot;emphasis&quot;&gt;in person at the library&lt;/span&gt;.  Some clues in the game will require you to find &lt;span class=&quot;emphasis&quot;&gt;&lt;em&gt;real things&lt;/em&gt; hidden in the library&lt;/span&gt;.
@@ -85,18 +84,9 @@ As you play, make sure to &lt;span class=&quot;emphasis&quot;&gt;scroll down eac
 Events happen at different times throughout the game, so &lt;span class=&quot;emphasis&quot;&gt;revisiting a location later or with an item in hand may open new avenues to explore!&lt;/span&gt;
 &lt;br&gt;&lt;br&gt;
 [[Continue-&gt;Intro2]]
-</tw-passagedata><tw-passagedata pid="2" name="footer" tags="" position="1275,325" size="100,100">&lt;div style=&quot;float: left;&quot;&gt;&lt;font size=&quot;4&quot;&gt;[[Inventory-&gt;Inventory]]&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;float: right;&quot;&gt;&lt;font size=&quot;4&quot;&gt;[[Scanner-&gt;scanner]]&lt;/font&gt;&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="2" name="footer" tags="" position="1275,325" size="100,100">(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;](else:)[&lt;div style=&quot;float: left;&quot;&gt;&lt;font size=&quot;4&quot;&gt;[[Inventory]]&lt;/font&gt;&lt;/div&gt;](if: (passage:)&#39;s name is &quot;scanner&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s name is &quot;Intro&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s tags contains &quot;noscanner&quot;)[&lt;!--Do nothing--&gt;](else-if: $HasScanner is 1)[&lt;div style=&quot;float: right;&quot;&gt;&lt;font size=&quot;4&quot;&gt;[[Scanner]]&lt;/font&gt;&lt;/div&gt;](else:)[&lt;!--Do nothing--&gt;]
 
-&lt;!--(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;]
-(else-if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;]
-(else-if: $inv&#39;s length is 0)[&lt;!--Do nothing--&gt;]
-(else:)[Check [[inventory-&gt;Inventory]]]&lt;br /&gt;
-(if: $inv contains &quot;scanner&quot;)[Use [[scanner]]]
-(else-if: (passage:)&#39;s name is &quot;scanner&quot;)[&lt;!--Do nothing--&gt;]
-(else-if: (passage:)&#39;s tags contains &quot;noscanner&quot;)[&lt;!--Do nothing--&gt;]
-(else:)[&lt;!--Do nothing--&gt;]
---&gt;
-&lt;/font&gt;</tw-passagedata><tw-passagedata pid="3" name="scanner" tags="" position="1225,450" size="100,100">(text-colour:lime)[Hint Scanner]
+&lt;!--&lt;div style=&quot;float: left;&quot;&gt;&lt;font size=&quot;4&quot;&gt;[[Inventory-&gt;Inventory]]&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;float: right;&quot;&gt;&lt;font size=&quot;4&quot;&gt;[[Scanner-&gt;Scanner]]&lt;/font&gt;&lt;/div&gt;--&gt;</tw-passagedata><tw-passagedata pid="3" name="Scanner" tags="" position="1225,450" size="100,100">(text-colour:lime)[Hint Scanner]
 &lt;div id=&quot;qr-reader&quot;&gt;&lt;/div&gt;
 
 Use the scanner to search for clues. Each clue will show you a word.  You&#39;ll be able to enter that word to unlock more information, an item, or further clues.
@@ -122,8 +112,7 @@ $(function () {
         html5QrcodeScanner.render(onScanSuccess);
     });
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="4" name="Inventory" tags="" position="1225,200" size="100,100">(if: $inv&#39;s length &gt; 0)[Your inventory contains a (joined: &quot;, &quot;, ...$inv).]
-(else:)[Your inventory is empty.]
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="4" name="Inventory" tags="" position="1225,200" size="100,100">(if: $inv&#39;s length &gt; 0)[Your inventory contains a (joined: &quot;, &quot;, ...$inv).](else:)[Your inventory is empty.]
 (click: &quot;remote control&quot;)[(display: &quot;TVRemote&quot;)]
 (click: &quot;bathroom key&quot;)[(display: &quot;BathroomKey&quot;)]
 (link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="5" name="FrontArea" tags="" position="300,200" size="100,100">You are in the &lt;span class=&quot;emphasis&quot;&gt;main entrance area&lt;/span&gt; of the Norwood Public Library. 
@@ -132,22 +121,17 @@ In front of you is a television. There is a catalog computer on a stand to the l
 
 To your right is the circulation desk.  To your left, behind some books is a meeting area.
 
-NOTE - Testing some technology here.  If you return to this page after visiting a few other pages you will be able to investigate the books.
+NOTE - Testing some technology here.  If you return to this page after visiting a few other pages you will be able to investigate the books.  The TV will show up once you find the remote.
 
-You can visit the [[circulation desk-&gt;Circ Desk]].
-You can look at the [[television-&gt;TV]].
-You can use the [[catalog computer-&gt;PAC1]]. 
-You can use the [[public computers-&gt;PUBS]].
-You can visit the [[meeting area-&gt;Meeting Area]].
-(if: turns &gt; 10)[You can investigate the [[books-&gt;Bookshelf Wall]].](else:)[&lt;!--DO NOTHING--&gt;]
+You can visit the [[circulation desk-&gt;Circ Desk]].&lt;br&gt;You can use the [[catalog computer-&gt;PAC1]].&lt;br&gt;You can use the [[public computers-&gt;PUBS]].&lt;br&gt;You can visit the [[meeting area-&gt;Meeting Area]].&lt;br&gt;(if: $inv contains &quot;remote control&quot;)[You can look at the [[television-&gt;TV]].&lt;br&gt;](else:)[&lt;!--DO NOTHING--&gt;](if: turns &gt; 10)[You can investigate the [[books-&gt;Bookshelf Wall]].&lt;br&gt;](else:)[&lt;!--DO NOTHING--&gt;]
 You can also go back to the [[vestibule-&gt;Vestibule]].</tw-passagedata><tw-passagedata pid="6" name="Outside" tags="" position="200,600" size="100,100">You are outside of the library building.
 
-Test the [[scanner]] 
+Test the [[Scanner]] 
 
 You can [[enter the library-&gt;Vestibule]]. </tw-passagedata><tw-passagedata pid="7" name="Vestibule" tags="" position="100,400" size="100,100">(set: $showfooter to true)
-You are in the vestibule.  You can either [[enter the library-&gt;FrontArea]] or [[go outside-&gt;Outside]].</tw-passagedata><tw-passagedata pid="8" name="TV" tags="" position="500,250" size="100,100">The TV is currently playing the local news. \
+You are in the vestibule.  You can either [[enter the library-&gt;FrontArea]] or [[go outside-&gt;Outside]].</tw-passagedata><tw-passagedata pid="8" name="TV" tags="" position="500,250" size="100,100">The TV is currently playing the local news.
 
-(if: $inv contains &quot;different remote control&quot;)[You pull the new remote control out of your inventory and point it at the TV.  This time you can [[change the channels-&gt;TV Channels]]!](else-if: $inv contains &quot;remote control&quot;)[You pull the remote control out of your inventory and point it at the TV, but nothing happens.  It must be for another televison somewhere.] \
+(if: $inv contains &quot;different remote control&quot;)[You pull the new remote control out of your inventory and point it at the TV.  This time you can [[change the channels-&gt;TV Channels]]!](else-if: $inv contains &quot;remote control&quot;)[You pull the remote control out of your inventory and point it at the TV, but nothing happens.  It must be for another televison somewhere.] 
 
 From here you can investigate the [[public computers-&gt;PUBS]], or [[browse the catalog-&gt;PAC1]]
 
@@ -176,9 +160,7 @@ You can [[go back-&gt;ChildrenRoom]]. </tw-passagedata><tw-passagedata pid="17" 
 
 You can [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="19" name="TVRemote" tags="" position="900,100" size="100,100">{This is a standard TV remote control, somewhat old and worn.  The brand of the remote is not labeled.&lt;br /&gt; &lt;br /&gt;
 (if: $inv contains &quot;remote control&quot;)[&lt;!--DO NOTHING](else:)[You add the remote to your inventory (set: $inv to it + (a: &quot;remote control&quot;))]&lt;br /&gt; &lt;br /&gt;
-(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else:)[You can [[go back-&gt;Meeting Area]].]}
-
-(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="20" name="TV Channels" tags="" position="700,250" size="100,100">
+(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else:)[You can [[go back-&gt;Meeting Area]].]}</tw-passagedata><tw-passagedata pid="20" name="TV Channels" tags="" position="700,250" size="100,100">
 You can [[go back-&gt;TV]]. </tw-passagedata><tw-passagedata pid="21" name="Prompt validation" tags="" position="1350,450" size="100,100">https://twinery.org/forum/discussion/8947/i-want-to-create-a-prompt-box-in-which-the-answer-becomes-a-correct-or-incorrect-variable
 
 (set: $total to &quot;0&quot;)
@@ -250,20 +232,28 @@ https://twine2.neocities.org/#macro_click
 &lt;!--(dialog: [Enter your name when prompted.], &quot;You got it!&quot;)\--&gt;
 (set: $name to (prompt: [Your name, please:], &quot;Patron&quot;))\
 (click: ?page)[==
-}(live: 1s)[(t8n:&quot;dissolve&quot;)[Hello, $name!  It&#39;s nice to meet you. You have been brought here today to locate the mysterious &lt;em&gt;Lost Manuscript&lt;/em&gt;](stop:)]
+}(live: .5s)[(t8n:&quot;dissolve&quot;)[Hello, $name!  It&#39;s nice to meet you. You have been brought here today to locate the mysterious &lt;em&gt;Lost Manuscript&lt;/em&gt;](stop:)]
 
 (live: 3s)[(t8n:&quot;dissolve&quot;)[Find the lost manuscript by solving a series of clues hidden throughout this game and in the library. Each clue leads to the next location and provides a piece of the final puzzle needed to find the manuscript.](stop:)]
+
 
 (live: 5s)[(t8n:&quot;dissolve&quot;)[You are in the vestibule. You&#39;ll have several choices to make in our little story, just tap the highligted words to select them. To start, you can:](stop:)]
 
 (live: 7s)[[[Enter the library-&gt;FrontArea]] or(stop:)] (live: 7.5s)[[[go outside (testing area)-&gt;Outside]](stop:)]</tw-passagedata><tw-passagedata pid="25" name="header" tags="header" position="1175,325" size="100,100">(display: &quot;footer&quot;)</tw-passagedata><tw-passagedata pid="26" name="librarian1" tags="" position="550,800" size="100,100">Hello, $name!  I&#39;m glad you stopped in today to help us in our search for the Lost Manuscript.
 
-(if: (visited: &quot;Bathroom&quot;))[I saw you checking out the bathroom.  Here&#39;s the key if you need it. (set: $inv to it + (a: &quot;bathroom key&quot;))] 
+NOTE - If you visit the bathroom, coming back to speak with the librarian gets you the bathroom key.  You don&#39;t get the key if you haven&#39;t visited the bathroom yet.
+
+(if: $inv contains &quot;bathroom key&quot;)[&lt;!--DO NOTHING--&gt;](else-if: (visited: &quot;Bathroom&quot;))[I saw you checking out the bathroom.  Here&#39;s the key if you need it. (set: $inv to it + (a: &quot;bathroom key&quot;))] 
 
 You can go to the [[circulation desk-&gt;Circ Desk]]. 
 You can go to the [[front of the library-&gt;FrontArea]]. 
 </tw-passagedata><tw-passagedata pid="27" name="BathroomKey" tags="" position="1000,100" size="100,100">This is a regular old key.  It opens the bathroom.
-(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else:)[(link-goto: &quot;Return&quot;, (history:)&#39;s last)]</tw-passagedata></tw-storydata>
+(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else:)[(link-goto: &quot;Return&quot;, (history:)&#39;s last)]</tw-passagedata><tw-passagedata pid="28" name="CodeEntry" tags="donotshowinventory" position="1225,700" size="100,100">(link-repeat: &quot;Enter code&quot;)[{
+	(set: $code to (prompt: &quot;Please enter your code.&quot;, &quot;&quot;))	
+    (set: $code to (lowercase: $code))
+	(if: $code is &quot;penguin&quot;)[(replace: ?results)[(set: $inv to it + (a: &quot;penguin&quot;))Item found!  Please check your inventory.]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]
+
+[]&lt;results|</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
