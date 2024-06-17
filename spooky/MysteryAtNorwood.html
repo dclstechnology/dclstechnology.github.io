@@ -49,34 +49,21 @@ color:#c2c2c2;
     margin-right: auto;
     max-width: 100%;
     height: auto;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="donotshowclues donotshowinventory nobacksies" position="100,200" size="100,100">(set: $inv to (a:))
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="donotshowclues donotshowinventory nobacksies" position="100,50" size="100,100">(set: $inv to (a:))
 &lt;img src=https://dclstechnology.github.io/spooky/img/title.png&gt;
-
 &lt;h3&gt;(text-colour:blue)[INTERACTIVE SCAVENGER HUNT]&lt;/h3&gt;
-
 FUN INFO ABOUT NORWOOD GOES HERE
 
-You have been brought in to investigate the strange things that have been happening in the library:
+This game is both &lt;strong&gt;(text-colour:yellow)[on your phone]&lt;/strong&gt; and &lt;strong&gt;(text-colour:yellow)[in person at the library]&lt;/strong&gt;.  Some clues in the game will require you to find (text-colour:yellow)[&lt;em&gt;real things&lt;/em&gt; hidden in the library].
 
-- Objects get moved around and sometimes disappear.
-- Strange handwritten notes have been found in all sorts of unlikely places.
-- Unusual noises are heard at all hours of the day and night.
+As you explore the game and interact with people, places, and things, (text-colour:yellow)[you will automatically add items and information to your inventory].  Your inventory will be at the bottom of each page, and will appear once you find an item.  
 
-Scroll down each page and make sure to read &lt;em&gt;everything&lt;/em&gt;!
+As you play, make sure to (text-colour:yellow)[scroll down each page and make sure to read &lt;em&gt;everything&lt;/em&gt;!]
 
-You will need to be in person in Norwood Public Library in to solve some puzzles.  They are hidden in unexpected places.
+Events happen at different times throughout the game, so (text-colour:yellow)[revisiting a location later or with an item in hand may open new avenues to explore!]
 
-As you explore the game and interact with people, places, and things, you will automatically add items and information to your inventory. 
-
-Events happen throughout the game, so revisiting a location later, or with an item in hand, may open new avenues to explore!
-
-(live: 1.5s)[(t8n:&quot;dissolve&quot;)[Please tap the screen to continue.](stop:)]
-(click: ?page)[== (set: $name to (prompt: &quot;What is your name?&quot;, &quot;Patron&quot;))
-(live: 1s)[(t8n:&quot;dissolve&quot;)[Hello, $name!  It&#39;s nice to meet you.](stop:)]
-
-(live: 2s)[(t8n:&quot;dissolve&quot;)[You are in the vestibule. You&#39;ll have several choices to make in our little story, just tap the highligted words to select them. To start, you can:](stop:)]
-
-(live: 3s)[[[Enter the library-&gt;FrontArea]] or(stop:)] (live: 3.5s)[[[go outside (testing area)-&gt;Outside]](stop:)]</tw-passagedata><tw-passagedata pid="2" name="footer" tags="footer" position="1225,325" size="100,100">(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;]
+[[Continue-&gt;Intro2]]
+</tw-passagedata><tw-passagedata pid="2" name="footer" tags="footer" position="1225,325" size="100,100">(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;]
 (else-if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;]
 (else-if: $inv&#39;s length is 0)[&lt;!--Do nothing--&gt;]
 (else:)[Check [[inventory-&gt;Inventory]]]&lt;br /&gt;
@@ -114,7 +101,7 @@ $(function () {
 (else:)[Your inventory is empty.]
 (click: &quot;remote control&quot;)[(display: &quot;TVRemote&quot;)]
 (link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="5" name="FrontArea" tags="nobacksies" position="300,200" size="100,100">(set: $showfooter to true)
-This is the main entrance area of the Norwood Public Library.
+This is the (text-colour:white)[main entrance area] of the Norwood Public Library. 
 
 In front of you is a [[television-&gt;TV]]. There is a [[catalog computer-&gt;PAC1]] on a stand to the left of the television.  There are several [[public computers and printers-&gt;PUBS]] behind the television.
 
@@ -123,7 +110,6 @@ To your right is the [[circulation desk-&gt;Circ Desk]].  To your left, behind s
 You can also go back to the [[vestibule-&gt;Vestibule]].</tw-passagedata><tw-passagedata pid="6" name="Outside" tags="" position="200,600" size="100,100">You are outside of the library building.
 
 Test the [[scanner]] 
-Test [[gps-passage]] 
 
 You can [[enter the library-&gt;Vestibule]]. </tw-passagedata><tw-passagedata pid="7" name="Vestibule" tags="" position="100,400" size="100,100">(set: $showfooter to true)
 You are in the vestibule.  You can either [[enter the library-&gt;FrontArea]] or [[go outside-&gt;Outside]].</tw-passagedata><tw-passagedata pid="8" name="TV" tags="" position="500,250" size="100,100">The TV is currently playing the local news. \
@@ -185,81 +171,45 @@ $(function () {
         checkWord();
     });
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="23" name="gps-passage" tags="" position="1225,575" size="100,100">GPS
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="23" name="SCRAPBOARD" tags="" position="1225,575" size="100,100">(live: 1.5s)[(t8n:&quot;dissolve&quot;)[Please tap the screen to continue.](stop:)]
+(input: bind $name, &quot;=X=&quot;, &quot;What is your name?&quot;)
+(click: ?page)[== (set: $name to (prompt: &quot;What is your name?&quot;, &quot;Patron&quot;))
+(live: 1s)[(t8n:&quot;dissolve&quot;)[Hello, $name!  It&#39;s nice to meet you.](stop:)]
 
-&lt;div id=&quot;output&quot;&gt;Fetching location...&lt;/div&gt;
+(live: 2s)[(t8n:&quot;dissolve&quot;)[You are in the vestibule. You&#39;ll have several choices to make in our little story, just tap the highligted words to select them. To start, you can:](stop:)]
 
-&lt;script&gt;
+(live: 3s)[[[Enter the library-&gt;FrontArea]] or(stop:)] (live: 3.5s)[[[go outside (testing area)-&gt;Outside]](stop:)]
 
-$(function () {
-    function toRadians(degrees) {
-        return degrees * (Math.PI / 180);
-    }
 
-    function toDegrees(radians) {
-        return radians * (180 / Math.PI);
-    }
+(dialog: [Enter your name when prompted, then scroll down to the rest of the tutorial.], &quot;You got it&quot;)\
 
-    function getDistanceAndBearing(lat1, lon1, lat2, lon2) {
-        const R = 6371e3; // Earth radius in meters
-        const φ1 = toRadians(lat1);
-        const φ2 = toRadians(lat2);
-        const Δφ = toRadians(lat2 - lat1);
-        const Δλ = toRadians(lon2 - lon1);
 
-        const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-                  Math.cos(φ1) * Math.cos(φ2) *
-                  Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        const distance = R * c;
+This text is visible by default.
+|DIRTY_SECRET)[This is a secret text only visible after you click on the page.]
+(click: ?page)[(show:?DIRTY_SECRET)]
+You can make the entire page clickable with (click: ?page).
 
-        const y = Math.sin(Δλ) * Math.cos(φ2);
-        const x = Math.cos(φ1) * Math.sin(φ2) -
-                  Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
-        const bearing = (toDegrees(Math.atan2(y, x)) + 360) % 360;
+The |hook_name)[passage content] syntax lets you create a named hook that is invisible until you call (show: ?hook_name).
 
-        return { distance, bearing };
-    }
+Docs:
 
-    function showPosition(position) {
-        console.log(&quot;Position obtained:&quot;, position);
-        const lat1 = position.coords.latitude;
-        const lon1 = position.coords.longitude;
-        const lat2 = 37.7749; // Example target latitude
-        const lon2 = -122.4194; // Example target longitude
+https://twine2.neocities.org/#markup_hidden-hook
+https://twine2.neocities.org/#macro_click
 
-        const result = getDistanceAndBearing(lat1, lon1, lat2, lon2);
+(click: ?page)[==
+(redirect: &quot;Intro2&quot;)</tw-passagedata><tw-passagedata pid="24" name="Intro2" tags="" position="100,200" size="100,100">(set: $turns to 0){
+(dialog: [Enter your name when prompted.], &quot;You got it!&quot;)\
+(set: $name to (prompt: [Your name, please:], &quot;Patron&quot;))\
+(click: ?page)[==
+}(live: 1s)[(t8n:&quot;dissolve&quot;)[Hello, $name!  It&#39;s nice to meet you. You have been brought in to investigate the strange things that have been happening in the library:](stop:)]
 
-        console.log(&quot;Distance and Bearing calculated:&quot;, result);
-        document.getElementById(&quot;output&quot;).innerHTML = 
-            `Distance: ${result.distance.toFixed(2)} meters&lt;br&gt;` +
-            `Bearing: ${result.bearing.toFixed(2)} degrees`;
-    }
+(live: 2s)[(t8n:&quot;dissolve&quot;)[- Objects get moved around and sometimes disappear.](stop:)]
+(live: 3s)[(t8n:&quot;dissolve&quot;)[- Strange handwritten notes have been found in all sorts of unlikely places.](stop:)]
+(live: 4s)[(t8n:&quot;dissolve&quot;)[- Unusual noises are heard at all hours of the day and night.](stop:)]
 
-    function getLocation() {
-        console.log(&quot;Attempting to get location...&quot;);
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, function(error) {
-                console.log(&quot;Error obtaining location:&quot;, error);
-                document.getElementById(&quot;output&quot;).innerHTML = 
-                    &quot;Error obtaining location: &quot; + error.message;
-            });
-        } else {
-            console.log(&quot;Geolocation not supported.&quot;);
-            document.getElementById(&quot;output&quot;).innerHTML = 
-                &quot;Geolocation is not supported by this browser.&quot;;
-        }
-    }
+(live: 5s)[(t8n:&quot;dissolve&quot;)[You are in the vestibule. You&#39;ll have several choices to make in our little story, just tap the highligted words to select them. To start, you can:](stop:)]
 
-    $(document).on(&#39;tw-story:shown&#39;, function (event) {
-        console.log(&quot;Passage shown:&quot;, event.passage);
-        if (event.passage == &#39;gps-passage&#39;) {
-            getLocation();
-        }
-    });
-});
-
-&lt;/script&gt;</tw-passagedata></tw-storydata>
+(live: 6s)[[[Enter the library-&gt;FrontArea]] or(stop:)] (live: 6.5s)[[[go outside (testing area)-&gt;Outside]](stop:)]</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
