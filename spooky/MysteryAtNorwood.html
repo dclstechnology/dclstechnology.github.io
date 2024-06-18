@@ -76,8 +76,8 @@ color:#c2c2c2;
 .cool { 
 	color: #68a1fc;
 	font-weight: bold;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="noscanner donotshowinventory noheader" position="100,50" size="100,100">(set: $inv to (a:))(set: $GamePhase to 1)(align: &quot;=&gt;&lt;=&quot;)[&lt;img src=https://dclstechnology.github.io/spooky/img/title.png&gt;&lt;br&gt;
-&lt;h3&gt;(text-colour:blue)[INTERACTIVE SCAVENGER HUNT]&lt;/h3&gt;]
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="noscanner donotshowinventory noheader" position="100,50" size="100,100">(set: $inv to (a:))(set: $GamePhase to 1)&lt;img src=https://dclstechnology.github.io/spooky/img/title.png&gt;&lt;br&gt;
+&lt;h3&gt;(text-colour:blue)[INTERACTIVE SCAVENGER HUNT]&lt;/h3&gt;
 FUN INFO ABOUT NORWOOD GOES HERE
 
 This game is both &lt;span class=&quot;cool&quot;&gt;on your phone&lt;/span&gt; and &lt;span class=&quot;cool&quot;&gt;in person at the library&lt;/span&gt;.  Some clues in the game will require you to find &lt;span class=&quot;cool&quot;&gt;&lt;em&gt;real things&lt;/em&gt; hidden in the library&lt;/span&gt;.
@@ -129,6 +129,8 @@ NOTE - Testing some technology here.  If you return to this page after visiting 
 
 The PAC and Pubs become available at a later part of the game.
 
+Finally, this is boring.  There isn&#39;t any actual content yet, it&#39;s all filler and a tech demo.
+
 (if: $GamePhase &lt;= 1)[You can visit the [[circulation desk-&gt;Circ Desk]].&lt;br&gt;You can visit the [[meeting area-&gt;Meeting Area]].&lt;br&gt;You can go to the  [[children and teen&#39;s area-&gt;ChildrenRoom]].&lt;br&gt;(if: turns &gt; 10)[You can investigate the [[books-&gt;Bookshelf Wall]].&lt;br&gt;](else:)[&lt;!--DO NOTHING--&gt;](if: $inv contains &quot;remote control&quot;)[You can look at the [[television-&gt;TV]].&lt;br&gt;](else:)[&lt;!--DO NOTHING--&gt;]](else-if: $GamePhase &gt;= 2)[You can use the [[catalog computer-&gt;PAC1]].&lt;br&gt;You can use the [[public computers-&gt;PUBS]].&lt;br&gt;]
 
 You can also go back to the [[vestibule-&gt;Vestibule]].</tw-passagedata><tw-passagedata pid="6" name="Outside" tags="" position="300,400" size="100,100">You are outside of the library building.
@@ -169,7 +171,7 @@ You can [[go back-&gt;ChildrenRoom]]. </tw-passagedata><tw-passagedata pid="17" 
 You can [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="19" name="TVRemote" tags="" position="800,50" size="100,100">{This is a standard TV remote control, somewhat old and worn.  The brand of the remote is not labeled.&lt;br /&gt; &lt;br /&gt;
 (if: $inv contains &quot;remote control&quot;)[&lt;!--DO NOTHING](else:)[You add the remote to your inventory (set: $inv to it + (a: &quot;remote control&quot;))]&lt;br /&gt; &lt;br /&gt;
 (if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else:)[You can [[go back-&gt;Meeting Area]].]}</tw-passagedata><tw-passagedata pid="20" name="TV Channels" tags="" position="1000,200" size="100,100">
-You can [[go back-&gt;TV]]. </tw-passagedata><tw-passagedata pid="21" name="PromptNoWorky" tags="" position="1975,425" size="100,100">&lt;form id=&quot;wordForm&quot;&gt;
+You can [[go back-&gt;TV]]. </tw-passagedata><tw-passagedata pid="21" name="PromptNoWorky" tags="" position="1075,375" size="100,100">&lt;form id=&quot;wordForm&quot;&gt;
     &lt;label for=&quot;wordInput&quot;&gt;Enter the word:&lt;/label&gt;
     &lt;input type=&quot;text&quot; id=&quot;wordInput&quot; name=&quot;wordInput&quot;&gt;
     &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
