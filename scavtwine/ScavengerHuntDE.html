@@ -86,7 +86,7 @@ Under the middle one — give it a try.&#39;&#39;//
 &lt;/center&gt;
 &lt;/div&gt;
 &lt;!--Type your hint for this puzzle in between the brackets below--&gt;
-(click-rerun: &quot;HINT&quot;)[(dialog: [No hint for you!],&quot;Got it!&quot;)]</tw-passagedata><tw-passagedata pid="3" name="Wordle" tags="" position="400,75" size="100,100">    &lt;style&gt;
+(click-rerun: &quot;HINT&quot;)[(dialog: [No hint for you!],&quot;Got it!&quot;)]</tw-passagedata><tw-passagedata pid="3" name="Wordle" tags="" position="400,75" size="100,100">&lt;style&gt;
 .main-container {
     display: flex;
     flex-direction: column;
@@ -98,7 +98,8 @@ Under the middle one — give it a try.&#39;&#39;//
 }
 .instructions-container {
     width: 100%;
-    padding: 20px;    background-color: rgba(0, 0, 0, 0.7); /* transparent black */
+    padding: 20px;    
+    background-color: rgba(0, 0, 0, 0.7); /* transparent black */
     border-radius: 10px;
     margin-bottom: 20px; /* Add margin-bottom to separate containers */
     box-sizing: border-box;
@@ -170,15 +171,28 @@ Under the middle one — give it a try.&#39;&#39;//
 
 .input-field {
     padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
+    font-size: 20px; /* Increase font size */
+    border: 2px solid #ccc; /* Increase border width */
     border-radius: 5px;
-    width: 50%;
-    max-width: 300px;
-    border: 3px solid #000;
-    margin: 0 auto 20px;
+    width: 100%;
+    max-width: 400px; /* Increase max width */
+    margin: 20px auto; /* Increase margin */
 }
 
+.submit-button {
+    background-color: #fff;
+    color: #4257f5;
+    padding: 15px 30px; /* Increase padding */
+    font-size: 20px; /* Increase font size */
+    border: 2px solid #4257f5; /* Add border */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #f0f0f0;
+}
 &lt;/style&gt;
 
 &lt;div class=&quot;container&quot;&gt;
@@ -191,135 +205,120 @@ The game will provide feedback:
 &lt;span class=&quot;correct&quot;&gt;Green&lt;/span&gt;: Correct letter in the correct position.
 &lt;span class=&quot;present&quot;&gt;Yellow&lt;/span&gt;: Correct letter in the wrong position.
 &lt;span class=&quot;absent&quot;&gt;Grey&lt;/span&gt;: Letter not in the word.
-
-If you guess the word within 6 attempts, you win! Otherwise, try again.
-
-After solving the word, enter the clue word in the input field below.
-
-If you need a hint, click the hint button below.
-&lt;br&gt;
-{&lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;&lt;br&gt;}&lt;/center&gt;
+&lt;p align=&quot;left&quot;&gt;- Guess the word within 6 attempts.&lt;br&gt;- After solving the word, take that answer and enter it at the bottom of the page to move on.&lt;br&gt;- If you need a hint, click the hint button below.&lt;/p.&gt;&lt;br&gt;
+&lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;&lt;/center&gt;
 &lt;/div&gt;
 &lt;div class=&quot;game-container&quot;&gt;
 	&lt;div id=&quot;game-board&quot;&gt;&lt;/div&gt;
-	&lt;input type=&quot;text&quot; id=&quot;guess-input&quot; maxlength=&quot;5&quot;&gt;&lt;br&gt;
-	&lt;button id=&quot;submit-guess&quot;&gt;Submit Guess&lt;/button&gt;
+&lt;form id=&quot;wordForm&quot; onsubmit=&quot;return checkWord()&quot;&gt;
+    &lt;input class=&quot;input-field&quot; type=&quot;text&quot; id=&quot;wordInput&quot; placeholder=&quot;Enter the word...&quot;&gt;
+    &lt;button type=&quot;submit&quot; class=&quot;submit-button&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
-
-(click-rerun: &quot;HINT&quot;)[(dialog: [No hint for you!],&quot;Got it!&quot;)]
-
+(click-rerun: &quot;HINT&quot;)[(dialog: [These are EVERYWHERE in libraries.],&quot;Got it!&quot;)]
 &lt;script&gt;
     const targetWord = &quot;shelf&quot;; // You can randomize this or choose from a list
     let attempts = 0;
 
-document.getElementById(&#39;submit-guess&#39;).addEventListener(&#39;click&#39;, () =&gt; {
-    const guessInput = document.getElementById(&#39;guess-input&#39;);
-    const guess = guessInput.value.toLowerCase();
-    guessInput.value = &#39;&#39;;
+    document.getElementById(&#39;wordForm&#39;).addEventListener(&#39;submit&#39;, (e) =&gt; {
+        e.preventDefault();
+        const guessInput = document.getElementById(&#39;wordInput&#39;);
+        const guess = guessInput.value.toLowerCase();
+        guessInput.value = &#39;&#39;;
 
-    if (guess.length !== 5) {
-        alert(&quot;Please enter a 5-letter word.&quot;);
-        return;
-    }
-
-    attempts++;
-    updateBoard(guess);
-
-    if (guess === targetWord) {
-        alert(`Congratulations! You guessed the word in ${attempts} attempts.`);
-        disableInput(); // Disable input after the correct guess
-    } else if (attempts === 6) {
-        alert(`Game over! The word was ${targetWord}. Try again.`);
-        location.reload(); // Reload the page to reset the game
-    }
-});
-
-function updateBoard(guess) {
-    const board = document.getElementById(&#39;game-board&#39;);
-    const row = document.createElement(&#39;div&#39;);
-    row.className = &#39;guess-row&#39;;
-
-    // Count the occurrences of each letter in the target word
-    const targetLetterCount = {};
-    for (let letter of targetWord) {
-        targetLetterCount[letter] = (targetLetterCount[letter] || 0) + 1;
-    }
-
-    // Arrays to keep track of correct and present letters
-    const correctLetters = Array(targetWord.length).fill(false);
-    const presentLetters = Array(targetWord.length).fill(false);
-
-    // First pass: mark correct letters and update the letter count
-    for (let i = 0; i &lt; guess.length; i++) {
-        if (guess[i] === targetWord[i]) {
-            correctLetters[i] = true;
-            targetLetterCount[guess[i]]--;
-        }
-    }
-
-    // Second pass: mark present letters
-    for (let i = 0; i &lt; guess.length; i++) {
-        if (!correctLetters[i] &amp;&amp; targetLetterCount[guess[i]]) {
-            presentLetters[i] = true;
-            targetLetterCount[guess[i]]--;
-        }
-    }
-
-    // Display letters with the appropriate class
-    for (let i = 0; i &lt; guess.length; i++) {
-        const letter = document.createElement(&#39;div&#39;);
-        letter.className = &#39;letter&#39;;
-        letter.textContent = guess[i];
-
-        if (correctLetters[i]) {
-            letter.classList.add(&#39;correct&#39;);
-        } else if (presentLetters[i]) {
-            letter.classList.add(&#39;present&#39;);
-        } else {
-            letter.classList.add(&#39;absent&#39;);
+        if (guess.length !== 5) {
+            alert(&quot;Please enter a 5-letter word.&quot;);
+            return;
         }
 
-        row.appendChild(letter);
+        attempts++;
+        updateBoard(guess);
+
+        if (guess === targetWord) {
+            alert(`Congratulations! You guessed the word in ${attempts} attempts.`);
+            disableInput(); // Disable input after the correct guess
+        } else if (attempts === 6) {
+            alert(`Game over! The word was ${targetWord}. Try again.`);
+            location.reload(); // Reload the page to reset the game
+        }
+    });
+
+    function updateBoard(guess) {
+        const board = document.getElementById(&#39;game-board&#39;);
+        const row = document.createElement(&#39;div&#39;);
+        row.className = &#39;guess-row&#39;;
+
+        // Count the occurrences of each letter in the target word
+        const targetLetterCount = {};
+        for (let letter of targetWord) {
+            targetLetterCount[letter] = (targetLetterCount[letter] || 0) + 1;
+        }
+
+        // Arrays to keep track of correct and present letters
+        const correctLetters = Array(targetWord.length).fill(false);
+        const presentLetters = Array(targetWord.length).fill(false);
+
+        // First pass: mark correct letters and update the letter count
+        for (let i = 0; i &lt; guess.length; i++) {
+            if (guess[i] === targetWord[i]) {
+                correctLetters[i] = true;
+                targetLetterCount[guess[i]]--;
+            }
+        }
+
+        // Second pass: mark present letters
+        for (let i = 0; i &lt; guess.length; i++) {
+            if (!correctLetters[i] &amp;&amp; targetLetterCount[guess[i]]) {
+                presentLetters[i] = true;
+                targetLetterCount[guess[i]]--;
+            }
+        }
+
+        // Display letters with the appropriate class
+        for (let i = 0; i &lt; guess.length; i++) {
+            const letter = document.createElement(&#39;div&#39;);
+            letter.className = &#39;letter&#39;;
+            letter.textContent = guess[i];
+
+            if (correctLetters[i]) {
+                letter.classList.add(&#39;correct&#39;);
+            } else if (presentLetters[i]) {
+                letter.classList.add(&#39;present&#39;);
+            } else {
+                letter.classList.add(&#39;absent&#39;);
+            }
+
+            row.appendChild(letter);
+        }
+
+        board.appendChild(row);
     }
 
-    board.appendChild(row);
-}
-
-function disableInput() {
-    document.getElementById(&#39;guess-input&#39;).disabled = true;
-    document.getElementById(&#39;submit-guess&#39;).disabled = true;
-}
-
-    function resetGame() {
-        attempts = 0;
-        document.getElementById(&#39;game-board&#39;).innerHTML = &#39;&#39;;
-    }
-
-    function HintOne() {
-        // Add logic to provide a hint
-        alert(&quot;Something that you see in libraries&quot;);
+    function disableInput() {
+        document.getElementById(&#39;wordInput&#39;).disabled = true;
+        document.querySelector(&#39;.submit-button&#39;).disabled = true;
     }
 
     function checkWord() {
-        var userInput = document.getElementById(&quot;wordInput&quot;).value.trim().toLowerCase(); // Convert input to lowercase
-        // Hash the user input using SHA-256
-        var hashedInput = sha256(userInput).toUpperCase();
-        console.log(&quot;Hashed input:&quot;, hashedInput);
-        // Hash of the correct answer
-        var correctHash = &quot;3EEFA42D52064C480030A45D5813C250A9D15AEB1E6296EAE68CA401E6BB1E6F&quot;;
-        console.log(&quot;Correct hash:&quot;, correctHash);
-        if (hashedInput === correctHash) {
-            // Redirect to the next page
-            window.location.href = &quot;scavfinal.html&quot;;
-            return false; // Prevent form submission
-        } else {
-            alert(&quot;Oops! That&#39;s not the right word. Please explore your surroundings and try again.&quot;);
+        const userInput = document.getElementById(&quot;wordInput&quot;).value.trim().toLowerCase();
+        
+        // Check if input is empty
+        if (!userInput) {
+            alert(&quot;Please enter a word.&quot;);
             return false; // Prevent form submission
         }
+        
+        if (userInput === &quot;shelf&quot;) {
+            window.location.href = &quot;scavfinal.html&quot;;
+        } else {
+            alert(&quot;Oops! That&#39;s not the right word. Please explore your surroundings and try again.&quot;);
+        }
+        return false; // Prevent form submission
     }
-&lt;/script&gt;</tw-passagedata></tw-storydata>
+&lt;/script&gt;
+</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
