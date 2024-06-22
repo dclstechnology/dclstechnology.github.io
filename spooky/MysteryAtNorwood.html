@@ -76,6 +76,15 @@ color:#c2c2c2;
 .cool { 
 	color: #68a1fc;
 	font-weight: bold;
+}
+
+.demo-info {
+    width: 100%;
+    padding: 20px;    
+    background-color: #222222;
+    border-radius: 10px;
+    margin-bottom: 10px; /* Add margin-bottom to separate containers */
+    box-sizing: border-box;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro" tags="noscanner donotshowinventory noheader" position="100,50" size="100,100">(set: $inv to (a:))(set: $GamePhase to 1)&lt;img src=https://dclstechnology.github.io/spooky/img/title.png&gt;&lt;br&gt;
 &lt;h3&gt;(text-colour:blue)[INTERACTIVE SCAVENGER HUNT]&lt;/h3&gt;
 FUN INFO ABOUT NORWOOD GOES HERE
@@ -123,15 +132,16 @@ $(function () {
 
 In front of you is a television. There is a catalog computer on a stand to the left of the television.  There are several public computers and printers behind the television.
 
-To your right is the circulation desk.  To your left, behind some books is a meeting area.
+To your right is the circulation desk.  (if: turns &lt;=10)[There is a librarian there helping a patron check out some books.](else-if: turns &gt;10 and turns &lt;16)[There is a librarian behind the desk finishing up with a patron.](else:)[There is a librarian available.]
 
-NOTE - Testing some technology here.  If you return to this page after visiting a few other pages you will be able to investigate the books.  The TV will show up once you find the remote.
+To your left, behind some books is a meeting area.
+
+&lt;div class=&quot;demo-info&quot;&gt;NOTE - The librarian becomes avalable after a while. If you return to this page after visiting a few other pages you will be able to investigate the books.  The TV will show up once you find the remote.
 
 The PAC and Pubs become available at a later part of the game.
 
-Finally, this is boring.  There isn&#39;t any actual content yet, it&#39;s all filler and a tech demo.
-
-(if: $GamePhase &lt;= 1)[You can visit the [[circulation desk-&gt;Circ Desk]].&lt;br&gt;You can visit the [[meeting area-&gt;Meeting Area]].&lt;br&gt;You can go to the  [[children and teen&#39;s area-&gt;ChildrenRoom]].&lt;br&gt;(if: turns &gt; 10)[You can investigate the [[books-&gt;Bookshelf Wall]].&lt;br&gt;](else:)[&lt;!--DO NOTHING--&gt;](if: $inv contains &quot;remote control&quot;)[You can look at the [[television-&gt;TV]].&lt;br&gt;](else:)[&lt;!--DO NOTHING--&gt;]](else-if: $GamePhase &gt;= 2)[You can use the [[catalog computer-&gt;PAC1]].&lt;br&gt;You can use the [[public computers-&gt;PUBS]].&lt;br&gt;]
+Finally, this is boring.  There isn&#39;t any actual content yet, it&#39;s all filler and a tech demo.&lt;/div&gt;
+(if: $GamePhase &lt;= 1)[(if: turns &gt;=16)[You can [[speak with the librarian-&gt;librarian1]].]&lt;br&gt;You can visit the [[meeting area-&gt;Meeting Area]].&lt;br&gt;You can visit the [[bathroom-&gt;Bathroom]].&lt;br&gt;You can go to the  [[children and teen&#39;s area-&gt;ChildrenRoom]].&lt;br&gt;(if: turns &gt; 10)[You can investigate the [[books-&gt;Bookshelf Wall]].&lt;br&gt;](else:)[&lt;!--DO NOTHING--&gt;](if: $inv contains &quot;remote control&quot;)[You can look at the [[television-&gt;TV]].&lt;br&gt;](else:)[&lt;!--DO NOTHING--&gt;]](else-if: $GamePhase &gt;= 2)[You can use the [[catalog computer-&gt;PAC1]].&lt;br&gt;You can use the [[public computers-&gt;PUBS]].&lt;br&gt;]
 
 You can also go back to the [[vestibule-&gt;Vestibule]].</tw-passagedata><tw-passagedata pid="6" name="Outside" tags="" position="300,400" size="100,100">You are outside of the library building.
 
@@ -146,32 +156,30 @@ You are in the vestibule.  You can either [[enter the library-&gt;MainArea]] or 
 
 You can [[go back-&gt;MainArea]]. </tw-passagedata><tw-passagedata pid="9" name="PAC1" tags="" position="700,200" size="100,100">This catalog shows all 2+ million items available at Delaware County Libraries.  You can search by author, title, or key words.
 
-You can [[go back-&gt;MainArea]].</tw-passagedata><tw-passagedata pid="10" name="PUBS" tags="" position="600,200" size="100,100">Four public computers and two printers are available for use.  You can sign in using your library card or visit the [[circulation desk-&gt;Circ Desk]] if you need a guest pass.  You can also go to the [[main entrance area-&gt;MainArea]]. </tw-passagedata><tw-passagedata pid="11" name="Circ Desk" tags="" position="500,400" size="100,100">(if: turns &lt;=10)[There is a librarian behind the desk.  They are currently helping a patron check out some books.](else-if: turns &gt;10 and turns &lt;16)[There is a librarian behind the desk. It looks like they are finishing up with a patron.](else:)[There is a librarian here.]
+You can [[go back-&gt;MainArea]].</tw-passagedata><tw-passagedata pid="10" name="PUBS" tags="" position="600,200" size="100,100">Four public computers and two printers are available for use.  You can sign in using your library cardYou can sign in using your library card(if: turns &gt;16)[, or visit the [[librarian-&gt;librarian1]] if you need a guest pass].  You can also go to the [[main entrance area-&gt;MainArea]]. </tw-passagedata><tw-passagedata pid="11" name="Bookshelf Wall" tags="" position="600,50" size="100,100">This is a large wall of books.  Behind this wall is the [[meeting area-&gt;Meeting Area]].
 
-NOTE - The librarian becomes avalable after a while.
-
-You can go to the [[front of the library-&gt;MainArea]].
-You can visit the [[bathroom-&gt;Bathroom]].
-(if: turns &gt;=16)[You can [[speak with the librarian-&gt;librarian1]].]</tw-passagedata><tw-passagedata pid="12" name="Bookshelf Wall" tags="" position="600,50" size="100,100">This is a large wall of books.  Behind this wall is the [[meeting area-&gt;Meeting Area]].
-
-(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="13" name="Meeting Area" tags="" position="700,50" size="100,100">{There is a long meeting table here, and bookshelves around each wall.  You can exit to the [[front of the library-&gt;MainArea]](if: $GamePhase is 2)[ or toward the [[public computers-&gt;PUBS]]].&lt;br /&gt; &lt;br /&gt;
+(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="12" name="Meeting Area" tags="" position="700,50" size="100,100">{There is a long meeting table here, and bookshelves around each wall.  You can exit to the [[front of the library-&gt;MainArea]](if: $GamePhase is 2)[ or toward the [[public computers-&gt;PUBS]]].&lt;br /&gt; &lt;br /&gt;
 (if: $inv contains &quot;remote control&quot;)[&lt;!--DO NOTHING--&gt;](else:)[There is a [[remote control-&gt;TVRemote]] here.]}
 
-(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="14" name="Bathroom" tags="" position="450,525" size="100,100">(if: $inv contains &quot;bathroom key&quot;)[You use the key to open the bathroom door.  Eventually there will be content here!](else:)[This is the bathroom.  The door is locked.]
+(link-goto: &quot;Return&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="13" name="Bathroom" tags="" position="450,400" size="100,100">(set: $GamePhase to 2)
 
-[[Go back-&gt;Circ Desk]] </tw-passagedata><tw-passagedata pid="15" name="ChildrenRoom" tags="" position="800,400" size="100,100">Entering the children and teen area, you see another catalog computer to your right.  To your left is the children&#39;s area, but that is off limits.  To your right is the teen area, featuring a public computer and another television.
+(if: $inv contains &quot;bathroom key&quot;)[You use the key to open the bathroom door.  Eventually there will be content here!](else:)[This is the bathroom.  The door is locked.]
+
+&lt;div class=&quot;demo-info&quot;&gt;For the sake of the demo, getting into the bathroom starts Phase 2, which just means that you&#39;ll see the pubs and pacs in the main area now.  In actual gameplay, the game would be broken into phases that represent solving a real-world puzzle.  Solving puzzle 1, which could be a hidden QR in the library or a secret word somewhere in the big dictionary, or a book safe, or whatever, would then unlock phase 2, which has new areas to explore, leading to the next real world puzzle, and so on.&lt;/div&gt;
+
+(link-goto: &quot;Go back&quot;, (history:)&#39;s last) </tw-passagedata><tw-passagedata pid="14" name="ChildrenRoom" tags="" position="800,400" size="100,100">Entering the children and teen area, you see another catalog computer to your right.  To your left is the children&#39;s area, but that is off limits.  To your right is the teen area, featuring a public computer and another television.
 
 (if: $inv contains &quot;remote control&quot;)[You can check out the [[television-&gt;TEENTV]].&lt;br&gt;](if: $GamePhase &gt;= 2)[You can use the [[catalog computer-&gt;PAC2]]&lt;br&gt;You can use the [[public computer-&gt;TEENPUB]].]
 
 You can go back to the [[main part of the library-&gt;MainArea]]. 
-</tw-passagedata><tw-passagedata pid="16" name="PAC2" tags="" position="850,525" size="100,100">This catalog shows all 2+ million items available at Delaware County Libraries.  You can search by author, title, or key words.
+</tw-passagedata><tw-passagedata pid="15" name="PAC2" tags="" position="850,525" size="100,100">This catalog shows all 2+ million items available at Delaware County Libraries.  You can search by author, title, or key words.
 
-You can [[go back-&gt;ChildrenRoom]]. </tw-passagedata><tw-passagedata pid="17" name="TEENPUB" tags="" position="1050,525" size="100,100">One public computer is available for use.  You can sign in using your library card or visit the [[circulation desk-&gt;Circ Desk]] if you need a guest pass.  You can also [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="18" name="TEENTV" tags="" position="950,525" size="100,100">This TV is currently off.
+You can [[go back-&gt;ChildrenRoom]]. </tw-passagedata><tw-passagedata pid="16" name="TEENPUB" tags="" position="1050,525" size="100,100">One public computer is available for use.  You can sign in using your library card(if: turns &gt;16)[, or visit the [[librarian-&gt;librarian1]] if you need a guest pass]. You can also [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="17" name="TEENTV" tags="" position="950,525" size="100,100">This TV is currently off.
 
-You can [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="19" name="TVRemote" tags="" position="800,50" size="100,100">{This is a standard TV remote control, somewhat old and worn.  The brand of the remote is not labeled.&lt;br /&gt; &lt;br /&gt;
+You can [[go back-&gt;ChildrenRoom]].</tw-passagedata><tw-passagedata pid="18" name="TVRemote" tags="" position="800,50" size="100,100">{This is a standard TV remote control, somewhat old and worn.  The brand of the remote is not labeled.&lt;br /&gt; &lt;br /&gt;
 (if: $inv contains &quot;remote control&quot;)[&lt;!--DO NOTHING](else:)[You add the remote to your inventory (set: $inv to it + (a: &quot;remote control&quot;))]&lt;br /&gt; &lt;br /&gt;
-(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else:)[You can [[go back-&gt;Meeting Area]].]}</tw-passagedata><tw-passagedata pid="20" name="TV Channels" tags="" position="1000,200" size="100,100">
-You can [[go back-&gt;TV]]. </tw-passagedata><tw-passagedata pid="21" name="PromptNoWorky" tags="" position="1075,375" size="100,100">&lt;form id=&quot;wordForm&quot;&gt;
+(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else:)[You can [[go back-&gt;Meeting Area]].]}</tw-passagedata><tw-passagedata pid="19" name="TV Channels" tags="" position="1000,200" size="100,100">
+You can [[go back-&gt;TV]]. </tw-passagedata><tw-passagedata pid="20" name="PromptNoWorky" tags="" position="1075,375" size="100,100">&lt;form id=&quot;wordForm&quot;&gt;
     &lt;label for=&quot;wordInput&quot;&gt;Enter the word:&lt;/label&gt;
     &lt;input type=&quot;text&quot; id=&quot;wordInput&quot; name=&quot;wordInput&quot;&gt;
     &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
@@ -197,7 +205,7 @@ $(function () {
         checkWord();
     });
 });
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="22" name="SCRAPBOARD" tags="" position="100,950" size="100,100">(live: 1.5s)[(t8n:&quot;dissolve&quot;)[Please tap the screen to continue.](stop:)]
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="21" name="SCRAPBOARD" tags="" position="100,950" size="100,100">(live: 1.5s)[(t8n:&quot;dissolve&quot;)[Please tap the screen to continue.](stop:)]
 (input: bind $name, &quot;=X=&quot;, &quot;What is your name?&quot;)
 (click: ?page)[== (set: $name to (prompt: &quot;What is your name?&quot;, &quot;Patron&quot;))
 (live: 1s)[(t8n:&quot;dissolve&quot;)[Hello, $name!  It&#39;s nice to meet you.](stop:)]
@@ -240,7 +248,7 @@ https://twinery.org/forum/discussion/8947/i-want-to-create-a-prompt-box-in-which
 	(else:)[
 		(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]
 	]
-}]</tw-passagedata><tw-passagedata pid="23" name="Intro2" tags="donotshowinventory" position="100,150" size="100,100">{
+}]</tw-passagedata><tw-passagedata pid="22" name="Intro2" tags="donotshowinventory" position="100,150" size="100,100">{
 (set: $name to (prompt: [Your name, please:], &quot;Patron&quot;))\
 (click: ?page)[==
 }(live: .5s)[(t8n:&quot;dissolve&quot;)[Hello, $name!  It&#39;s nice to meet you. You have been brought here today to locate the mysterious &lt;span class=&quot;emphasis&quot;&gt;Lost Manuscript&lt;/span&gt;.](stop:)]
@@ -251,21 +259,21 @@ https://twinery.org/forum/discussion/8947/i-want-to-create-a-prompt-box-in-which
 (live: 9.5s)[(t8n:&quot;dissolve&quot;)[&lt;h3&gt;The Game Begins!&lt;/h3&gt;](stop:)]
 (live: 11s)[(t8n:&quot;dissolve&quot;)[You are in the vestibule. You&#39;ll have several choices to make in the story, just tap the highligted words to select them. To start, you can:](stop:)]
 
-(live: 11.5s)[[[Enter the library-&gt;MainArea]] or(stop:)] (live: 12s)[[[go outside (testing area)-&gt;Outside]](stop:)]</tw-passagedata><tw-passagedata pid="24" name="header" tags="header" position="100,500" size="100,100">{(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;](else:)[&lt;div style=&quot;float: left;&quot;&gt;&lt;font size=&quot;4&quot;&gt;(link: &quot;Inventory&quot;)[(redirect: &quot;Inventory&quot;)]&lt;/font&gt;&lt;/div&gt;](if: (passage:)&#39;s name is &quot;scanner&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s tags contains &quot;noscanner&quot;)[&lt;!--Do nothing--&gt;](else-if: $HasScanner is 1)[&lt;div style=&quot;float: right;&quot;&gt;&lt;font size=&quot;4&quot;&gt;(link: &quot;Scanner&quot;)[(redirect: &quot;Scanner&quot;)]&lt;/font&gt;&lt;/div&gt;](else:)[&lt;!--Do nothing--&gt;]&lt;br&gt; &lt;br&gt;}</tw-passagedata><tw-passagedata pid="25" name="librarian1" tags="" position="600,525" size="100,100">(set: $Librarian to (either: &quot;Eileen&quot;, &quot;Nadia&quot;, &quot;Jane&quot;, &quot;Emily&quot;))
-Hello, $name, I&#39;m $Librarian!  I&#39;m glad you stopped in today to help us in our search for the Lost Manuscript.
+(live: 11.5s)[[[Enter the library-&gt;MainArea]] or(stop:)] (live: 12s)[[[go outside (testing area)-&gt;Outside]](stop:)]</tw-passagedata><tw-passagedata pid="23" name="header" tags="header" position="100,500" size="100,100">{(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s tags contains &quot;donotshowinventory&quot;)[&lt;!--Do nothing--&gt;](else:)[&lt;div style=&quot;float: left;&quot;&gt;&lt;font size=&quot;4&quot;&gt;(link: &quot;Inventory&quot;)[(redirect: &quot;Inventory&quot;)]&lt;/font&gt;&lt;/div&gt;](if: (passage:)&#39;s name is &quot;scanner&quot;)[&lt;!--Do nothing--&gt;](else-if: (passage:)&#39;s tags contains &quot;noscanner&quot;)[&lt;!--Do nothing--&gt;](else-if: $HasScanner is 1)[&lt;div style=&quot;float: right;&quot;&gt;&lt;font size=&quot;4&quot;&gt;(link: &quot;Scanner&quot;)[(redirect: &quot;Scanner&quot;)]&lt;/font&gt;&lt;/div&gt;](else:)[&lt;!--Do nothing--&gt;]&lt;br&gt; &lt;br&gt;}</tw-passagedata><tw-passagedata pid="24" name="librarian1" tags="" position="600,400" size="100,100">(set: $Librarian to (either: &quot;Eileen&quot;, &quot;Nadia&quot;, &quot;Jane&quot;, &quot;Emily&quot;))
+Hello, $name, I&#39;m $Librarian. (display: &quot;Greeting&quot;) We need your help with the Lost Manuscript.
 
-NOTES - The librarian&#39;s name is randomly picked from Eileen, Jane, Emily, and Nadia for now.  Also, if you visit the bathroom, coming back to speak with the librarian gets you the bathroom key.  You don&#39;t get the key if you haven&#39;t visited the bathroom yet.
+&lt;div class=&quot;demo-info&quot;&gt;NOTES - The librarian&#39;s name is randomly picked from Eileen, Jane, Emily, and Nadia for now.  Their greeting is randomly picked from a few options. Also, if you visit the bathroom, coming back to speak with the librarian gets you the bathroom key.  You don&#39;t get the key if you haven&#39;t visited the bathroom yet.&lt;/div&gt;
 
 (if: $inv contains &quot;bathroom key&quot;)[&lt;!--DO NOTHING--&gt;](else-if: (visited: &quot;Bathroom&quot;))[I saw you checking out the bathroom.  Here&#39;s the key if you need it. (set: $inv to it + (a: &quot;bathroom key&quot;))] 
 
 You can go to the [[front of the library-&gt;MainArea]]. 
-</tw-passagedata><tw-passagedata pid="26" name="BathroomKey" tags="" position="450,625" size="100,100">This is a regular old key.  It opens the bathroom.
-(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else:)[&lt;br&gt; &lt;br&gt;(link-goto: &quot;Return&quot;, (history:)&#39;s last)]</tw-passagedata><tw-passagedata pid="27" name="CodeEntry" tags="donotshowinventory" position="100,800" size="100,100">(link-repeat: &quot;Enter code&quot;)[{
+</tw-passagedata><tw-passagedata pid="25" name="BathroomKey" tags="" position="450,500" size="100,100">This is a regular old key.  It opens the bathroom.
+(if: (passage:)&#39;s name is &quot;Inventory&quot;)[&lt;!--Do nothing--&gt;](else:)[&lt;br&gt; &lt;br&gt;(link-goto: &quot;Return&quot;, (history:)&#39;s last)]</tw-passagedata><tw-passagedata pid="26" name="CodeEntry" tags="donotshowinventory" position="100,800" size="100,100">(link-repeat: &quot;Enter code&quot;)[{
 	(set: $code to (prompt: &quot;Please enter your code.&quot;, &quot;&quot;))	
     (set: $code to (lowercase: $code))
 	(if: $code is &quot;penguin&quot;)[(replace: ?results)[(set: $inv to it + (a: &quot;penguin&quot;))Item found!  Please check your inventory.]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]
 
-[]&lt;results|</tw-passagedata></tw-storydata>
+[]&lt;results|</tw-passagedata><tw-passagedata pid="27" name="Greeting" tags="" position="600,500" size="100,100">(either: &quot;It&#39;s so nice to meet you!&quot;, &quot;You sure took your time getting here!&quot;, &quot;I hope you&#39;re up for this challenge!&quot;, &quot;...I expected someone taller.&quot;)</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
