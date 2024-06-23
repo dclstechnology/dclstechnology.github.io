@@ -81,9 +81,7 @@ Each clue will be a word. Enter the word into the box to move on to the next ste
 Ready to play?  [[Tap here-&gt;Stage1]] to begin!
 &lt;/div&gt;
 &lt;!--Type your hint for this puzzle in between the brackets below--&gt;
-(click-rerun: &quot;HINT&quot;)[(dialog: [No hint for you!],&quot;Got it!&quot;)]</tw-passagedata><tw-passagedata pid="2" name="Stage3" tags="" position="475,75" size="100,100">&lt;div class=&quot;container&quot;&gt;
-&lt;h2&gt;CONGRATULATIONS!  You have reached Stage 3&lt;/h2&gt;
-Explore the office and uncover clues that will lead you on an adventure!
+(click-rerun: &quot;HINT&quot;)[(dialog: [No hint for you!],&quot;Got it!&quot;)]</tw-passagedata><tw-passagedata pid="2" name="Stage3" tags="" position="475,75" size="100,100">&lt;div class=&quot;container&quot;&gt;&lt;h3&gt;You did it! You have reached Stage 3&lt;/h3&gt;Explore the office and uncover clues that will lead you on an adventure!
 
 Each clue will be a word. Enter the word into the box to move on to the next step. Press the button for a hint if you get stuck!
 
@@ -91,17 +89,15 @@ Each clue will be a word. Enter the word into the box to move on to the next ste
 A hidden clue awaits, don&#39;t pass it by.
 Look bottom right, count words with care,
 The 13th holds the clue you’ll declare.&#39;&#39;//
-&lt;center&gt;
-&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;
+
+&lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;&lt;/center&gt;
 &lt;br&gt;
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[{
 	(set: $code to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code to (lowercase: $code))
 	(if: $code is &quot;nation&quot;)[(replace: ?results)[(go-to: &quot;Anagram1&quot;)]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt;
-(text-colour:white)[[]&lt;results|]}
-&lt;/center&gt;
-&lt;/div&gt;
+(text-colour:white)[[]&lt;results|]}&lt;/div&gt;
 &lt;!--Type your hint for this puzzle in between the brackets below--&gt;
 (click-rerun: &quot;HINT&quot;)[(dialog: [Think of the Law Library],&quot;Got it!&quot;)]</tw-passagedata><tw-passagedata pid="3" name="Wordle1" tags="" position="350,75" size="100,100">&lt;style&gt;
 .main-container {
@@ -213,17 +209,15 @@ The 13th holds the clue you’ll declare.&#39;&#39;//
 }
 &lt;/style&gt;
 
-&lt;div class=&quot;container&quot;&gt;
-&lt;h2&gt;Wordl.... &quot;word puzzle&quot; level!&lt;/h2&gt;
+&lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Wordl.... &quot;word puzzle&quot; level!&lt;/h3&gt;
 &lt;div class=&quot;instructions-container&quot;&gt;
-        &lt;h3&gt;How to Play&lt;/h3&gt;
-Type a 5-letter word in the input box and click &quot;Submit Guess&quot;.
-
+&lt;h3&gt;How to Play&lt;/h3&gt;Type a 5-letter word in the input box and click &quot;Submit Guess&quot;.
+&lt;p align=&quot;left&quot;&gt;
 The game will provide feedback:
 &lt;span class=&quot;correct&quot;&gt;Green&lt;/span&gt;: Correct letter in the correct position.
 &lt;span class=&quot;present&quot;&gt;Yellow&lt;/span&gt;: Correct letter in the wrong position.
-&lt;span class=&quot;absent&quot;&gt;Grey&lt;/span&gt;: Letter not in the word.
-&lt;p align=&quot;left&quot;&gt;- Guess the word within 6 attempts.&lt;br&gt;- After solving the word, take that answer and enter it at the bottom of the page to move on.&lt;br&gt;- If you need a hint, click the hint button below.&lt;/p.&gt;&lt;br&gt;
+&lt;span class=&quot;absent&quot;&gt;Grey&lt;/span&gt;: Letter not in the word.&lt;/p&gt;
+&lt;p align=&quot;left&quot;&gt;- Guess the word within 6 attempts.&lt;br&gt;- After solving the word, take that answer and enter it at the bottom of the page to move on.&lt;br&gt;- If you need a hint, click the hint button below.&lt;/p&gt;&lt;br&gt;
 &lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;&lt;/center&gt;
 &lt;/div&gt;
 &lt;div class=&quot;game-container&quot;&gt;
@@ -233,13 +227,14 @@ The game will provide feedback:
     &lt;button type=&quot;submit&quot; class=&quot;submit-button&quot;&gt;Submit Guess&lt;/button&gt;
     &lt;/form&gt;
 &lt;/div&gt;
+Enter your solution by tapping the box below:
+
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[{
 	(set: $code to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code to (lowercase: $code))
 	(if: $code is &quot;shelf&quot;)[(replace: ?results)[(go-to: &quot;Stage3&quot;)]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt;
-(text-colour:white)[[]&lt;results|]}
-&lt;/div&gt;
+(text-colour:white)[[]&lt;results|]}&lt;/div&gt;
 &lt;/div&gt;
 (click-rerun: &quot;HINT&quot;)[(dialog: [These are EVERYWHERE in libraries.],&quot;Got it!&quot;)]
 &lt;script&gt;
@@ -324,25 +319,20 @@ The game will provide feedback:
         document.getElementById(&#39;wordInput&#39;).disabled = true;
         document.querySelector(&#39;.submit-button&#39;).disabled = true;
     }
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="4" name="Stage1" tags="" position="225,75" size="100,100">&lt;div class=&quot;container&quot;&gt;
-&lt;h2&gt;DCL SCAVENGER HUNT DEMO&lt;/h2&gt;
-Explore the office and uncover clues that will lead you on an adventure!
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="4" name="Stage1" tags="" position="225,75" size="100,100">&lt;div class=&quot;container&quot;&gt;&lt;h3&gt;DCL SCAVENGER HUNT DEMO&lt;/h3&gt;Explore the office and uncover clues that will lead you on an adventure!
 
 Each clue will be a word. Enter the word into the box to move on to the next step. Press the button for a hint if you get stuck!
 
 //&#39;&#39;Three bears in a row, perched up high,
 Under the middle one — give it a try.&#39;&#39;//
-&lt;center&gt;
-&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;
-&lt;br&gt;
-&lt;/center&gt;
+
+&lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;&lt;/center&gt;
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[{
 	(set: $code to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code to (lowercase: $code))
 	(if: $code is &quot;bookworm&quot;)[(replace: ?results)[(go-to: &quot;Wordle1&quot;)]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt;
-(text-colour:white)[[]&lt;results|]}
-&lt;/div&gt;
+(text-colour:white)[[]&lt;results|]}&lt;/div&gt;
 &lt;!--Type your hint for this puzzle in between the brackets below--&gt;
 (click-rerun: &quot;HINT&quot;)[(dialog: [No hint for you!],&quot;Got it!&quot;)]</tw-passagedata><tw-passagedata pid="5" name="Anagram1" tags="" position="600,75" size="100,100">&lt;style&gt;
 #current-anagram {
@@ -359,10 +349,24 @@ Under the middle one — give it a try.&#39;&#39;//
 }
 
 #submit-guess {
-    padding: 10px 20px;
+	background-color: #fff;
+	color: #4257f5;
+	padding: 10px 20px;
+	font-size: 18px;
+    font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	margin-bottom: 20px;
+	width: 220px;
+  	margin: auto;
+	padding: 10px;
+/*padding: 10px 20px;
     font-size: 20px; /* Increase font size */
-    cursor: pointer;
-}
+   cursor: pointer; */
+   }
+
 
 #message {
     margin-top: 20px;
@@ -376,7 +380,7 @@ Under the middle one — give it a try.&#39;&#39;//
 #solved-words-list {
     list-style: none;
     padding: 0;
-    font-size: 36px; /* Increase font size */
+    font-size: 30px; /* Increase font size */
     text-transform: uppercase; /* Ensure displayed letters are in uppercase */
 }
 
@@ -386,10 +390,8 @@ Under the middle one — give it a try.&#39;&#39;//
 }
 &lt;/style&gt;
 
-    &lt;div class=&quot;container&quot;&gt;
-        &lt;h2&gt;Anagram Chain Puzzle&lt;/h2&gt;
-        Unscramble the anagrams!  You&#39;ll need to solve five, which will reveal the sixth and final anagram.  Once you&#39;re done, submit your final unscrambled word at the bottom of the page.
-        &lt;br&gt;
+&lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Anagram Chain Puzzle&lt;/h3&gt;Unscramble the anagrams!  You&#39;ll need to solve five, which will reveal the sixth and final anagram.  Once you&#39;re done, submit your final unscrambled word at the bottom of the page.
+&lt;br&gt;
 &lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;&lt;/center&gt;
 &lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;MORE HINTS&lt;/div&gt;&lt;/center&gt;
         &lt;div id=&quot;puzzle-container&quot;&gt;
@@ -397,19 +399,15 @@ Under the middle one — give it a try.&#39;&#39;//
             &lt;input type=&quot;text&quot; id=&quot;guess-input&quot; placeholder=&quot;Enter your guess...&quot;&gt;
             &lt;button id=&quot;submit-guess&quot;&gt;Submit Guess&lt;/button&gt;
             &lt;div id=&quot;message&quot;&gt;&lt;/div&gt;
-            &lt;div id=&quot;solved-words-container&quot;&gt;
-                &lt;h2&gt;Solved Words&lt;/h2&gt;&lt;ul id=&quot;solved-words-list&quot;&gt;&lt;/ul&gt;
-            &lt;/div&gt;
+            &lt;div id=&quot;solved-words-container&quot;&gt;&lt;h3&gt;Solved Words&lt;/h3&gt;&lt;ul id=&quot;solved-words-list&quot;&gt;&lt;/ul&gt;&lt;/div&gt;
         &lt;/div&gt;
         &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[{
 	(set: $code to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code to (lowercase: $code))
 	(if: $code is &quot;story&quot;)[(replace: ?results)[(go-to: &quot;Stage5&quot;)]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt;
-(text-colour:white)[[]&lt;results|]}
-&lt;/div&gt;
-&lt;/div&gt;
-    
+(text-colour:white)[[]&lt;results|]}&lt;/div&gt;
+&lt;/div&gt;   
 
 (click-rerun: &quot;HINT&quot;)[(dialog: [These are all words connected to public libraries.],&quot;Got it!&quot;)]
 (click-rerun: &quot;MORE HINTS&quot;)[(dialog: [Computer, Books, Reference, Study, Catalog, STORY.],&quot;Got it!&quot;)]
@@ -478,45 +476,26 @@ submitGuessButton.addEventListener(&#39;click&#39;, checkGuess);
 showAnagram();
 
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="6" name="Stage5" tags="" position="725,75" size="100,100">&lt;div class=&quot;container&quot;&gt;
-&lt;h2&gt;CONGRATULATIONS!  You have reached Stage 5&lt;/h2&gt;
-Explore the office and uncover clues that will lead you on an adventure!
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="6" name="Stage5" tags="" position="725,75" size="100,100">&lt;div class=&quot;container&quot;&gt;&lt;h3&gt;You have reached Stage 5&lt;/h3&gt;Explore the office and uncover clues that will lead you on an adventure!
 
 Each clue will be a word. Enter the word into the box to move on to the next step. Press the button for a hint if you get stuck!
 
 //&#39;&#39;Red and white patterns, a county’s lore,
 Bottom left, up one, to find what’s in store.&#39;&#39;//
-&lt;center&gt;
-&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;
+
+&lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;&lt;/center&gt;
 &lt;br&gt;
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[{
 	(set: $code to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code to (lowercase: $code))
 	(if: $code is &quot;freedom&quot;)[(replace: ?results)[(go-to: &quot;Stage6&quot;)]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt;
-(text-colour:white)[[]&lt;results|]}
-&lt;/center&gt;
-&lt;/div&gt;
+(text-colour:white)[[]&lt;results|]}&lt;/div&gt;
 &lt;!--Type your hint for this puzzle in between the brackets below--&gt;
-(click-rerun: &quot;HINT&quot;)[(dialog: [Check the quilt.],&quot;Got it!&quot;)]</tw-passagedata><tw-passagedata pid="7" name="Final" tags="" position="975,75" size="100,100">&lt;div class=&quot;container&quot;&gt;
-&lt;h2&gt;DCL SCAVENGER HUNT DEMO&lt;/h2&gt;
-Explore the office and uncover clues that will lead you on an adventure!
+(click-rerun: &quot;HINT&quot;)[(dialog: [Check the quilt.],&quot;Got it!&quot;)]</tw-passagedata><tw-passagedata pid="7" name="Final" tags="" position="975,75" size="100,100">&lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Woohoo!&lt;/h3&gt;You solved the scavenger hunt!  Go claim your prize from Debbie. If she says she doesn&#39;t know what you&#39;re talking about, she&#39;s lying.
 
-Each clue will be a word. Enter the word into the box to move on to the next step. Press the button for a hint if you get stuck!
-
-
-
-&lt;center&gt;
-&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;
-&lt;br&gt;
-
-Ready to play?  [[Tap here-&gt;Welcome]] to begin!
-
-&lt;/div&gt;
-&lt;!--Type your hint for this puzzle in between the brackets below--&gt;
-(click-rerun: &quot;HINT&quot;)[(dialog: [No hint for you!],&quot;Got it!&quot;)]</tw-passagedata><tw-passagedata pid="8" name="Stage6" tags="" position="850,75" size="100,100">&lt;div class=&quot;container&quot;&gt;
-&lt;h2&gt;CONGRATULATIONS!  You have reached Stage 6&lt;/h2&gt;
-Explore the office and uncover clues that will lead you on an adventure!
+Play again?  [[Tap here-&gt;Welcome]] to restart!
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="Stage6" tags="" position="850,75" size="100,100">&lt;div class=&quot;container&quot;&gt;&lt;h3&gt;THE FINAL STAGE&lt;/h3&gt;Explore the office and uncover clues that will lead you on an adventure!
 
 Each clue will be a word. Enter the word into the box to move on to the next step. Press the button for a hint if you get stuck!
 
@@ -524,17 +503,15 @@ Each clue will be a word. Enter the word into the box to move on to the next ste
 006.7 is the section to explore.
 A YouTube book holds the secret you seek,
 Inside the front cover, take a peek.&#39;&#39;//
-&lt;center&gt;
-&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;
+
+&lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;&lt;/center&gt;
 &lt;br&gt;
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[{
 	(set: $code to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code to (lowercase: $code))
 	(if: $code is &quot;overdue&quot;)[(replace: ?results)[(go-to: &quot;Final&quot;)]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt;
-(text-colour:white)[[]&lt;results|]}
-&lt;/center&gt;
-&lt;/div&gt;
+(text-colour:white)[[]&lt;results|]}&lt;/div&gt;
 &lt;!--Type your hint for this puzzle in between the brackets below--&gt;
 (click-rerun: &quot;HINT&quot;)[(dialog: [35918114342274],&quot;Got it!&quot;)]</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
