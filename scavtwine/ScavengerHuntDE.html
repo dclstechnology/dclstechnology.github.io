@@ -26,9 +26,9 @@ body {
 }
 
 .container {
-	max-width: 90%;
+	max-width: 97%;
 	margin: 50px auto;
-	padding: 20px;
+	padding: 15px;
 	font-family: Arial, sans-serif;
 	background-color: rgba(0, 0, 0, 0.7); /* Black */
 	border-radius: 10px;
@@ -335,13 +335,13 @@ Under the middle one — give it a try.&#39;&#39;//
 &lt;center&gt;
 &lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;
 &lt;br&gt;
+&lt;/center&gt;
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[{
 	(set: $code to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code to (lowercase: $code))
 	(if: $code is &quot;bookworm&quot;)[(replace: ?results)[(go-to: &quot;Wordle1&quot;)]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt;
 (text-colour:white)[[]&lt;results|]}
-&lt;/center&gt;
 &lt;/div&gt;
 &lt;!--Type your hint for this puzzle in between the brackets below--&gt;
 (click-rerun: &quot;HINT&quot;)[(dialog: [No hint for you!],&quot;Got it!&quot;)]</tw-passagedata><tw-passagedata pid="5" name="Anagram1" tags="" position="600,75" size="100,100">&lt;style&gt;
