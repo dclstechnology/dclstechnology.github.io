@@ -11,17 +11,22 @@
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Mystery at Norwood Library.</tw-noscript></noscript></tw-story>
 <tw-storydata name="Mystery at Norwood Library" startnode="1" creator="Twine" creator-version="2.8.1" format="Harlowe" format-version="3.3.8" ifid="59070540-e144-4527-83bf-cbf05af53a11" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-sidebar tw-icon { display: none; }
 
+tw-story {
+  	font-size: 14pt;
+	/* line-height: 1.5em; */
+}
+
 tw-story[tags~="red-background"] {
     background-color: red;
     color: white;
 }
 
 tw-story[tags~="footer"] {
-    font-size: 60%;
+    font-size: 80%;
 }
 
 tw-story[tags~="header"] {
-    font-size: 60%;
+    font-size: 80%;
 }
 
 tw-passage {
@@ -265,7 +270,21 @@ https://twinery.org/forum/discussion/8947/i-want-to-create-a-prompt-box-in-which
 	(else:)[
 		(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]
 	]
-}]</tw-passagedata><tw-passagedata pid="22" name="Intro2" tags="donotshowinventory" position="100,150" size="100,100">{
+}]
+
+
+tw-sidebar tw-icon { display: none; }
+
+html {
+	font: 100% Georgia,serif;
+	color: white;
+}
+
+tw-story {
+  	font-size: 14pt;
+	/* line-height: 1.5em; */
+}
+</tw-passagedata><tw-passagedata pid="22" name="Intro2" tags="donotshowinventory" position="100,150" size="100,100">{
 (set: $name to (prompt: [Your name, please:], &quot;Patron&quot;))\
 (click: ?page)[==
 }(live: .5s)[(t8n:&quot;dissolve&quot;)[Hello, $name!  It&#39;s nice to meet you. You have been brought here today to locate the mysterious &lt;span class=&quot;emphasis&quot;&gt;Lost Manuscript&lt;/span&gt;.](stop:)]
