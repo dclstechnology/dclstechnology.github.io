@@ -124,10 +124,10 @@ Clue:
 	(if: $code1 is &quot;zigzag&quot;)[(replace: ?results)[(set: $Gremlin1 to True, $G1Count to 1, $SolveCount to it +1)(go-to: &quot;Gremlin1&quot;)]](else-if: $code1 is &quot;giggles&quot; or &quot;glimmer&quot; or &quot;whisper&quot;)[(replace: ?results)[(display: &quot;FoundFriend&quot;)]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt; &lt;br&gt;
 (text-colour:red)[[]&lt;results|]}&lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="6" name="G1Found" tags="" position="500,275" size="100,100">(set: $G1Count to it +1)
+</tw-passagedata><tw-passagedata pid="6" name="G1Found" tags="" position="500,275" size="100,100">(set: $G1Count to it +1)(set: $HowMany to 4 - $SolveCount)
 &lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Zigzag has been found!&lt;/h3&gt;(if: $G1Count &lt;= 2)[Congratulations on figuring out their name!  We&#39;re going to post zome &quot;&#39;&#39;No Zigag Allowed&#39;&#39;&quot; signs up, so that should keep them out of the library.  Thanks for your help!
 
-(if: $SolveCount &lt;= 3)[&lt;h3&gt;You have more gremlins to find!&lt;/h3&gt;](else:)[&lt;!--DO NOTHING--&gt;]
+(if: $SolveCount &lt;= 3)[&lt;h3&gt;You have $HowMany more (if: $HowMany is 1)[gremlin](else:)[gremlins] to find!&lt;/h3&gt;](else:)[&lt;!--DO NOTHING--&gt;]
 &lt;table width=99% align=&quot;center&quot;&gt;
 &lt;tr&gt;&lt;td&gt;&lt;img src=&quot;https://dclstechnology.github.io/gremlins/img/Grem1Large.png&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
@@ -158,10 +158,10 @@ Clue:
     (set: $code2 to (lowercase: $code2))
 	(if: $code2 is &quot;giggles&quot;)[(replace: ?results)[(set: $Gremlin2 to True, $G2Count to 1, $SolveCount to it +1)(go-to: &quot;Gremlin2&quot;)]](else-if: $code2 is &quot;zigzag&quot; or &quot;glimmer&quot; or &quot;whisper&quot;)[(replace: ?results)[(display: &quot;FoundFriend&quot;)]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt; &lt;br&gt;
-(text-colour:red)[[]&lt;results|]}&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="G2Found" tags="" position="650,275" size="100,100">(set: $G2Count to it +1)
+(text-colour:red)[[]&lt;results|]}&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="G2Found" tags="" position="650,275" size="100,100">(set: $G2Count to it +1)(set: $HowMany to 4 - $SolveCount)
 &lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Giggles has been found!&lt;/h3&gt;(if: $G2Count &lt;= 2)[Congratulations on figuring out their name!  We&#39;re going to tell their parents that Giggles isn&#39;t allowed in the library anymore.  That should keep them away! Thanks for your help!
 
-(if: $SolveCount &lt;= 3)[&lt;h3&gt;You have more gremlins to find!&lt;/h3&gt;](else:)[&lt;!--DO NOTHING--&gt;]
+(if: $SolveCount &lt;= 3)[&lt;h3&gt;You have $HowMany more (if: $HowMany is 1)[gremlin](else:)[gremlins] to find!&lt;/h3&gt;](else:)[&lt;!--DO NOTHING--&gt;]
 &lt;table width=99% align=&quot;center&quot;&gt;
 &lt;tr&gt;&lt;td&gt;&lt;img src=&quot;https://dclstechnology.github.io/gremlins/img/Grem2Large.png&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
@@ -182,10 +182,10 @@ Clue:
     (set: $code3 to (lowercase: $code3))
 	(if: $code3 is &quot;glimmer&quot;)[(replace: ?results)[(set: $Gremlin3 to True, $G3Count to 1, $SolveCount to it +1)(go-to: &quot;Gremlin3&quot;)]](else-if: $code3 is &quot;giggles&quot; or &quot;zigzag&quot; or &quot;whisper&quot;)[(replace: ?results)[(display: &quot;FoundFriend&quot;)]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt; &lt;br&gt;
-(text-colour:red)[[]&lt;results|]}&lt;/div&gt;</tw-passagedata><tw-passagedata pid="12" name="G3Found" tags="" position="800,275" size="100,100">(set: $G3Count to it +1)
+(text-colour:red)[[]&lt;results|]}&lt;/div&gt;</tw-passagedata><tw-passagedata pid="12" name="G3Found" tags="" position="800,275" size="100,100">(set: $G3Count to it +1)(set: $HowMany to 4 - $SolveCount)
 &lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Glimmer has been found!&lt;/h3&gt;(if: $G3Count &lt;= 2)[Congratulations on figuring out their name!  We&#39;ll make sure to hide our more shiny books, so they&#39;ll get bored and leave us alone. Thanks!
 
-(if: $SolveCount &lt;= 3)[&lt;h3&gt;You have more gremlins to find!&lt;/h3&gt;](else:)[&lt;!--DO NOTHING--&gt;]
+(if: $SolveCount &lt;= 3)[&lt;h3&gt;You have $HowMany more (if: $HowMany is 1)[gremlin](else:)[gremlins] to find!&lt;/h3&gt;](else:)[&lt;!--DO NOTHING--&gt;]
 &lt;table width=99% align=&quot;center&quot;&gt;
 &lt;tr&gt;&lt;td&gt;&lt;img src=&quot;https://dclstechnology.github.io/gremlins/img/Grem3Large.png&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
@@ -205,10 +205,10 @@ Clue:
     (set: $code4 to (lowercase: $code4))
 	(if: $code4 is &quot;whisper&quot;)[(replace: ?results)[(set: $Gremlin4 to True, $G4Count to 1, $SolveCount to it +1)(go-to: &quot;Gremlin4&quot;)]](else-if: $code4 is &quot;giggles&quot; or &quot;glimmer&quot; or &quot;zigzag&quot;)[(replace: ?results)[(display: &quot;FoundFriend&quot;)]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt; &lt;br&gt;
-(text-colour:red)[[]&lt;results|]}&lt;/div&gt;</tw-passagedata><tw-passagedata pid="14" name="G4Found" tags="" position="950,275" size="100,100">(set: $G4Count to it +1)
+(text-colour:red)[[]&lt;results|]}&lt;/div&gt;</tw-passagedata><tw-passagedata pid="14" name="G4Found" tags="" position="950,275" size="100,100">(set: $G4Count to it +1)(set: $HowMany to 4 - $SolveCount)
 &lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Whisper has been found!&lt;/h3&gt;(if: $G4Count &lt;= 2)[Congratulations on figuring out their name!  We&#39;re going to hide some noisemakers near where Whisper liked to hang out.  That&#39;ll keep them away! Thanks for your help!
 
-(if: $SolveCount &lt;= 3)[&lt;h3&gt;You have more gremlins to find!&lt;/h3&gt;](else:)[&lt;!--DO NOTHING--&gt;]
+(if: $SolveCount &lt;= 3)[&lt;h3&gt;You have $HowMany more (if: $HowMany is 1)[gremlin](else:)[gremlins] to find!&lt;/h3&gt;](else:)[&lt;!--DO NOTHING--&gt;]
 &lt;table width=99% align=&quot;center&quot;&gt;
 &lt;tr&gt;&lt;td&gt;&lt;img src=&quot;https://dclstechnology.github.io/gremlins/img/Grem4Large.png&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;
