@@ -9,12 +9,9 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Find the Book Gremlins!.</tw-noscript></noscript></tw-story>
-<tw-storydata name="Find the Book Gremlins!" startnode="7" creator="Twine" creator-version="2.8.1" format="Harlowe" format-version="3.3.8" ifid="fa2329bc-9256-4d7e-8281-03b25c722d53" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-sidebar tw-icon { display: none; }
+<tw-storydata name="Find the Book Gremlins!" startnode="7" creator="Twine" creator-version="2.8.1" format="Harlowe" format-version="3.3.8" ifid="fa2329bc-9256-4d7e-8281-03b25c722d53" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-html {
-	font: 100% Georgia,serif;
-	color: white;
-}
+tw-sidebar tw-icon { display: none; }
 
 body {
 	margin: 0;
@@ -25,7 +22,7 @@ body {
 }
 
 tw-story {
-	background-color: #00ff00; /* Background color */
+	background-color: #003300; /* Background color */
   	font-size: 12pt;
 	/* line-height: 1.5em; */
 }
@@ -43,6 +40,12 @@ td {
 	font-family: Arial, sans-serif;
 	background-color: rgba(0, 0, 0, 0.7); /* Black */
 	border-radius: 10px;
+}
+
+.highlight {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .hint-button {
@@ -74,17 +77,17 @@ td {
 	width: 220px;
   	margin: auto;
 	padding: 10px;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="MainPage" tags="" position="250,75" size="200,200">&lt;div class=&quot;container&quot;&gt;
-&lt;h2&gt;FIND THESE GREMLINS!&lt;/h2&gt;{&lt;br&gt;  &lt;br&gt;
-&lt;table align=center width=80% cellpadding=10 border=3&gt;
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="MainPage" tags="" position="250,75" size="200,200">&lt;div class=&quot;container&quot;&gt;{&lt;h1 class=&quot;highlight&quot;&gt;FIND THESE GREMLINS!&lt;/h1&gt;Your job is to find their hiding spots and look for clues that will help us keep them out of the library.}
+&lt;br&gt; 
+{&lt;table align=center width=80% cellpadding=10 border=0&gt;
 &lt;tr&gt;
-&lt;th colspan=2&gt;MEET THE GREMLINS&lt;/th&gt;
+&lt;th colspan=2&gt;&lt;h3 class=&quot;highlight&quot;&gt;WANTED&lt;/h3&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;(if: $Gremlin1 is false)[ [[Gremlin1]] ](else:)[ [[FOUND-&gt;Gremlin1]] ]&lt;/td&gt;&lt;td&gt;(if: $Gremlin2 is false)[ [[Gremlin2]] ](else:)[ [[FOUND-&gt;Gremlin2]] ]&lt;/td&gt;
+&lt;td&gt;(if: $Gremlin1 is false)[ [[&lt;img src=&quot;https://dclstechnology.github.io/gremlins/img/Grem1Small.png&quot;&gt;-&gt;Gremlin1]] ](else:)[ [[FOUND-&gt;Gremlin1]] ]&lt;/td&gt;&lt;td&gt;(if: $Gremlin2 is false)[ [[&lt;img src=&quot;https://dclstechnology.github.io/gremlins/img/Grem2Small.png&quot;&gt;-&gt;Gremlin2]] ](else:)[ [[FOUND-&gt;Gremlin2]] ]&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;(if: $Gremlin3 is false)[ [[Gremlin3]] ](else:)[ [[FOUND-&gt;Gremlin3]] ]&lt;/td&gt;&lt;td&gt;(if: $Gremlin4 is false)[ [[Gremlin4]] ](else:)[ [[FOUND-&gt;Gremlin4]] ]&lt;/td&gt;
+&lt;td&gt;(if: $Gremlin3 is false)[ [[&lt;img src=&quot;https://dclstechnology.github.io/gremlins/img/Grem3Small.png&quot;&gt;-&gt;Gremlin3]] ](else:)[ [[FOUND-&gt;Gremlin3]] ]&lt;/td&gt;&lt;td&gt;(if: $Gremlin4 is false)[ [[&lt;img src=&quot;https://dclstechnology.github.io/gremlins/img/Grem4Small.png&quot;&gt;-&gt;Gremlin4]] ](else:)[ [[FOUND-&gt;Gremlin4]] ]&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/table&gt;}
 &lt;/div&gt;
