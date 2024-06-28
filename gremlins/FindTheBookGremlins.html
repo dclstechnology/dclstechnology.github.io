@@ -114,7 +114,7 @@ FindMe
 &lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Gremlin 1 has been found!&lt;/h3&gt;(if: $G1Count &lt;= 2)[Congratulations on finding the magic word!  Gremlin 1 has been scared off and won&#39;t bother us anymore.](else:)[Stats on Gremlin 1.]
 [[MainPage]]
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="7" name="Landing" tags="Startup" position="100,75" size="100,100">(set: $Gremlin1 to False, $Gremlin2 to False, $Gremlin3 to False, $Gremlin4 to False, $G1Count to 0, $G2Count to 0, $G3Count to 0, $G4Count to 0 )
+</tw-passagedata><tw-passagedata pid="7" name="Landing" tags="Startup" position="100,75" size="100,100">(set: $Gremlin1 to False, $Gremlin2 to False, $Gremlin3 to False, $Gremlin4 to False, $G1Count to 0, $G2Count to 0, $G3Count to 0, $G4Count to 0)
 &lt;div class=&quot;container&quot;&gt;
 &lt;h2&gt;FIND THE BOOK GREMLINS!&lt;/h2&gt;
 Book gremlins have invaded the library!  Those sneaky little critters like making messes and rearranging the books.  
@@ -131,7 +131,7 @@ Clue:
 
 FindMe
 [[MainPage]] 
-(click: &quot;FindMe&quot;)[(set: $Gremlin2 to True)(go-to: &quot;MainPage&quot;)]
+(click: &quot;FindMe&quot;)[(set: $Gremlin2 to True, $G2Count to 1)(go-to: &quot;Gremlin2&quot;)]
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="G2Found" tags="" position="650,275" size="100,100">(set: $G2Count to it +1)
 &lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Gremlin 2 has been found!&lt;/h3&gt;(if: $G2Count &lt;= 2)[Congratulations on finding the magic word!  Gremlin 1 has been scared off and won&#39;t bother us anymore.](else:)[Stats on Gremlin 2.]
 [[MainPage]]
@@ -144,12 +144,12 @@ Clue:
 
 FindMe
 [[MainPage]] 
-(click: &quot;FindMe&quot;)[(set: $Gremlin3 to True)(go-to: &quot;MainPage&quot;)]
+(click: &quot;FindMe&quot;)[(set: $Gremlin3 to True, $G3Count to 1)(go-to: &quot;Gremlin3&quot;)]
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="12" name="G3Found" tags="" position="800,275" size="100,100">(set: $G3Count to it +1)
 &lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Gremlin 3 has been found!&lt;/h3&gt;(if: $G3Count &lt;= 2)[Congratulations on finding the magic word!  Gremlin 3 has been scared off and won&#39;t bother us anymore.](else:)[Stats on Gremlin 3.]
 [[MainPage]]
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="13" name="G4Clue" tags="" position="950,175" size="100,100">&lt;div class=&quot;container&quot;&gt;
-Gremlin4 is still hidden.  Those sneaky little monsters left a clue on the desk this morning.
+This gremlin is very quiet and sneaky. They like to rearrange books in the wrong order and leave tiny, cryptic notes behind. Keep an eye out for tiny footprints or little notes with riddles!
 
 Clue:
 
@@ -157,9 +157,9 @@ Clue:
 
 FindMe
 [[MainPage]] 
-(click: &quot;FindMe&quot;)[(set: $Gremlin4 to True)(go-to: &quot;MainPage&quot;)]
+(click: &quot;FindMe&quot;)[(set: $Gremlin4 to True, $G4Count to 1)(go-to: &quot;Gremlin4&quot;)]
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="14" name="G4Found" tags="" position="950,275" size="100,100">(set: $G1Count to it +1)
-&lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Gremlin 4 has been found!&lt;/h3&gt;(if: $G4Count &lt;= 2)[Congratulations on finding the magic word!  Gremlin 4 has been scared off and won&#39;t bother us anymore.](else:)[Stats on Gremlin 4.]
+&lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Whisper has been found!&lt;/h3&gt;(if: $G4Count &lt;= 2)[Congratulations on figuring out Whisper&#39;s name!  We shouted their name and and now they won&#39;t bother us anymore!](else:)[Whisper is very quiet and sneaky. They like to rearrange books in the wrong order and leave tiny, cryptic notes behind. Keep an eye out for tiny footprints or little notes with riddles!]
 [[MainPage]]
 &lt;/div&gt;
 </tw-passagedata></tw-storydata>
