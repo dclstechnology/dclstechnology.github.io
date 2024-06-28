@@ -121,7 +121,7 @@ Clue:
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;What&#39;s my name?&quot;)[{
 	(set: $code1 to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code1 to (lowercase: $code1))
-	(if: $code1 is &quot;zigzag&quot;)[(replace: ?results)[(set: $Gremlin1 to True, $G1Count to 1)(go-to: &quot;Gremlin1&quot;)]](else-if: $code1 is &quot;giggles&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code1 is &quot;glimmer&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code1 is &quot;whisper&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
+	(if: $code1 is &quot;zigzag&quot;)[(replace: ?results)[(set: $Gremlin1 to True, $G1Count to 1, $SolveCount to it +1)(go-to: &quot;Gremlin1&quot;)]](else-if: $code1 is &quot;giggles&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code1 is &quot;glimmer&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code1 is &quot;whisper&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt; &lt;br&gt;
 (text-colour:red)[[]&lt;results|]}&lt;/div&gt;
 </tw-passagedata><tw-passagedata pid="6" name="G1Found" tags="" position="500,275" size="100,100">(set: $G1Count to it +1)
@@ -134,9 +134,10 @@ Thank you!
 ](else:)[&lt;table width=99% align=&quot;center&quot;&gt;
 &lt;tr&gt;&lt;td&gt;&lt;img src=&quot;https://dclstechnology.github.io/gremlins/img/Grem1Large.png&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;]
-&lt;br&gt; &lt;br&gt;&lt;span class=&quot;guess-button&quot;&gt;[[Go Back-&gt;MainPage]]&lt;/span&gt;
+&lt;br&gt; &lt;br&gt;&lt;span class=&quot;guess-button&quot;&gt;Go Back&lt;/span&gt;
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="7" name="Landing" tags="Startup" position="100,75" size="100,100">(set: $Gremlin1 to False, $Gremlin2 to False, $Gremlin3 to False, $Gremlin4 to False, $G1Count to 0, $G2Count to 0, $G3Count to 0, $G4Count to 0)
+(click: &quot;Go Back&quot;)[(if: $SolveCount is 4)[(go-to: &quot;Final&quot;)](else:)[(go-to: &quot;MainPage&quot;)]]
+</tw-passagedata><tw-passagedata pid="7" name="Landing" tags="Startup" position="100,75" size="100,100">(set: $Gremlin1 to False, $Gremlin2 to False, $Gremlin3 to False, $Gremlin4 to False, $G1Count to 0, $G2Count to 0, $G3Count to 0, $G4Count to 0, $SolveCount to 0)
 &lt;div class=&quot;container&quot;&gt;
 &lt;h2&gt;FIND THE BOOK GREMLINS!&lt;/h2&gt;
 Book gremlins have invaded the library!  Those sneaky little critters like making messes and rearranging the books.
@@ -156,7 +157,7 @@ Clue:
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;What&#39;s my name?&quot;)[{
 	(set: $code2 to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code2 to (lowercase: $code2))
-	(if: $code2 is &quot;giggles&quot;)[(replace: ?results)[(set: $Gremlin2 to True, $G2Count to 1)(go-to: &quot;Gremlin2&quot;)]](else-if: $code2 is &quot;zigzag&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code2 is &quot;glimmer&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code2 is &quot;whisper&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
+	(if: $code2 is &quot;giggles&quot;)[(replace: ?results)[(set: $Gremlin2 to True, $G2Count to 1, $SolveCount to it +1)(go-to: &quot;Gremlin2&quot;)]](else-if: $code2 is &quot;zigzag&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code2 is &quot;glimmer&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code2 is &quot;whisper&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt; &lt;br&gt;
 (text-colour:red)[[]&lt;results|]}&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="G2Found" tags="" position="650,275" size="100,100">(set: $G2Count to it +1)
 &lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Giggles has been found!&lt;/h3&gt;(if: $G2Count &lt;= 2)[Congratulations on figuring out their name!  We&#39;re going to use this to keep them out of the library from now on.  
@@ -168,8 +169,9 @@ Thank you!
 ](else:)[&lt;table width=99% align=&quot;center&quot;&gt;
 &lt;tr&gt;&lt;td&gt;&lt;img src=&quot;https://dclstechnology.github.io/gremlins/img/Grem2Large.png&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;]
-&lt;br&gt; &lt;br&gt;&lt;span class=&quot;guess-button&quot;&gt;[[Go Back-&gt;MainPage]]&lt;/span&gt;
+&lt;br&gt; &lt;br&gt;&lt;span class=&quot;guess-button&quot;&gt;Go Back&lt;/span&gt;
 &lt;/div&gt;
+(click: &quot;Go Back&quot;)[(if: $SolveCount is 4)[(go-to: &quot;Final&quot;)](else:)[(go-to: &quot;MainPage&quot;)]]
 </tw-passagedata><tw-passagedata pid="11" name="G3Clue" tags="" position="800,175" size="100,100">&lt;div class=&quot;container&quot;&gt;
 This gremlin loves shiny things and often leaves a trail of sparkly stuff wherever they go. They have a knack for finding the oldest, dustiest books and making them shine. Look for the sparkly trail!
 
@@ -180,7 +182,7 @@ Clue:
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;What&#39;s my name?&quot;)[{
 	(set: $code3 to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code3 to (lowercase: $code3))
-	(if: $code3 is &quot;glimmer&quot;)[(replace: ?results)[(set: $Gremlin3 to True, $G3Count to 1)(go-to: &quot;Gremlin3&quot;)]](else-if: $code3 is &quot;zigzag&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code3 is &quot;giggles&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code3 is &quot;whisper&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
+	(if: $code3 is &quot;glimmer&quot;)[(replace: ?results)[(set: $Gremlin3 to True, $G3Count to 1, $SolveCount to it +1)(go-to: &quot;Gremlin3&quot;)]](else-if: $code3 is &quot;zigzag&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code3 is &quot;giggles&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code3 is &quot;whisper&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt; &lt;br&gt;
 (text-colour:red)[[]&lt;results|]}&lt;/div&gt;</tw-passagedata><tw-passagedata pid="12" name="G3Found" tags="" position="800,275" size="100,100">(set: $G3Count to it +1)
 &lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Glimmer has been found!&lt;/h3&gt;(if: $G3Count &lt;= 2)[Congratulations on figuring out their name!  We&#39;re going to use this to keep them out of the library from now on.  
@@ -192,8 +194,9 @@ Thank you!
 ](else:)[&lt;table width=99% align=&quot;center&quot;&gt;
 &lt;tr&gt;&lt;td&gt;&lt;img src=&quot;https://dclstechnology.github.io/gremlins/img/Grem3Large.png&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;]
-&lt;br&gt; &lt;br&gt;&lt;span class=&quot;guess-button&quot;&gt;[[Go Back-&gt;MainPage]]&lt;/span&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="13" name="G4Clue" tags="" position="950,175" size="100,100">&lt;div class=&quot;container&quot;&gt;
+&lt;br&gt; &lt;br&gt;&lt;span class=&quot;guess-button&quot;&gt;Go Back&lt;/span&gt;
+&lt;/div&gt;
+(click: &quot;Go Back&quot;)[(if: $SolveCount is 4)[(go-to: &quot;Final&quot;)](else:)[(go-to: &quot;MainPage&quot;)]]</tw-passagedata><tw-passagedata pid="13" name="G4Clue" tags="" position="950,175" size="100,100">&lt;div class=&quot;container&quot;&gt;
 This gremlin is very quiet and sneaky. They like to rearrange books in the wrong order and leave tiny, cryptic notes behind. Keep an eye out for tiny footprints or little notes with riddles!
 
 Clue:
@@ -203,7 +206,7 @@ Clue:
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;What&#39;s my name?&quot;)[{
 	(set: $code4 to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code4 to (lowercase: $code4))
-	(if: $code4 is &quot;whisper&quot;)[(replace: ?results)[(set: $Gremlin4 to True, $G4Count to 1)(go-to: &quot;Gremlin4&quot;)]](else-if: $code3 is &quot;zigzag&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code3 is &quot;giggles&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code3 is &quot;glimmer&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
+	(if: $code4 is &quot;whisper&quot;)[(replace: ?results)[(set: $Gremlin4 to True, $G4Count to 1, $SolveCount to it +1)(go-to: &quot;Gremlin4&quot;)]](else-if: $code3 is &quot;zigzag&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code3 is &quot;giggles&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else-if: $code3 is &quot;glimmer&quot;)[(replace: ?results)[You found one of my friends, not me haha!]](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]}]&lt;/div&gt;{
 &lt;br&gt; &lt;br&gt;
 (text-colour:red)[[]&lt;results|]}&lt;/div&gt;</tw-passagedata><tw-passagedata pid="14" name="G4Found" tags="" position="950,275" size="100,100">(set: $G4Count to it +1)
 &lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Whisper has been found!&lt;/h3&gt;(if: $G4Count &lt;= 2)[Congratulations on figuring out their name!  We&#39;re going to use this to keep them out of the library from now on.  
@@ -215,9 +218,9 @@ Thank you!
 ](else:)[&lt;table width=99% align=&quot;center&quot;&gt;
 &lt;tr&gt;&lt;td&gt;&lt;img src=&quot;https://dclstechnology.github.io/gremlins/img/Grem4Large.png&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;/table&gt;]
-&lt;br&gt; &lt;br&gt;&lt;span class=&quot;guess-button&quot;&gt;[[Go Back-&gt;MainPage]]&lt;/span&gt;
+&lt;br&gt; &lt;br&gt;&lt;span class=&quot;guess-button&quot;&gt;Go Back&lt;/span&gt;
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="15" name="SCRAPBOOK" tags="" position="100,400" size="100,100">&lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;&lt;/center&gt;
+(click: &quot;Go Back&quot;)[(if: $SolveCount is 4)[(go-to: &quot;Final&quot;)](else:)[(go-to: &quot;MainPage&quot;)]]</tw-passagedata><tw-passagedata pid="15" name="SCRAPBOOK" tags="" position="100,400" size="100,100">&lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;&lt;/center&gt;
 
 
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[{
@@ -230,7 +233,13 @@ Thank you!
 
 
 &lt;!--Type your hint for this puzzle in between the brackets below--&gt;
-(click-rerun: &quot;HINT&quot;)[(dialog: [No hint for you!],&quot;Got it!&quot;)]</tw-passagedata></tw-storydata>
+(click-rerun: &quot;HINT&quot;)[(dialog: [No hint for you!],&quot;Got it!&quot;)]</tw-passagedata><tw-passagedata pid="16" name="Final" tags="" position="1100,75" size="200,200">&lt;div class=&quot;container&quot;&gt;
+
+&lt;h1&gt;FINAL PAGE CONTENT HERE&lt;/h1&gt;
+
+[[Play Again-&gt;Landing]] 
+
+&lt;/div&gt;</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
