@@ -21,7 +21,8 @@ tw-story {
 WARNING - there isn&#39;t any content yet, just an outline and game structure.
 
 [[Continue to Story-&gt;MsBooksworth]] 
-</tw-passagedata><tw-passagedata pid="3" name="MsBooksworth" tags="" position="50,350" size="200,200">&lt;h1&gt;Meet Ms. Booksworth&lt;/h1&gt;
+
+(set: $PuzzleSolved to 0)</tw-passagedata><tw-passagedata pid="3" name="MsBooksworth" tags="" position="50,350" size="200,200">&lt;h1&gt;Meet Ms. Booksworth&lt;/h1&gt;
 Each of these pages will have a puzzle to solve and a short description of the service offered.  Solving the puzzle unlocks that feature of the library card.  At the end of the game it&#39;s revelaed that they already have all of these features with their real card.
 
 [[Genealogy Resources-&gt;Genealogy1]]
@@ -38,23 +39,30 @@ Each of these pages will have a puzzle to solve and a short description of the s
 
 [[Newspapers and Archives-&gt;NewspapersEtc1]] 
 
-(if: (history:) contains &quot;Genealogy1&quot; and &quot;Kanopy1&quot; and &quot;Libby1&quot; and &quot;MuseumPasses1&quot; and &quot;Brainfuse1&quot; and &quot;TransparentLanguage1&quot; and &quot;NewspapersEtc1&quot;)[[[ALL VISITED, GO TO END-&gt;Ending]]] 
+(if: $PuzzleSolved is 7)[[[ALL VISITED, GO TO END-&gt;Ending]]]
 </tw-passagedata><tw-passagedata pid="4" name="Kanopy1" tags="" position="600,50" size="100,100">&lt;h1&gt;Video Streaming&lt;/h1&gt;
 
+(if: $Kanopy is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Kanopy to true)]]
 [[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="5" name="Libby1" tags="" position="800,50" size="100,100">&lt;h1&gt;eBooks and Audiobooks&lt;/h1&gt;
 
+(if: $Libby is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Libby to true)]]
 [[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="6" name="MuseumPasses1" tags="" position="1000,50" size="100,100">&lt;h1&gt;Museum Passes&lt;/h1&gt;
 
+(if: $MuseumPasses is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $MuseumPasses to true)]]
 [[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="7" name="Brainfuse1" tags="" position="500,300" size="100,100">&lt;h1&gt;Homework Help and Job Search Tools&lt;/h1&gt;
 
+(if: $Brainfuse is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Brainfuse to true)]]
 [[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="8" name="TransparentLanguage1" tags="" position="700,300" size="100,100">&lt;h1&gt;Language Learning&lt;/h1&gt;
 
+(if: $Language is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Language to true)]]
 [[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="9" name="NewspapersEtc1" tags="" position="900,300" size="100,100">&lt;h1&gt;Newspapers and Newspaper Archives&lt;/h1&gt;
 
+(if: $Newspapers is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Newspapers to true)]]
 [[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="10" name="Genealogy1" tags="" position="400,50" size="100,100">&lt;h1&gt;Genealogy Resources&lt;/h1&gt;
 
+(if: $Genealogy is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Genealogy to true)]]
 [[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="11" name="Ending" tags="" position="1100,300" size="200,200">&lt;h1&gt;Final Page&lt;/h1&gt;
-Congratulations!  You&#39;ve unlocked all of the features of your library card.  BUT WAIT - you had them all along!  HAHAH WE TRICKED YOU INTO PLAYING A GAME!</tw-passagedata></tw-storydata>
+Congratulations!  You&#39;ve unlocked all of the features of your library card.  BUT WAIT - you had them all along!  HAHAH WE TRICKED YOU INTO PLAYING A GAME!</tw-passagedata><tw-passagedata pid="12" name="Scrapbook" tags="" position="625,500" size="100,100">(if: (history:) contains &quot;Genealogy1&quot; and &quot;Kanopy1&quot; and &quot;Libby1&quot; and &quot;MuseumPasses1&quot; and &quot;Brainfuse1&quot; and &quot;TransparentLanguage1&quot; and &quot;NewspapersEtc1&quot;)[[[]]] </tw-passagedata><tw-passagedata pid="13" name="[" tags="" position="625,625" size="100,100"></tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
