@@ -19,33 +19,23 @@
   height: var(--dice-height);
   background-size: cover;
   display: inline-block;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Roller" tags="" position="100,100" size="100,100">:: Start
-(set: $diceType to 6)
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Roller" tags="" position="100,100" size="100,100">(set: $diceType to 6)
 (set: $rollCount to 10)
 (set: $currentRoll to 0)
 (set: $diceResult to 1)
 
 &lt;div id=&quot;dice&quot; class=&quot;dice&quot; style=&quot;background-image:url(&#39;https://dclstechnology.github.io/diceroller/img/d6-1.png&#39;);&quot;&gt;&lt;/div&gt;
 (link:&quot;Roll d6&quot;)[
+	(set: $rollCount to 10)
 	(set: $currentRoll to 0)
-	(roll-dice: $diceType, $rollCount)
-]
-
-:: roll-dice
-(live:100ms)[
-	(unless: $currentRoll is $rollCount)[
-		(set: $diceResult to (random: 1, $diceType))
-		(set: $currentRoll to it + 1)
-		(replace: ?dice)[&lt;div id=&quot;dice&quot; class=&quot;dice&quot; style=&quot;background-image:url(&#39;https://dclstechnology.github.io/diceroller/img/d6-$diceResult.png&#39;);&quot;&gt;&lt;/div&gt;]
-	]
-	(else:)[
-		(stop:)
-		(goto: &quot;dice-result&quot;)
+	(live:100ms)[
+		(unless: $currentRoll is $rollCount)[
+			(set: $diceResult to (random: 1, $diceType))
+			(set: $currentRoll to it + 1)
+			(replace: ?dice)[&lt;div id=&quot;dice&quot; class=&quot;dice&quot; style=&quot;background-image:url(&#39;https://dclstechnology.github.io/diceroller/img/d6-$diceResult.png&#39;);&quot;&gt;&lt;/div&gt;]
+		]
 	]
 ]
-
-:: dice-result
-&lt;div id=&quot;dice&quot; class=&quot;dice&quot; style=&quot;background-image:url(&#39;https://dclstechnology.github.io/diceroller/img/d6-$diceResult.png&#39;);&quot;&gt;&lt;/div&gt;
 </tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
