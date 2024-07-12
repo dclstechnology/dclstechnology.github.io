@@ -712,7 +712,7 @@ Enter your solution by tapping the box below:
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[{
 	(set: $code to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code to (lowercase: $code))
-	(if: $code is &quot;shelf&quot;)[
+	(if: $code is &quot;chair&quot;)[
 		(set: $currentPassageIndex to it + 1)
 		(if: $currentPassageIndex &gt; 5)[(go-to: &quot;Final&quot;)][(go-to: $passagesOrder&#39;s $currentPassageIndex)]
 	](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]
@@ -722,7 +722,7 @@ Enter your solution by tapping the box below:
 &lt;/div&gt;
 (click-rerun: &quot;HINT&quot;)[(dialog: [These are EVERYWHERE in libraries.],&quot;Got it!&quot;)]
 &lt;script&gt;
-    const targetWord = &quot;shelf&quot;; // You can randomize this or choose from a list
+    const targetWord = &quot;chair&quot;; // You can randomize this or choose from a list
     let attempts = 0;
 
     document.getElementById(&#39;wordForm&#39;).addEventListener(&#39;submit&#39;, (e) =&gt; {
@@ -945,7 +945,7 @@ Enter your solution by tapping the box below:
 &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[{
 	(set: $code to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
     (set: $code to (lowercase: $code))
-	(if: $code is &quot;shelf&quot;)[
+	(if: $code is &quot;books&quot;)[
 		(set: $currentPassageIndex to it + 1)
 		(if: $currentPassageIndex &gt; 5)[(go-to: &quot;Final&quot;)][(go-to: $passagesOrder&#39;s $currentPassageIndex)]
 	](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]
@@ -955,7 +955,7 @@ Enter your solution by tapping the box below:
 &lt;/div&gt;
 (click-rerun: &quot;HINT&quot;)[(dialog: [These are EVERYWHERE in libraries.],&quot;Got it!&quot;)]
 &lt;script&gt;
-    const targetWord = &quot;shelf&quot;; // You can randomize this or choose from a list
+    const targetWord = &quot;books&quot;; // You can randomize this or choose from a list
     let attempts = 0;
 
     document.getElementById(&#39;wordForm&#39;).addEventListener(&#39;submit&#39;, (e) =&gt; {
