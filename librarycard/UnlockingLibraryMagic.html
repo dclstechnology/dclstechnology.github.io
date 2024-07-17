@@ -14,7 +14,8 @@
 tw-story {
   	font-size: 12pt;
 	/* line-height: 1.5em; */
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="SplashPage" tags="" position="100,100" size="100,100">&lt;h1&gt;Unlocking Library Magic&lt;/h1&gt;
+}
+</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="SplashPage" tags="" position="100,100" size="100,100">&lt;h1&gt;Unlocking Library Magic&lt;/h1&gt;
 
 [[Continue to Intro-&gt;Intro]] </tw-passagedata><tw-passagedata pid="2" name="Intro" tags="" position="100,225" size="100,100">&lt;h1&gt;Information About the Game&lt;/h1&gt;
 
@@ -64,8 +65,11 @@ WARNING - there isn&#39;t any content yet, just an outline and game structure.
 (if: $Newspapers is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Newspapers to true)]]
 [[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="10" name="Genealogy1" tags="" position="400,50" size="100,100">&lt;h1&gt;Genealogy Resources&lt;/h1&gt;
 
+&lt;iframe width=&quot;500&quot; height=&quot;500&quot; style=&quot;border:3px solid black; margin:auto; display:block&quot; frameborder=&quot;0&quot; src=&quot;https://crosswordlabs.com/embed/genealogy-crossword-11&quot;&gt;&lt;/iframe&gt;
+
 (if: $Genealogy is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Genealogy to true)]]
-[[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="11" name="Ending" tags="" position="1100,300" size="200,200">&lt;h1&gt;Final Page&lt;/h1&gt;
+[[Go Back-&gt;MsBooksworth]] 
+</tw-passagedata><tw-passagedata pid="11" name="Ending" tags="" position="1100,300" size="200,200">&lt;h1&gt;Final Page&lt;/h1&gt;
 Congratulations!  You&#39;ve unlocked all of the features of your library card.  BUT WAIT - you had them all along!  HAHAH WE TRICKED YOU INTO PLAYING A GAME!</tw-passagedata><tw-passagedata pid="12" name="Scrapbook" tags="" position="625,500" size="100,100">(if: (history:) contains &quot;Genealogy1&quot; and &quot;Kanopy1&quot; and &quot;Libby1&quot; and &quot;MuseumPasses1&quot; and &quot;Brainfuse1&quot; and &quot;TransparentLanguage1&quot; and &quot;NewspapersEtc1&quot;)[[[]]] </tw-passagedata><tw-passagedata pid="13" name="[" tags="" position="625,625" size="100,100"></tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
