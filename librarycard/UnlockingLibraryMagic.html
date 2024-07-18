@@ -66,7 +66,7 @@ WARNING - there isn&#39;t any content yet, just an outline and game structure.
 
 [[Homework Help and Job Search-&gt;Brainfuse1]] 
 
-[[Language Learning-&gt;TransparentLanguage1]] 
+(if: $Language is True)[[[Language Learning - SOLVED-&gt;TransparentLanguage1]]](else:)[[Language Learning-&gt;TransparentLanguage1]] 
 
 [[Newspapers and Archives-&gt;NewspapersEtc1]] 
 
@@ -369,17 +369,11 @@ The game will provide feedback:
             &lt;div id=&quot;message&quot;&gt;&lt;/div&gt;
             &lt;div id=&quot;solved-words-container&quot;&gt;&lt;h3&gt;Solved Words&lt;/h3&gt;&lt;ul id=&quot;solved-words-list&quot;&gt;&lt;/ul&gt;&lt;/div&gt;
         &lt;/div&gt;
-        &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[{
-	(set: $code to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
-    (set: $code to (lowercase: $code))
-	(if: $code is &quot;story&quot;)[
-		(set: $currentPassageIndex to it + 1)
-		(if: $currentPassageIndex &gt; 5)[(go-to: &quot;Final&quot;)][(go-to: $passagesOrder&#39;s $currentPassageIndex)]
-	](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]
-}]&lt;/div&gt;{
+        &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[(set: $code to (prompt: &quot;Answer:&quot;, &quot;&quot;))(set: $code to (lowercase: $code))(if: $code is &quot;story&quot;)[(set: $PuzzleSolved to it +1, $Language to true)(dialog: [Congratulations!  You have solved this puzzle.], &quot;Ok&quot;)(go-to: &quot;MsBooksworth&quot;)](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]]
+&lt;/div&gt;{
 &lt;br&gt;
 (text-colour:white)[[]&lt;results|]}&lt;/div&gt;
-&lt;/div&gt;   
+&lt;/div&gt;
 
 (click-rerun: &quot;HINT&quot;)[(dialog: [These are all words connected to public libraries.],&quot;Got it!&quot;)]
 (click-rerun: &quot;MORE HINTS&quot;)[(dialog: [Computer, Books, Reference, Study, Catalog, STORY.],&quot;Got it!&quot;)]
