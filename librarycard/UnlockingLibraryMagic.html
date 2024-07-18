@@ -46,7 +46,9 @@ tw-story {
 	width: 220px;
   	margin: auto;
 	padding: 10px;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="SplashPage" tags="" position="100,100" size="100,100">&lt;h1&gt;Unlocking Library Magic&lt;/h1&gt;
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">$(document).on('click', '#to-top tw-link', function () {
+    $('tw-passage').scrollTop(0);
+});</script><tw-passagedata pid="1" name="SplashPage" tags="startup" position="100,100" size="100,100">&lt;h1&gt;Unlocking Library Magic&lt;/h1&gt;
 
 [[Continue to Intro-&gt;Intro]] </tw-passagedata><tw-passagedata pid="2" name="Intro" tags="" position="100,225" size="100,100">&lt;h1&gt;Information About the Game&lt;/h1&gt;
 
@@ -190,7 +192,7 @@ INSTRUCTIONS GO HERE
 }
 &lt;/style&gt;}&lt;h1&gt;eBooks and Audiobooks&lt;/h1&gt;
 
-&lt;div class=&quot;main-container&quot;&gt;&lt;h3&gt;Wordl.... &quot;word puzzle&quot; level!&lt;/h3&gt;
+&lt;div class=&quot;main-container&quot; id=&quot;main-container&quot;&gt;&lt;h3&gt;Wordl.... &quot;word puzzle&quot; level!&lt;/h3&gt;
 &lt;div class=&quot;instructions-container&quot;&gt;
 &lt;h3&gt;How to Play&lt;/h3&gt;Type a 5-letter word in the input box and click &quot;Submit Guess&quot;.
 &lt;p align=&quot;left&quot;&gt;
