@@ -15,7 +15,37 @@ tw-story {
   	font-size: 12pt;
 	/* line-height: 1.5em; */
 }
-</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="SplashPage" tags="" position="100,100" size="100,100">&lt;h1&gt;Unlocking Library Magic&lt;/h1&gt;
+
+.hint-button {
+	background-color: #fff;
+	color: #4257f5;
+	padding: 10px 20px;
+	font-size: 18px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	margin-bottom: 20px;
+	width: 100px;
+  	margin: auto;
+	padding: 10px;
+}
+
+.guess-button {
+	background-color: #fff;
+	color: #4257f5;
+	padding: 10px 20px;
+	font-size: 18px;
+    font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	margin-bottom: 20px;
+	width: 220px;
+  	margin: auto;
+	padding: 10px;
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="SplashPage" tags="" position="100,100" size="100,100">&lt;h1&gt;Unlocking Library Magic&lt;/h1&gt;
 
 [[Continue to Intro-&gt;Intro]] </tw-passagedata><tw-passagedata pid="2" name="Intro" tags="" position="100,225" size="100,100">&lt;h1&gt;Information About the Game&lt;/h1&gt;
 
@@ -43,25 +73,392 @@ WARNING - there isn&#39;t any content yet, just an outline and game structure.
 (if: $PuzzleSolved is 7)[[[ALL VISITED, GO TO END-&gt;Ending]]]
 </tw-passagedata><tw-passagedata pid="4" name="Kanopy1" tags="" position="600,50" size="100,100">&lt;h1&gt;Video Streaming&lt;/h1&gt;
 
-&lt;span style=&quot;display:inline-block;margin:1em;width:240px;text-align:center&quot;&gt;&lt;a href=&quot;https://www.jigsawplanet.com/?rc=play&amp;amp;pid=29d7a2870a70&quot; style=&quot;display:inline-block;position:relative&quot;&gt;&lt;img alt=&quot;preview&quot; style=&quot;display:block;box-shadow:2px 2px 4px rgba(0,0,0,.4)&quot; src=&quot;https://im.jigsawplanet.com/?rc=img&amp;amp;pid=29d7a2870a70&amp;amp;size=240&quot;&gt;&lt;span style=&quot;position:absolute;right:4px;bottom:4px;font:bold 120% Verdana,sans-serif;white-space:nowrap;filter:drop-shadow(1px 1px 2px #000)&quot;&gt;&lt;span style=&quot;color:#fff;vertical-align:middle&quot;&gt;152&lt;/span&gt;&lt;img style=&quot;width:1.5em;height:1.5em;vertical-align:middle&quot; src=&quot;https://www.jigsawplanet.com/img/shapes/10.svg&quot; alt=&quot;piece&quot;&gt;&lt;/span&gt;&lt;/a&gt;&lt;a style=&quot;display:block;margin-top:.2em;overflow-wrap:break-word&quot; href=&quot;https://www.jigsawplanet.com/?rc=play&amp;amp;pid=29d7a2870a70&quot;&gt;Solve this puzzle to find the clue!&lt;/a&gt;&lt;/span&gt;
+INSTRUCTIONS GO HERE
+
+&lt;center&gt;
+&lt;span style=&quot;display:inline-block;margin:1em;width:240px;text-align:center&quot;&gt;&lt;a href=&quot;https://www.jigsawplanet.com/?rc=play&amp;amp;pid=29d7a2870a70&quot; style=&quot;display:inline-block;position:relative&quot;&gt;&lt;img alt=&quot;preview&quot; style=&quot;display:block;box-shadow:2px 2px 4px rgba(0,0,0,.4)&quot; src=&quot;https://im.jigsawplanet.com/?rc=img&amp;amp;pid=29d7a2870a70&amp;amp;size=240&quot;&gt;&lt;span style=&quot;position:absolute;right:4px;bottom:4px;font:bold 120% Verdana,sans-serif;white-space:nowrap;filter:drop-shadow(1px 1px 2px #000)&quot;&gt;&lt;span style=&quot;color:#fff;vertical-align:middle&quot;&gt;152&lt;/span&gt;&lt;img style=&quot;width:1.5em;height:1.5em;vertical-align:middle&quot; src=&quot;https://www.jigsawplanet.com/img/shapes/10.svg&quot; alt=&quot;piece&quot;&gt;&lt;/span&gt;&lt;/a&gt;&lt;a style=&quot;display:block;margin-top:.2em;overflow-wrap:break-word&quot; href=&quot;https://www.jigsawplanet.com/?rc=play&amp;amp;pid=29d7a2870a70&quot;&gt;Solve this puzzle to find the clue!&lt;/a&gt;&lt;/span&gt;&lt;/center&gt;
 
 (if: $Kanopy is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Kanopy to true)]]
-[[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="5" name="Libby1" tags="" position="800,50" size="100,100">&lt;h1&gt;eBooks and Audiobooks&lt;/h1&gt;
+[[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="5" name="Libby1" tags="" position="800,50" size="100,100">{&lt;style&gt;
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+.instructions-container {
+    width: 100%;
+    padding: 20px;    
+    background-color: rgba(0, 0, 0, 0.7); /* transparent black */
+    border-radius: 10px;
+    margin-bottom: 20px; /* Add margin-bottom to separate containers */
+    box-sizing: border-box;
+}
+
+.instructions-container h3 {
+    margin-top: 0;
+}
+
+.instructions-container ol {
+    padding-left: 20px;
+}
+
+.instructions-container ul {
+	list-style-type: none;
+    padding-left: 0;
+}
+
+.instructions-container li {
+	margin-bottom: 10px;
+}
+
+.game-container {
+	text-align: center;
+	width: 100%;
+	padding: 20px; /* Add padding to the game container */
+	border-radius: 10px; /* Add border radius for rounded corners */
+	margin-bottom: 20px; /* Add margin-bottom to separate containers */
+    border: 2px solid #4257f5; /* Add border */
+}
+
+#game-board {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.guess-row {
+    display: flex;
+    gap: 5px;
+}
+
+.letter {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.correct {
+    background-color: green;
+    color: white;
+}
+
+.present {
+    background-color: yellow;
+    color: black;
+}
+
+.absent {
+    background-color: grey;
+    color: white;
+}
+
+.input-field {
+    padding: 10px;
+    font-size: 20px; /* Increase font size */
+    border: 2px solid #ccc; /* Increase border width */
+    border-radius: 5px;
+    width: 100%;
+    max-width: 400px; /* Increase max width */
+    margin: 20px auto; /* Increase margin */
+}
+
+.submit-button {
+    background-color: #fff;
+    color: #4257f5;
+    padding: 15px 30px; /* Increase padding */
+    font-size: 20px; /* Increase font size */
+    border: 2px solid #4257f5; /* Add border */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #f0f0f0;
+}
+&lt;/style&gt;}
+&lt;h1&gt;eBooks and Audiobooks&lt;/h1&gt;
+
+&lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Wordl.... &quot;word puzzle&quot; level!&lt;/h3&gt;
+&lt;div class=&quot;instructions-container&quot;&gt;
+&lt;h3&gt;How to Play&lt;/h3&gt;Type a 5-letter word in the input box and click &quot;Submit Guess&quot;.
+&lt;p align=&quot;left&quot;&gt;
+The game will provide feedback:
+&lt;span class=&quot;correct&quot;&gt;Green&lt;/span&gt;: Correct letter in the correct position.
+&lt;span class=&quot;present&quot;&gt;Yellow&lt;/span&gt;: Correct letter in the wrong position.
+&lt;span class=&quot;absent&quot;&gt;Grey&lt;/span&gt;: Letter not in the word.&lt;/p&gt;
+&lt;p align=&quot;left&quot;&gt;- Guess the word within 6 attempts.&lt;br&gt;- After solving the word, take that answer and enter it at the bottom of the page to move on.&lt;br&gt;- If you need a hint, click the hint button below.&lt;/p&gt;&lt;br&gt;
+&lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;&lt;/center&gt;
+&lt;/div&gt;
+&lt;div class=&quot;game-container&quot;&gt;
+    &lt;div id=&quot;game-board&quot;&gt;&lt;/div&gt;
+    &lt;form id=&quot;wordForm&quot;&gt;
+    &lt;input type=&quot;text&quot; id=&quot;wordInput&quot; maxlength=&quot;5&quot; class=&quot;input-field&quot; placeholder=&quot;Enter the word...&quot;&gt;
+    &lt;button type=&quot;submit&quot; class=&quot;submit-button&quot;&gt;Submit Guess&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
 
 (if: $Libby is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Libby to true)]]
-[[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="6" name="MuseumPasses1" tags="" position="1000,50" size="100,100">&lt;h1&gt;Museum Passes&lt;/h1&gt;
+[[Go Back-&gt;MsBooksworth]] 
+
+(click-rerun: &quot;HINT&quot;)[(dialog: [These are EVERYWHERE in libraries.],&quot;Got it!&quot;)]
+&lt;script&gt;
+    const targetWord = &quot;shelf&quot;; // You can randomize this or choose from a list
+    let attempts = 0;
+
+    document.getElementById(&#39;wordForm&#39;).addEventListener(&#39;submit&#39;, (e) =&gt; {
+        e.preventDefault();
+        const guessInput = document.getElementById(&#39;wordInput&#39;);
+        const guess = guessInput.value.toLowerCase();
+
+        if (guess.length !== 5) {
+            alert(&quot;Please enter a 5-letter word.&quot;);
+            return;
+        }
+
+        guessInput.value = &#39;&#39;; // Clear the input after checking the length
+        attempts++;
+        updateBoard(guess);
+
+        if (guess === targetWord) {
+            alert(`Congratulations! You guessed the word in ${attempts} attempts.`);
+            disableInput(); // Disable input after the correct guess
+        } else if (attempts === 6) {
+            alert(`Game over!  Try again.`);
+            location.reload(); // Reload the page to reset the game
+        }
+    });
+
+    function updateBoard(guess) {
+        const board = document.getElementById(&#39;game-board&#39;);
+        const row = document.createElement(&#39;div&#39;);
+        row.className = &#39;guess-row&#39;;
+
+        // Count the occurrences of each letter in the target word
+        const targetLetterCount = {};
+        for (let letter of targetWord) {
+            targetLetterCount[letter] = (targetLetterCount[letter] || 0) + 1;
+        }
+
+        // Arrays to keep track of correct and present letters
+        const correctLetters = Array(targetWord.length).fill(false);
+        const presentLetters = Array(targetWord.length).fill(false);
+
+        // First pass: mark correct letters and update the letter count
+        for (let i = 0; i &lt; guess.length; i++) {
+            if (guess[i] === targetWord[i]) {
+                correctLetters[i] = true;
+                targetLetterCount[guess[i]]--;
+            }
+        }
+
+        // Second pass: mark present letters
+        for (let i = 0; i &lt; guess.length; i++) {
+            if (!correctLetters[i] &amp;&amp; targetLetterCount[guess[i]]) {
+                presentLetters[i] = true;
+                targetLetterCount[guess[i]]--;
+            }
+        }
+
+        // Display letters with the appropriate class
+        for (let i = 0; i &lt; guess.length; i++) {
+            const letter = document.createElement(&#39;div&#39;);
+            letter.className = &#39;letter&#39;;
+            letter.textContent = guess[i];
+
+            if (correctLetters[i]) {
+                letter.classList.add(&#39;correct&#39;);
+            } else if (presentLetters[i]) {
+                letter.classList.add(&#39;present&#39;);
+            } else {
+                letter.classList.add(&#39;absent&#39;);
+            }
+
+            row.appendChild(letter);
+        }
+
+        board.appendChild(row);
+    }
+
+    function disableInput() {
+        document.getElementById(&#39;wordInput&#39;).disabled = true;
+        document.querySelector(&#39;.submit-button&#39;).disabled = true;
+    }
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="6" name="MuseumPasses1" tags="" position="1000,50" size="100,100">&lt;h1&gt;Museum Passes&lt;/h1&gt;
 
 (if: $MuseumPasses is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $MuseumPasses to true)]]
 [[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="7" name="Brainfuse1" tags="" position="500,300" size="100,100">&lt;h1&gt;Homework Help and Job Search Tools&lt;/h1&gt;
 
 (if: $Brainfuse is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Brainfuse to true)]]
-[[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="8" name="TransparentLanguage1" tags="" position="700,300" size="100,100">&lt;h1&gt;Language Learning&lt;/h1&gt;
+[[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="8" name="TransparentLanguage1" tags="" position="700,300" size="100,100">{&lt;style&gt;
+#current-anagram {
+    font-size: 36px; /* Increase font size */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#guess-input {
+    padding: 10px;
+    font-size: 20px; /* Increase font size */
+    margin: 10px 0;
+    text-transform: uppercase; /* Ensure input is in uppercase */
+}
+
+#submit-guess {
+	background-color: #fff;
+	color: #4257f5;
+	padding: 10px 20px;
+	font-size: 18px;
+    font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	margin-bottom: 20px;
+	width: 220px;
+  	margin: auto;
+	padding: 10px;
+/*padding: 10px 20px;
+    font-size: 20px; /* Increase font size */
+   cursor: pointer; */
+   }
+
+
+#message {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+#solved-words-container {
+    margin-top: 20px;
+}
+
+#solved-words-list {
+    list-style: none;
+    padding: 0;
+    font-size: 30px; /* Increase font size */
+    text-transform: uppercase; /* Ensure displayed letters are in uppercase */
+}
+
+.highlight {
+    color: red;
+    font-weight: bold;
+}
+&lt;/style&gt;}
+&lt;h1&gt;Language Learning&lt;/h1&gt;
+
+&lt;div class=&quot;container&quot;&gt;&lt;h3&gt;Anagram Chain Puzzle&lt;/h3&gt;Unscramble the anagrams!  You&#39;ll need to solve five, which will reveal the sixth and final anagram.  Once you&#39;re done, submit your final unscrambled word at the bottom of the page.
+&lt;br&gt;
+&lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;HINT&lt;/div&gt;&lt;/center&gt;
+&lt;center&gt;&lt;div class=&quot;hint-button&quot;&gt;MORE HINTS&lt;/div&gt;&lt;/center&gt;
+        &lt;div id=&quot;puzzle-container&quot;&gt;
+            &lt;div id=&quot;current-anagram&quot;&gt;&lt;/div&gt;
+            &lt;input type=&quot;text&quot; id=&quot;guess-input&quot; placeholder=&quot;Enter your guess...&quot;&gt;
+            &lt;button id=&quot;submit-guess&quot;&gt;Submit Guess&lt;/button&gt;
+            &lt;div id=&quot;message&quot;&gt;&lt;/div&gt;
+            &lt;div id=&quot;solved-words-container&quot;&gt;&lt;h3&gt;Solved Words&lt;/h3&gt;&lt;ul id=&quot;solved-words-list&quot;&gt;&lt;/ul&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;guess-button&quot;&gt;(link-repeat: &quot;Tap here to answer&quot;)[{
+	(set: $code to (prompt: &quot;Answer:&quot;, &quot;&quot;))	
+    (set: $code to (lowercase: $code))
+	(if: $code is &quot;story&quot;)[
+		(set: $currentPassageIndex to it + 1)
+		(if: $currentPassageIndex &gt; 5)[(go-to: &quot;Final&quot;)][(go-to: $passagesOrder&#39;s $currentPassageIndex)]
+	](else:)[(replace: ?results)[Oops. That doesn&#39;t look right. Please try again.]]
+}]&lt;/div&gt;{
+&lt;br&gt;
+(text-colour:white)[[]&lt;results|]}&lt;/div&gt;
+&lt;/div&gt;   
+
+(click-rerun: &quot;HINT&quot;)[(dialog: [These are all words connected to public libraries.],&quot;Got it!&quot;)]
+(click-rerun: &quot;MORE HINTS&quot;)[(dialog: [Computer, Books, Reference, Study, Catalog, STORY.],&quot;Got it!&quot;)]
+
 
 (if: $Language is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Language to true)]]
-[[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="9" name="NewspapersEtc1" tags="" position="900,300" size="100,100">&lt;h1&gt;Newspapers and Newspaper Archives&lt;/h1&gt;
+[[Go Back-&gt;MsBooksworth]] 
+
+&lt;script&gt;
+
+const anagramChain = [
+    { anagram: &quot;otpmrecu&quot;, word: &quot;computer&quot;, highlightIndex: 1 },
+    { anagram: &quot;oskbo&quot;, word: &quot;books&quot;, highlightIndex: 4 },
+    { anagram: &quot;erencfree&quot;, word: &quot;reference&quot;, highlightIndex: 4 },
+    { anagram: &quot;ytsdu&quot;, word: &quot;study&quot;, highlightIndex: 4 },
+    { anagram: &quot;gaotlca&quot;, word: &quot;catalog&quot;, highlightIndex: 2 }
+];
+
+let currentStep = 0;
+let finalAnswer = &quot;&quot;;
+
+const currentAnagramElement = document.getElementById(&#39;current-anagram&#39;);
+const guessInputElement = document.getElementById(&#39;guess-input&#39;);
+const submitGuessButton = document.getElementById(&#39;submit-guess&#39;);
+const messageElement = document.getElementById(&#39;message&#39;);
+const solvedWordsListElement = document.getElementById(&#39;solved-words-list&#39;);
+
+function showAnagram() {
+    currentAnagramElement.textContent = anagramChain[currentStep].anagram.toUpperCase();
+}
+
+function checkGuess() {
+    const guess = guessInputElement.value.toLowerCase();
+    if (guess === anagramChain[currentStep].word) {
+        messageElement.textContent = &quot;Correct!&quot;;
+        finalAnswer += anagramChain[currentStep].word[anagramChain[currentStep].highlightIndex].toUpperCase();
+        addSolvedWord(anagramChain[currentStep].word, anagramChain[currentStep].highlightIndex);
+        currentStep++;
+        if (currentStep &lt; anagramChain.length) {
+            showAnagram();
+        } else {
+           messageElement.innerHTML = `First stage complete! Final anagram:&lt;font color=&quot;red&quot;&gt; ${finalAnswer} &lt;/font&gt;&lt;br&gt; Enter your solution at the bottom of the page.`;
+            guessInputElement.disabled = true;
+            submitGuessButton.disabled = true;
+        }
+    } else {
+        messageElement.textContent = &quot;Incorrect, try again!&quot;;
+    }
+    guessInputElement.value = &#39;&#39;;
+}
+
+function addSolvedWord(word, highlightIndex) {
+    const listItem = document.createElement(&#39;li&#39;);
+    listItem.innerHTML = highlightLetter(word.toUpperCase(), highlightIndex);
+    solvedWordsListElement.appendChild(listItem);
+}
+
+function highlightLetter(word, index) {
+    let highlightedWord = &quot;&quot;;
+    for (let i = 0; i &lt; word.length; i++) {
+        if (i === index) {
+            highlightedWord += `&lt;span class=&quot;highlight&quot;&gt;${word[i]}&lt;/span&gt;`;
+        } else {
+            highlightedWord += word[i];
+        }
+    }
+    return highlightedWord;
+}
+
+submitGuessButton.addEventListener(&#39;click&#39;, checkGuess);
+showAnagram();
+
+
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="NewspapersEtc1" tags="" position="900,300" size="100,100">&lt;h1&gt;Newspapers and Newspaper Archives&lt;/h1&gt;
 
 (if: $Newspapers is true)[&lt;!--NOTHING--&gt;](else:)[(link: &quot;Solve Puzzle&quot;)[(set: $PuzzleSolved to it +1, $Newspapers to true)]]
 [[Go Back-&gt;MsBooksworth]] </tw-passagedata><tw-passagedata pid="10" name="Genealogy1" tags="" position="400,50" size="100,100">&lt;h1&gt;Genealogy Resources&lt;/h1&gt;
+
+INSTRUCTIONS GO HERE.  
 
 &lt;iframe width=&quot;330&quot; height=&quot;600&quot; style=&quot;border:3px solid black; margin:auto; display:block&quot; frameborder=&quot;0&quot; src=&quot;https://crosswordlabs.com/embed/genealogy-crossword-11&quot;&gt;&lt;/iframe&gt;
 
