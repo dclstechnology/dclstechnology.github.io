@@ -248,11 +248,10 @@ function normalizeSingleRailTrain(item, bucket = "") {
     item.sched_time ||
     "";
 
-  const status =
+  const rawStatus =
     item.status ||
     item.late ||
     item.delay ||
-    bucket ||
     "";
 
   const minutes =
@@ -265,11 +264,20 @@ function normalizeSingleRailTrain(item, bucket = "") {
         item.orig_delay
     );
 
+  // CRITICAL FILTER — skip non-train rows
+  if (
+    !destination ||
+    !departureTime ||
+    !Number.isFinite(minutes)
+  ) {
+    return null;
+  }
+
   return {
     destination,
     line,
     departure_time: departureTime,
-    status: normalizeStatus(status, item),
+    status: normalizeStatus(rawStatus, item),
     minutes,
   };
 }
