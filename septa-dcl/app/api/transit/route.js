@@ -170,8 +170,16 @@ async function getRailRows(config, slug) {
 
   const rows = [];
 
-  const nextInbound = Array.isArray(inboundData) ? inboundData[0] : null;
-  const nextOutbound = Array.isArray(outboundData) ? outboundData[0] : null;
+  const inboundList = Array.isArray(inboundData) ? inboundData : [];
+  const outboundList = Array.isArray(outboundData) ? outboundData : [];
+
+  const nextInbound = inboundList.find(
+    (t) => isFutureTime(t.orig_departure_time)
+  ) || null;
+
+  const nextOutbound = outboundList.find(
+    (t) => isFutureTime(t.arrival_time)
+  ) || null;
 
   if (nextInbound) {
     rows.push({
@@ -466,6 +474,11 @@ function minutesUntilClockTime(timeString) {
   }
 
   return Math.round((target - now) / 60000);
+}
+
+function isFutureTime(timeString) {
+  const mins = minutesUntilClockTime(timeString);
+  return mins !== null && mins >= 0;
 }
 
 function normalizeStatus(status, item) {
