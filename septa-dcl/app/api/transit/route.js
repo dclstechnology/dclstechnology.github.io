@@ -355,7 +355,7 @@ async function getUpcomingStopTimes(stopConfig, config, slug) {
     library_slug: slug,
     mode: stopConfig.mode || "Bus/Trolley",
     route: entry.route || "",
-    direction_label: stopConfig.label || "",
+    direction_label: entry.direction_from_feed || stopConfig.label || "",
     destination: entry.destination || "",
     minutes: entry.minutes,
     departure_time: entry.departure_time || "",
@@ -370,31 +370,40 @@ async function getUpcomingStopTimes(stopConfig, config, slug) {
 function parseSmsStopFeed(text) {
   if (!text) return [];
 
-  const lines = text
-    .split(/\r?\n/)
-    .map((x) => x.trim())
-    .filter(Boolean);
-
+  const cleaned = text.replace(/\s+/g, " ").trim();
   const rows = [];
 
-  for (const line of lines) {
-    // Try to find route + minutes in loose text
-    // Examples vary, so this is intentionally forgiving.
-    const routeMatch = line.match(/\b(Route\s*)?([A-Za-z0-9]+)/i);
-    const minMatch = line.match(/(\d+)\s*(min|mins|minutes)\b/i);
-    const timeMatch = line.match(/\b(\d{1,2}:\d{2}\s*[APMapm]{2})\b/);
+  const directionBlocks = [
+    { label: "Inbound", regex: /Inbound\s+(.+?)(?=\s+Outbound\b|$)/i },
+    { label: "Outbound", regex: /Outbound\s+(.+?)$/i },
+  ];
 
-    rows.push({
-      route: routeMatch ? routeMatch[2] : "",
-      destination: extractDestinationFromLine(line),
-      minutes: minMatch ? parseInt(minMatch[1], 10) : parseMinutes(timeMatch?.[1] || ""),
-      departure_time: timeMatch ? timeMatch[1] : "",
-      raw: line,
-    });
+  for (const block of directionBlocks) {
+    const match = cleaned.match(block.regex);
+    if (!match) continue;
+
+    const segment = match[1];
+
+    const routeRegex = /Rt\.\s*([A-Za-z0-9]+)\s*@\s*(\d{1,2}:\d{2})/gi;
+    let routeMatch;
+
+    while ((routeMatch = routeRegex.exec(segment)) !== null) {
+      const route = routeMatch[1];
+      const time24 = routeMatch[2];
+
+      rows.push({
+        route,
+        destination: "",
+        direction_from_feed: block.label,
+        minutes: minutesUntil24HourTime(time24),
+        departure_time: convert24HourTo12Hour(time24),
+        raw: routeMatch[0],
+      });
+    }
   }
 
   return rows
-    .filter((r) => Number.isFinite(r.minutes))
+    .filter((r) => Number.isFinite(r.minutes) && r.minutes >= 0)
     .sort((a, b) => a.minutes - b.minutes)
     .slice(0, 4);
 }
@@ -486,6 +495,40 @@ function minutesUntilClockTime(timeString) {
 function isFutureTime(timeString) {
   const mins = minutesUntilClockTime(timeString);
   return mins !== null && mins >= 0;
+}
+
+function minutesUntil24HourTime(timeString) {
+  if (!timeString) return null;
+
+  const match = String(timeString).trim().match(/^(\d{1,2}):(\d{2})$/);
+  if (!match) return null;
+
+  const hour = parseInt(match[1], 10);
+  const minute = parseInt(match[2], 10);
+
+  const now = new Date();
+  const target = new Date(now);
+  target.setHours(hour, minute, 0, 0);
+
+  if (target < now) {
+    target.setDate(target.getDate() + 1);
+  }
+
+  return Math.round((target - now) / 60000);
+}
+
+function convert24HourTo12Hour(timeString) {
+  const match = String(timeString).trim().match(/^(\d{1,2}):(\d{2})$/);
+  if (!match) return timeString || "";
+
+  let hour = parseInt(match[1], 10);
+  const minute = match[2];
+  const suffix = hour >= 12 ? "PM" : "AM";
+
+  if (hour === 0) hour = 12;
+  else if (hour > 12) hour -= 12;
+
+  return `${hour}:${minute}${suffix}`;
 }
 
 function normalizeStatus(status, item) {
