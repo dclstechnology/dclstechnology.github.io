@@ -196,7 +196,7 @@ async function getRailRows(config, slug) {
       direction_label: config.rail.outboundLabel,
       destination: nextOutbound.destination || station,
       minutes: parseMinutes(nextOutbound.orig_delay ?? nextOutbound.orig_departure_time),
-      departure_time: nextOutbound.orig_departure_time || "",
+      departure_time: nextOutbound.arrival_time || "",
       status: normalizeNtaStatus(nextOutbound),
     });
   }
