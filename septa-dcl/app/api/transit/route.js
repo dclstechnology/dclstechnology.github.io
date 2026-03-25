@@ -348,7 +348,11 @@ async function getUpcomingStopTimes(stopConfig, config, slug) {
   }
 
   const text = await response.text();
+  console.log("STOP ID:", stopId);
+  console.log("RAW STOP TEXT:", text);
+
   const parsed = parseSmsStopFeed(text);
+  console.log("PARSED STOP ROWS:", parsed);
 
   return parsed.map((entry) => ({
     library: config.name,
@@ -403,7 +407,7 @@ function parseSmsStopFeed(text) {
   }
 
   return rows
-    .filter((r) => Number.isFinite(r.minutes) && r.minutes >= 0)
+    .filter((r) => Number.isFinite(r.minutes) && r.minutes >= -2)
     .sort((a, b) => a.minutes - b.minutes)
     .slice(0, 4);
 }
