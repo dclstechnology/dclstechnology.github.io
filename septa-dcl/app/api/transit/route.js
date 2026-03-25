@@ -510,10 +510,6 @@ function minutesUntil24HourTime(timeString) {
   const target = new Date(now);
   target.setHours(hour, minute, 0, 0);
 
-  if (target < now) {
-    target.setDate(target.getDate() + 1);
-  }
-
   return Math.round((target - now) / 60000);
 }
 
