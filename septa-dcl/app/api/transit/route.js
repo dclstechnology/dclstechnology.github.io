@@ -39,6 +39,14 @@ const LIBRARIES = {
     surfaceStops: [],
   },
 
+  dclhq: {
+    name: "DCL Administrative Office",
+    surfaceStops: [
+      { stopId: "15069", mode: "Bus", label: "Fair Acres" },
+    ]
+    surfaceStops: [],
+  },
+
   radnor: {
     name: "Radnor Memorial Library",
 
