@@ -6,8 +6,8 @@ const LIBRARIES = {
     rail: {
       station: "Norwood",
       line: "Wilmington/Newark Line",
-      inboundLabel: "To Center City",
-      outboundLabel: "From Center City",
+      inboundLabel: "To Phila",
+      outboundLabel: "From Phila",
     },
   },
 
@@ -16,8 +16,8 @@ const LIBRARIES = {
     rail: {
       station: "Swarthmore",
       line: "Media/Wawa Line",
-      inboundLabel: "To Center City",
-      outboundLabel: "From Center City",
+      inboundLabel: "To Phila",
+      outboundLabel: "From Phila",
     },
   },
 
@@ -26,8 +26,8 @@ const LIBRARIES = {
     rail: {
       station: "Sharon Hill",
       line: "Wilmington/Newark Line",
-      inboundLabel: "To Center City",
-      outboundLabel: "From Center City",
+      inboundLabel: "To Phila",
+      outboundLabel: "From Phila",
     },
 
     // FILL THESE IN LATER
