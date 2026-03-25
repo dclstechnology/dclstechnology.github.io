@@ -440,7 +440,14 @@ function parseMinutes(value) {
 }
 
 function minutesUntilClockTime(timeString) {
-  const match = timeString.match(/^\s*(\d{1,2}):(\d{2})\s*([APap][Mm])\s*$/);
+  if (!timeString) return null;
+
+  const normalized = String(timeString)
+    .trim()
+    .replace(/\s+/g, " ")
+    .replace(/(\d)(AM|PM)$/i, "$1 $2");
+
+  const match = normalized.match(/^(\d{1,2}):(\d{2})\s*([APap][Mm])$/);
   if (!match) return null;
 
   let hour = parseInt(match[1], 10);
