@@ -133,51 +133,57 @@ export async function GET(request) {
  */
 async function getRailRows(config, slug) {
   const station = config.rail.station;
+  const cityStation = "Suburban Station";
 
-  const url =
-    `https://www3.septa.org/api/Arrivals/index.php` +
-    `?station=${encodeURIComponent(station)}` +
-    `&results=10`;
+  const inboundUrl =
+    `https://www3.septa.org/api/NextToArrive/index.php` +
+    `?req1=${encodeURIComponent(station)}` +
+    `&req2=${encodeURIComponent(cityStation)}` +
+    `&req3=1`;
 
-  const response = await fetch(url, {
-    headers: {
-      Accept: "application/json",
-    },
-    next: { revalidate: 300 },
-  });
+  const outboundUrl =
+    `https://www3.septa.org/api/NextToArrive/index.php` +
+    `?req1=${encodeURIComponent(cityStation)}` +
+    `&req2=${encodeURIComponent(station)}` +
+    `&req3=1`;
 
-  if (!response.ok) {
-    throw new Error(`Rail request failed for ${station}`);
+  const [inboundRes, outboundRes] = await Promise.all([
+    fetch(inboundUrl, {
+      headers: { Accept: "application/json" },
+      next: { revalidate: 300 },
+    }),
+    fetch(outboundUrl, {
+      headers: { Accept: "application/json" },
+      next: { revalidate: 300 },
+    }),
+  ]);
+
+  if (!inboundRes.ok) {
+    throw new Error(`Rail request failed for ${station} -> ${cityStation}`);
+  }
+  if (!outboundRes.ok) {
+    throw new Error(`Rail request failed for ${cityStation} -> ${station}`);
   }
 
-  const data = await response.json();
-
-  // SEPTA Arrivals has historically returned arrays/objects with NB/SB buckets.
-  // We normalize defensively because field names can vary a bit.
-  const allTrains = normalizeRailData(data);
-
-  // Heuristic:
-  // - Anything headed toward Center City / Suburban / 30th / Jefferson / Temple is "To Center City"
-  // - Everything else is "From Center City"
-  const inboundCandidates = allTrains.filter((t) => isTowardCenterCity(t.destination));
-  const outboundCandidates = allTrains.filter((t) => !isTowardCenterCity(t.destination));
-
-  const nextInbound = inboundCandidates[0] || null;
-  const nextOutbound = outboundCandidates[0] || null;
+  const inboundData = await inboundRes.json();
+  const outboundData = await outboundRes.json();
 
   const rows = [];
+
+  const nextInbound = Array.isArray(inboundData) ? inboundData[0] : null;
+  const nextOutbound = Array.isArray(outboundData) ? outboundData[0] : null;
 
   if (nextInbound) {
     rows.push({
       library: config.name,
       library_slug: slug,
       mode: "Rail",
-      route: nextInbound.line || config.rail.line,
+      route: nextInbound.orig_line || config.rail.line,
       direction_label: config.rail.inboundLabel,
-      destination: nextInbound.destination || "Center City",
-      minutes: nextInbound.minutes,
-      departure_time: nextInbound.departure_time || "",
-      status: nextInbound.status || "",
+      destination: nextInbound.destination || cityStation,
+      minutes: parseMinutes(nextInbound.orig_delay ?? nextInbound.orig_departure_time),
+      departure_time: nextInbound.orig_departure_time || "",
+      status: normalizeNtaStatus(nextInbound),
     });
   }
 
@@ -186,16 +192,24 @@ async function getRailRows(config, slug) {
       library: config.name,
       library_slug: slug,
       mode: "Rail",
-      route: nextOutbound.line || config.rail.line,
+      route: nextOutbound.orig_line || config.rail.line,
       direction_label: config.rail.outboundLabel,
-      destination: nextOutbound.destination || "",
-      minutes: nextOutbound.minutes,
-      departure_time: nextOutbound.departure_time || "",
-      status: nextOutbound.status || "",
+      destination: nextOutbound.destination || station,
+      minutes: parseMinutes(nextOutbound.orig_delay ?? nextOutbound.orig_departure_time),
+      departure_time: nextOutbound.orig_departure_time || "",
+      status: normalizeNtaStatus(nextOutbound),
     });
   }
 
-  return rows;
+  return rows.filter((r) => Number.isFinite(r.minutes) || r.departure_time);
+}
+
+function normalizeNtaStatus(item) {
+  const late = item?.orig_delay ?? item?.delay;
+  if (late === undefined || late === null || late === "") return "";
+  const n = parseInt(String(late), 10);
+  if (Number.isNaN(n)) return String(late);
+  return n === 0 ? "On Time" : `${n} min late`;
 }
 
 function normalizeRailData(data) {
