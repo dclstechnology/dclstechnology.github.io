@@ -1,5 +1,5 @@
 [[ GLOBAL ]]
-kiosk_config=https://dl.dropboxusercontent.com/scl/fi/jtprxupuc2vkf1ivcxey6/KioskConfig.txt?rlkey=b3o9u0cgf6fjseh7i99xs1tpz&dl=1
+kiosk_config=https://raw.githubusercontent.com/dclstechnology/dclstechnology.github.io/main/PAC/WifiKioskConfig.txt
 connection=wifi
 network_interface=wlan0
 dhcp=yes
