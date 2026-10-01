@@ -34,9 +34,9 @@ wallpaper=https://dl.dropboxusercontent.com/s/b05zuz7rbadfg3j/RTBackground.jpg
 
 [[ 1-E6-C96-2B-F8 ]]
 hostname=RAWIFI01
-ssid_name=RML_Staff
+ssid_name=RadnorLibrary
 wifi_encryption=wpa
-wpa_password=***REMOVED***
+wpa_password=library1
 homepage=https://ra-delco.na5.iiivega.com/|https://kids-delco.na5.iiivega.com/
 screensaver_archive=https://dl.dropboxusercontent.com/s/6jkfmumwwh22fji/RAPAC.zip
 wallpaper=https://dl.dropboxusercontent.com/s/a4vbhrpq0ilhdeq/RABackground.jpg
