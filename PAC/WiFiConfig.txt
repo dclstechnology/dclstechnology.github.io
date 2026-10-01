@@ -1,5 +1,5 @@
 [[ GLOBAL ]]
-kiosk_config=https://raw.githubusercontent.com/dclstechnology/dclstechnology.github.io/main/PAC/WifiKioskConfig.txt
+kiosk_config=https://raw.githubusercontent.com/dclstechnology/dclstechnology.github.io/main/PAC/WiFiConfig.txt
 connection=wifi
 network_interface=wlan0
 dhcp=yes
