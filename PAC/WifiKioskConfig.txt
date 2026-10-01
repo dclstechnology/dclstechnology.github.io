@@ -1,0 +1,42 @@
+[[ GLOBAL ]]
+kiosk_config=https://dl.dropboxusercontent.com/scl/fi/jtprxupuc2vkf1ivcxey6/KioskConfig.txt?rlkey=b3o9u0cgf6fjseh7i99xs1tpz&dl=1
+connection=wifi
+network_interface=wlan0
+dhcp=yes
+timezone=America/New_York
+browser=chrome
+clear_cookies=yes
+clear_cache=yes
+restore_last_session=no
+disable_address_bar=yes
+homepage=https://discover.delco.lib.pa.us/|https://kids-delco.na5.iiivega.com/
+allow_icmp_protocol=yes
+session_idle=2
+allow_popup_windows=yes
+screensaver_idle=3
+screensaver_archive_update=20
+slide_duration=15
+volume_level=0%
+whitelist=delco.lib.pa.us delcolibraries.org btol.com overdrive.com eventkeeper.com tumblebooks.com rbdigital.com libraryreserve.com delco.iii.com iii.com refworks.com proquest.com books.google.com my2020census.gov goodreads.com delcopa.gov delcocovid.as.me acuityscheduling.com cdc.gov delcohsa.org arcgis.com libcal.com encore.delco.lib.pa.us libbyapp.com discover.delco.lib.pa.us iiivega.com na5.iiivega.com
+wake_on_lan=yes
+additional_components=06-fonts.xzm 
+scheduled_action=Monday-22:00 Tuesday-22:00 Wednesday-22:00 Thursday-22:00 Friday-22:00 Saturday-22:00 Sunday-22:00 action:shutdown
+onscreen_buttons=home
+
+# NOTE - ID numbers must be all caps
+
+[[ 3-53-8A4-5D-39 ]]
+hostname=RTWIFI01
+ssid_name=Ridley Twp Library
+homepage=https://kids-delco.na5.iiivega.com/|https://rt-delco.na5.iiivega.com/
+screensaver_archive=https://dl.dropboxusercontent.com/s/lezul90cw26ebd5/RTPAC.zip
+wallpaper=https://dl.dropboxusercontent.com/s/b05zuz7rbadfg3j/RTBackground.jpg
+
+[[ 1-E6-C96-2B-F8 ]]
+hostname=RAWIFI01
+ssid_name=RML_Staff
+wifi_encryption=wpa
+wpa_password=Pepper14$
+homepage=https://ra-delco.na5.iiivega.com/|https://kids-delco.na5.iiivega.com/
+screensaver_archive=https://dl.dropboxusercontent.com/s/6jkfmumwwh22fji/RAPAC.zip
+wallpaper=https://dl.dropboxusercontent.com/s/a4vbhrpq0ilhdeq/RABackground.jpg
